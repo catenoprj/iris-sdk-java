@@ -1,4 +1,6 @@
-package br.com.cateno.client;
+package br.com.cateno;
+
+import br.com.cateno.auth.Establishment;
 
 import java.util.List;
 

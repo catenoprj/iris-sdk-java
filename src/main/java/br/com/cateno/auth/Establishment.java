@@ -1,4 +1,4 @@
-package br.com.cateno.client;
+package br.com.cateno.auth;
 
 public class Establishment {
 
