@@ -14,8 +14,6 @@ import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import java.util.logging.Level;
 
-import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
-
 @Log
 public class Authenticator {
 
@@ -26,9 +24,6 @@ public class Authenticator {
   private final UserCredentials userCredentials;
 
   public Authenticator(final ClientCredentials clientCredentials, final UserCredentials userCredentials) {
-    checkNotNull(clientCredentials);
-    checkNotNull(userCredentials);
-
     final Feature feature = new LoggingFeature(log, Level.INFO, null, null);
     this.client.register(feature);
     this.credentials = clientCredentials;

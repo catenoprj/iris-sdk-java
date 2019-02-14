@@ -5,15 +5,11 @@ import br.com.cateno.auth.Establishment;
 
 import java.util.List;
 
-import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
-
 class DefaultIrisClient implements Iris {
 
   private final Authentication authentication;
 
   DefaultIrisClient(final Authentication authentication) {
-    checkNotNull(authentication);
-
     this.authentication = authentication;
   }
 

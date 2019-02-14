@@ -5,8 +5,6 @@ import br.com.cateno.auth.Authenticator;
 import br.com.cateno.auth.credential.ClientCredentials;
 import br.com.cateno.auth.credential.UserCredentials;
 
-import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
-
 public class IrisClientBuilder {
 
   private ClientCredentials clientCredentials;
@@ -20,9 +18,6 @@ public class IrisClientBuilder {
   }
 
   public DefaultIrisClient build() {
-    checkNotNull(this.clientCredentials);
-    checkNotNull(this.userCredentials);
-
     final Authentication authentication = new Authenticator(this.clientCredentials, this.userCredentials).login();
     return new DefaultIrisClient(authentication);
   }
