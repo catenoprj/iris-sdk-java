@@ -3,6 +3,7 @@ package br.com.cateno.auth;
 import br.com.cateno.auth.authenticator.AuthorizationHeaders;
 import br.com.cateno.auth.credential.ClientCredentials;
 import br.com.cateno.auth.credential.UserCredentials;
+import lombok.NonNull;
 import lombok.extern.java.Log;
 import org.glassfish.jersey.logging.LoggingFeature;
 
@@ -23,7 +24,7 @@ public class Authenticator {
   private final ClientCredentials credentials;
   private final UserCredentials userCredentials;
 
-  public Authenticator(final ClientCredentials clientCredentials, final UserCredentials userCredentials) {
+  public Authenticator(final @NonNull ClientCredentials clientCredentials, final @NonNull UserCredentials userCredentials) {
     final Feature feature = new LoggingFeature(log, Level.INFO, null, null);
     this.client.register(feature);
     this.credentials = clientCredentials;

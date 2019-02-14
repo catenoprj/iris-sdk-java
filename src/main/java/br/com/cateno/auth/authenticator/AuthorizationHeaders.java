@@ -1,6 +1,7 @@
 package br.com.cateno.auth.authenticator;
 
 import br.com.cateno.auth.credential.ClientCredentials;
+import lombok.NonNull;
 import org.glassfish.jersey.internal.util.collection.ImmutableMultivaluedMap;
 
 import javax.ws.rs.core.MultivaluedHashMap;
@@ -16,7 +17,7 @@ public class AuthorizationHeaders extends ImmutableMultivaluedMap<String, Object
     super(delegate);
   }
 
-  public static AuthorizationHeaders of(final ClientCredentials credentials) {
+  public static AuthorizationHeaders of(final @NonNull ClientCredentials credentials) {
     final String clientId = credentials.getId();
     final String clientSecret = credentials.getSecret();
     final String token = format("%s:%s", clientId, clientSecret);
