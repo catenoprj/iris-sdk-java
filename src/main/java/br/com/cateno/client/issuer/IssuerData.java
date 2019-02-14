@@ -16,17 +16,19 @@ public class IssuerData {
 
     private static final String CLIENT_ID = "c8da779c-304f-3204-b5db-67bab9d32871";
 
-    private static final String ACCESS_TOKEN = "084161d5-8b77-3a5f-9183-b8c77b5e6fc4";
+    private static final String ACCESS_TOKEN = "ee713e55-b6b7-3cc2-a198-07eec6f614dc";
 
     private Client client = ClientBuilder.newClient();
 
     public Issuer fetchIssuerById(UUID id) {
+
         return client
                 .target(ISSUER_REST_URI)
                 .path(id.toString())
                 .request(MediaType.APPLICATION_JSON)
                 .headers(authenticate())
                 .get(Issuer.class);
+
     }
 
     public List<Issuer> fetchIssuers() {
