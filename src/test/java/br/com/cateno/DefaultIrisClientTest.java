@@ -1,18 +1,16 @@
 package br.com.cateno;
 
-import br.com.cateno.auth.*;
 import br.com.cateno.auth.credential.ClientCredentials;
 import br.com.cateno.auth.credential.UserCredentials;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
-@DisplayName("Dealing with Establishments")
-class EstablishmentsTest {
+@DisplayName("Dealing with Iris Client")
+class DefaultIrisClientTest {
 
   @Nested
   @DisplayName("When credential are valid")
@@ -24,14 +22,26 @@ class EstablishmentsTest {
     private static final String PASSWORD = "Guilherme#123";
 
     @Test
-    @DisplayName("Should respond a list of establishments")
-    void ShouldRespondAListOfEstablishments() {
+    @DisplayName("Should respond with an instance")
+    void shouldRespondWithAnInstance() {
       final Iris iris = IrisClientBuilder.standard()
           .withClientCredentials(new ClientCredentials(CLIENT_ID, CLIENT_SECRET))
           .withUserCredentials(new UserCredentials(USERNAME, PASSWORD))
           .build();
-      final List<Establishment> establishments = iris.listEstablishments();
-      assertThat(establishments).isNotEmpty();
+      assertThat(iris).isNotNull();
+    }
+  }
+
+  @Nested
+  @DisplayName("When credential are not informed")
+  class WhenCredentialAreNotInformed {
+
+    @Test
+    @DisplayName("Should thrown error")
+    void ShouldThrownError() {
+      assertThatExceptionOfType(CredentialsNotFoundException.class)
+          .isThrownBy(() -> IrisClientBuilder.standard().build())
+          .withNoCause();
     }
   }
 }
