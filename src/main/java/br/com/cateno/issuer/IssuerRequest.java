@@ -1,14 +1,13 @@
-package br.com.cateno.issuer.model;
+package br.com.cateno.issuer;
 
 import lombok.Data;
 
 @Data
 public class IssuerRequest {
-
     private String cnpj;
     private String name;
     private String issuerCode;
-    private ExtraInfoRequest extraInfo;
+    private ExtraInfo extraInfo;
 }
 
 

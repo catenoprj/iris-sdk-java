@@ -1,7 +1,5 @@
 package br.com.cateno.issuer;
 
-import br.com.cateno.issuer.model.ExtraInfoRequest;
-import br.com.cateno.issuer.model.IssuerRequest;
 import br.com.cateno.util.CNPJCreator;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
@@ -15,7 +13,7 @@ public class IssuerRequestMock {
         FakeValuesService fakeValuesService = new FakeValuesService(
                 new Locale("en-GB"), new RandomService());
 
-        ExtraInfoRequest extraInfo = new ExtraInfoRequest();
+        ExtraInfo extraInfo = new ExtraInfo();
 
         String issuercode = fakeValuesService.regexify("[1-9]{6}");
         String email = fakeValuesService.bothify("????##@gmail.com");

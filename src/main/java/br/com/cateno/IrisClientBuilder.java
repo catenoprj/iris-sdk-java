@@ -20,7 +20,7 @@ public class IrisClientBuilder {
   public DefaultIrisClient build() {
     if ((this.clientCredentials == null) || (this.userCredentials == null)) throw new CredentialsNotFoundException();
     final Authentication authentication = new Authenticator(this.clientCredentials, this.userCredentials).login();
-    return new DefaultIrisClient(authentication);
+    return new DefaultIrisClient(authentication, this.clientCredentials.getId());
   }
 
   public IrisClientBuilder withClientCredentials(final ClientCredentials clientCredentials) {
