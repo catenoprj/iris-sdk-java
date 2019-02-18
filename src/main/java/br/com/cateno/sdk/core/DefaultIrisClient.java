@@ -1,79 +1,41 @@
 package br.com.cateno.sdk.core;
 
-import br.com.cateno.sdk.domain.auth.Authentication;
 import br.com.cateno.sdk.domain.issuer.Issuer;
 import br.com.cateno.sdk.domain.issuer.IssuerRequest;
+import br.com.cateno.sdk.domain.issuer.IssuerService;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.List;
 import java.util.UUID;
 
-import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
-
+@Singleton
 public class DefaultIrisClient implements Iris {
 
-  private final Authentication authentication;
-  private final String clientId;
+  private final IssuerService issuerService;
 
-  private Client client = ClientBuilder.newClient();
-
-  public DefaultIrisClient(final Authentication authentication, final String clientId) {
-    checkNotNull(authentication);
-    checkNotNull(clientId);
-
-    this.authentication = authentication;
-    this.clientId = clientId;
-  }
-
-  private MultivaluedMap<String, Object> enableAccess() {
-    final MultivaluedMap<String, Object> args = new MultivaluedHashMap<>();
-    args.add("client_id", clientId);
-    args.add("access_token", authentication.getAccessToken());
-    return args;
+  @Inject
+  public DefaultIrisClient(final IssuerService issuerService) {
+    this.issuerService = issuerService;
   }
 
   @Override
   public Issuer fetchIssuer(UUID id) {
-    return client
-            .target(ISSUER_REST_URI)
-            .path(id.toString())
-            .request(MediaType.APPLICATION_JSON)
-            .headers(enableAccess())
-            .get(Issuer.class);
+    return this.issuerService.fetch(id);
   }
 
   @Override
   public List<Issuer> listIssuers() {
-    return client
-            .target(ISSUER_REST_URI)
-            .request(MediaType.APPLICATION_JSON)
-            .headers(enableAccess())
-            .get(new GenericType<List<Issuer>>() {});
+    return this.issuerService.list();
   }
 
   @Override
   public Issuer createIssuer(IssuerRequest issuer) {
-    return client
-            .target(ISSUER_REST_URI)
-            .request(MediaType.APPLICATION_JSON)
-            .headers(enableAccess())
-            .post(Entity.entity(issuer, MediaType.APPLICATION_JSON), Issuer.class);
+    return this.issuerService.create(issuer);
   }
 
   @Override
   public Issuer updateIssuer(UUID id, IssuerRequest issuer) {
-    return client
-            .target(ISSUER_REST_URI)
-            .path(id.toString())
-            .request(MediaType.APPLICATION_JSON)
-            .headers(enableAccess())
-            .put(Entity.entity(issuer, MediaType.APPLICATION_JSON), Issuer.class);
+    return this.issuerService.update(id, issuer);
   }
-
 }

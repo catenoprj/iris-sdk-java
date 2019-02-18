@@ -1,7 +1,5 @@
 package br.com.cateno.sdk.core;
 
-import br.com.cateno.sdk.domain.auth.Authentication;
-import br.com.cateno.sdk.domain.auth.Authenticator;
 import br.com.cateno.sdk.domain.auth.ClientCredentials;
 import br.com.cateno.sdk.domain.auth.UserCredentials;
 
@@ -17,10 +15,12 @@ public class IrisClientBuilder {
     return new IrisClientBuilder();
   }
 
-  public DefaultIrisClient build() {
+  public Iris build() {
     if ((this.clientCredentials == null) || (this.userCredentials == null)) throw new CredentialsNotFoundException();
-    final Authentication authentication = new Authenticator(this.clientCredentials, this.userCredentials).login();
-    return new DefaultIrisClient(authentication, this.clientCredentials.getId());
+    final ClientFactory factory = DaggerClientFactory.builder()
+        .irisModule(new IrisModule(this.clientCredentials, this.userCredentials))
+        .build();
+    return factory.buildClient();
   }
 
   public IrisClientBuilder withClientCredentials(final ClientCredentials clientCredentials) {
