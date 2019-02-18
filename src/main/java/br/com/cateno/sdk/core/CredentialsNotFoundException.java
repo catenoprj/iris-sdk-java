@@ -1,4 +1,4 @@
-package br.com.cateno;
+package br.com.cateno.sdk.core;
 
 public class CredentialsNotFoundException extends RuntimeException {
 

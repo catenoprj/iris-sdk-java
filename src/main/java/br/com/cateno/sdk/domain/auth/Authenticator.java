@@ -1,8 +1,5 @@
-package br.com.cateno.auth;
+package br.com.cateno.sdk.domain.auth;
 
-import br.com.cateno.auth.authenticator.AuthorizationHeaders;
-import br.com.cateno.auth.credential.ClientCredentials;
-import br.com.cateno.auth.credential.UserCredentials;
 import org.glassfish.jersey.logging.LoggingFeature;
 
 import javax.ws.rs.client.Client;

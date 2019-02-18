@@ -1,9 +1,11 @@
 package br.com.cateno.issuer;
 
-import br.com.cateno.DefaultIrisClient;
-import br.com.cateno.IrisClientBuilder;
-import br.com.cateno.auth.credential.ClientCredentials;
-import br.com.cateno.auth.credential.UserCredentials;
+import br.com.cateno.sdk.core.DefaultIrisClient;
+import br.com.cateno.sdk.core.IrisClientBuilder;
+import br.com.cateno.sdk.domain.auth.ClientCredentials;
+import br.com.cateno.sdk.domain.auth.UserCredentials;
+import br.com.cateno.sdk.domain.issuer.Issuer;
+import br.com.cateno.sdk.domain.issuer.IssuerRequest;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 import org.junit.jupiter.api.DisplayName;

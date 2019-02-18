@@ -1,7 +1,7 @@
-package br.com.cateno;
+package br.com.cateno.sdk.core;
 
-import br.com.cateno.issuer.Issuer;
-import br.com.cateno.issuer.IssuerRequest;
+import br.com.cateno.sdk.domain.issuer.Issuer;
+import br.com.cateno.sdk.domain.issuer.IssuerRequest;
 
 import java.util.List;
 import java.util.UUID;
