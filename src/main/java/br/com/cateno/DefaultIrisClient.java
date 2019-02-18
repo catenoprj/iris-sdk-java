@@ -3,14 +3,18 @@ package br.com.cateno;
 import br.com.cateno.auth.Authentication;
 import br.com.cateno.issuer.Issuer;
 import br.com.cateno.issuer.IssuerRequest;
-import lombok.NonNull;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedHashMap;
+import javax.ws.rs.core.MultivaluedMap;
 import java.util.List;
 import java.util.UUID;
+
+import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
 
 public class DefaultIrisClient implements Iris {
 
@@ -19,7 +23,10 @@ public class DefaultIrisClient implements Iris {
 
   private Client client = ClientBuilder.newClient();
 
-  public DefaultIrisClient(final @NonNull Authentication authentication, final @NonNull String clientId) {
+  public DefaultIrisClient(final Authentication authentication, final String clientId) {
+    checkNotNull(authentication);
+    checkNotNull(clientId);
+
     this.authentication = authentication;
     this.clientId = clientId;
   }

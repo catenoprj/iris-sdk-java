@@ -1,7 +1,6 @@
 package br.com.cateno.auth.authenticator;
 
 import br.com.cateno.auth.credential.ClientCredentials;
-import lombok.NonNull;
 import org.glassfish.jersey.internal.util.collection.ImmutableMultivaluedMap;
 
 import javax.ws.rs.core.MultivaluedHashMap;
@@ -10,6 +9,7 @@ import java.util.Base64;
 
 import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
 
 public class AuthorizationHeaders extends ImmutableMultivaluedMap<String, Object> {
 
@@ -17,7 +17,9 @@ public class AuthorizationHeaders extends ImmutableMultivaluedMap<String, Object
     super(delegate);
   }
 
-  public static AuthorizationHeaders of(final @NonNull ClientCredentials credentials) {
+  public static AuthorizationHeaders of(final ClientCredentials credentials) {
+    checkNotNull(credentials);
+
     final String clientId = credentials.getId();
     final String clientSecret = credentials.getSecret();
     final String token = format("%s:%s", clientId, clientSecret);

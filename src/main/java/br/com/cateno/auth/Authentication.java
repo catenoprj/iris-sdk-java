@@ -2,11 +2,9 @@ package br.com.cateno.auth;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 
 import java.util.List;
 
-@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Authentication {
 
@@ -22,4 +20,52 @@ public class Authentication {
   private String name;
   @JsonProperty("user_id")
   private String userId;
+
+  public String getAccessToken() {
+    return this.accessToken;
+  }
+
+  public List<String> getAuthorities() {
+    return this.authorities;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  public String getRefreshToken() {
+    return this.refreshToken;
+  }
+
+  public String getUserId() {
+    return this.userId;
+  }
+
+  public String getUserName() {
+    return this.userName;
+  }
+
+  public void setAccessToken(String accessToken) {
+    this.accessToken = accessToken;
+  }
+
+  public void setAuthorities(List<String> authorities) {
+    this.authorities = authorities;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setRefreshToken(String refreshToken) {
+    this.refreshToken = refreshToken;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
 }
