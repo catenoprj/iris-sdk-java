@@ -14,10 +14,10 @@ public interface Iris {
   // Issuer
   Issuer fetchIssuerById(UUID id);
 
-  List<Issuer> fetchIssuers();
+  List<Issuer> listIssuers();
 
-  Response createIssuer(IssuerRequest issuer);
+  Issuer createIssuer(IssuerRequest issuer);
 
-  Response updateIssuer(UUID id, IssuerRequest issuer);
+  Issuer updateIssuer(UUID id, IssuerRequest issuer);
 
 }

@@ -42,7 +42,7 @@ public class DefaultIrisClient implements Iris {
   }
 
   @Override
-  public List<Issuer> fetchIssuers() {
+  public List<Issuer> listIssuers() {
     return client
             .target(ISSUER_REST_URI)
             .request(MediaType.APPLICATION_JSON)
@@ -51,22 +51,22 @@ public class DefaultIrisClient implements Iris {
   }
 
   @Override
-  public Response createIssuer(IssuerRequest issuer) {
+  public Issuer createIssuer(IssuerRequest issuer) {
     return client
             .target(ISSUER_REST_URI)
             .request(MediaType.APPLICATION_JSON)
             .headers(enableAccess())
-            .post(Entity.entity(issuer, MediaType.APPLICATION_JSON));
+            .post(Entity.entity(issuer, MediaType.APPLICATION_JSON), Issuer.class);
   }
 
   @Override
-  public Response updateIssuer(UUID id, IssuerRequest issuer) {
+  public Issuer updateIssuer(UUID id, IssuerRequest issuer) {
     return client
             .target(ISSUER_REST_URI)
             .path(id.toString())
             .request(MediaType.APPLICATION_JSON)
             .headers(enableAccess())
-            .put(Entity.entity(issuer, MediaType.APPLICATION_JSON));
+            .put(Entity.entity(issuer, MediaType.APPLICATION_JSON), Issuer.class);
   }
 
 }
