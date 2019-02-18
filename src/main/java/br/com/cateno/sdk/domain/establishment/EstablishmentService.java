@@ -1,7 +1,6 @@
 package br.com.cateno.sdk.domain.establishment;
 
 import br.com.cateno.sdk.domain.auth.AuthService;
-import br.com.cateno.sdk.domain.issuer.IssuerRequest;
 
 import javax.inject.Inject;
 import javax.ws.rs.client.Client;
