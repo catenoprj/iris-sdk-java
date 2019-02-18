@@ -3,7 +3,6 @@ package br.com.cateno;
 import br.com.cateno.issuer.Issuer;
 import br.com.cateno.issuer.IssuerRequest;
 
-import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.UUID;
 
