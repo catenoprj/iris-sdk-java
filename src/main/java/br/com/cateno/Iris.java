@@ -12,7 +12,7 @@ public interface Iris {
    String ISSUER_REST_URI  = "https://api-cateno.sensedia.com/hlg/iris/v1/issuers/";
 
   // Issuer
-  Issuer fetchIssuerById(UUID id);
+  Issuer fetchIssuer(UUID id);
 
   List<Issuer> listIssuers();
 

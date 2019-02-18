@@ -56,7 +56,7 @@ class IssuerDataTest {
         void searchIssuerById() {
             issuerCreateResponse = authorize().createIssuer(IssuerRequestMock.issuerRequestMock());
 
-            issuer = authorize().fetchIssuerById(issuerCreateResponse.getId());
+            issuer = authorize().fetchIssuer(issuerCreateResponse.getId());
             assertThat(issuer.getId()).isNotNull();
         }
     }

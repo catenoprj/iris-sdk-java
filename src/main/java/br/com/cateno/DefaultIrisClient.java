@@ -32,7 +32,7 @@ public class DefaultIrisClient implements Iris {
   }
 
   @Override
-  public Issuer fetchIssuerById(UUID id) {
+  public Issuer fetchIssuer(UUID id) {
     return client
             .target(ISSUER_REST_URI)
             .path(id.toString())
