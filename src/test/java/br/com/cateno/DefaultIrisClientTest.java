@@ -1,7 +1,10 @@
 package br.com.cateno;
 
-import br.com.cateno.auth.credential.ClientCredentials;
-import br.com.cateno.auth.credential.UserCredentials;
+import br.com.cateno.sdk.core.CredentialsNotFoundException;
+import br.com.cateno.sdk.core.Iris;
+import br.com.cateno.sdk.core.IrisClientBuilder;
+import br.com.cateno.sdk.domain.auth.ClientCredentials;
+import br.com.cateno.sdk.domain.auth.UserCredentials;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,5 @@
-package br.com.cateno.auth.authenticator;
+package br.com.cateno.sdk.domain.auth;
 
-import br.com.cateno.auth.credential.ClientCredentials;
 import org.glassfish.jersey.internal.util.collection.ImmutableMultivaluedMap;
 
 import javax.ws.rs.core.MultivaluedHashMap;

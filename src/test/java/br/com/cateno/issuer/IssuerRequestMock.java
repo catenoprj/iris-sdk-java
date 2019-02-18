@@ -1,5 +1,7 @@
 package br.com.cateno.issuer;
 
+import br.com.cateno.sdk.domain.issuer.ExtraInfo;
+import br.com.cateno.sdk.domain.issuer.IssuerRequest;
 import br.com.cateno.util.CNPJCreator;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;

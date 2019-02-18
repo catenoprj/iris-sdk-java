@@ -1,4 +1,4 @@
-package br.com.cateno.issuer;
+package br.com.cateno.sdk.domain.issuer;
 
 public class ExtraInfo {
     private String mainPhone;

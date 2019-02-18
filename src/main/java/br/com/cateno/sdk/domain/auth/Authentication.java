@@ -1,4 +1,4 @@
-package br.com.cateno.auth;
+package br.com.cateno.sdk.domain.auth;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

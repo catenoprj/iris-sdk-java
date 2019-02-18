@@ -1,9 +1,9 @@
-package br.com.cateno;
+package br.com.cateno.sdk.core;
 
-import br.com.cateno.auth.Authentication;
-import br.com.cateno.auth.Authenticator;
-import br.com.cateno.auth.credential.ClientCredentials;
-import br.com.cateno.auth.credential.UserCredentials;
+import br.com.cateno.sdk.domain.auth.Authentication;
+import br.com.cateno.sdk.domain.auth.Authenticator;
+import br.com.cateno.sdk.domain.auth.ClientCredentials;
+import br.com.cateno.sdk.domain.auth.UserCredentials;
 
 public class IrisClientBuilder {
 

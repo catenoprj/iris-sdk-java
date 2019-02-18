@@ -1,4 +1,4 @@
-package br.com.cateno.auth.credential;
+package br.com.cateno.sdk.domain.auth;
 
 import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
 
