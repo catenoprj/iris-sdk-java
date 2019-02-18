@@ -16,7 +16,7 @@ public class AuthorizationHeaders extends ImmutableMultivaluedMap<String, Object
     super(delegate);
   }
 
-  public static AuthorizationHeaders of(final ClientCredentials credentials) {
+  static AuthorizationHeaders of(final ClientCredentials credentials) {
     checkNotNull(credentials);
 
     final String clientId = credentials.getId();
@@ -27,6 +27,16 @@ public class AuthorizationHeaders extends ImmutableMultivaluedMap<String, Object
     headers.add("Authorization", "Basic " + Base64.getEncoder().encodeToString(token.getBytes(UTF_8)));
     headers.add("client_id", clientId);
 
+    return new AuthorizationHeaders(headers);
+  }
+
+  static AuthorizationHeaders of(final ClientCredentials credentials, final Authentication authentication) {
+    checkNotNull(credentials);
+    checkNotNull(authentication);
+
+    final MultivaluedMap<String, Object> headers = new MultivaluedHashMap<>();
+    headers.add("client_id", credentials.getId());
+    headers.add("access_token", authentication.getAccessToken());
     return new AuthorizationHeaders(headers);
   }
 }

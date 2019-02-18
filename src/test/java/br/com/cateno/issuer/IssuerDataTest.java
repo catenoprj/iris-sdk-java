@@ -1,6 +1,7 @@
 package br.com.cateno.issuer;
 
 import br.com.cateno.sdk.core.DefaultIrisClient;
+import br.com.cateno.sdk.core.Iris;
 import br.com.cateno.sdk.core.IrisClientBuilder;
 import br.com.cateno.sdk.domain.auth.ClientCredentials;
 import br.com.cateno.sdk.domain.auth.UserCredentials;
@@ -28,7 +29,7 @@ class IssuerDataTest {
     private Issuer issuer;
 
 
-    DefaultIrisClient authorize(){
+    Iris authorize(){
         return  IrisClientBuilder.standard()
                 .withClientCredentials(new ClientCredentials(CLIENT_ID, CLIENT_SECRET))
                 .withUserCredentials(new UserCredentials(USERNAME, PASSWORD))
