@@ -1,39 +1,36 @@
-package br.com.cateno.issuer;
+package br.com.cateno.sdk.domain.establishment;
 
-import br.com.cateno.sdk.domain.issuer.ExtraInfo;
-import br.com.cateno.sdk.domain.issuer.IssuerRequest;
+import br.com.cateno.sdk.domain.establishment.EstablishmentRequest;
+import br.com.cateno.sdk.domain.establishment.ExtraInfo;
 import br.com.cateno.util.CNPJCreator;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
+
 import java.util.Locale;
 
-class IssuerRequestMock {
+ class EstablishmentRequestMock {
 
-
-    static IssuerRequest issuerRequestMock(){
+    static EstablishmentRequest establismentRequestMock(){
 
         FakeValuesService fakeValuesService = new FakeValuesService(
                 new Locale("pt-BR"), new RandomService());
 
         ExtraInfo extraInfo = new ExtraInfo();
-
-        String issuerCode = fakeValuesService.regexify("[1-9]{6}");
         String email = fakeValuesService.bothify("????##@gmail.com");
         String mainPhone = "11" + fakeValuesService.regexify("[1-9]{8}");
         String backupPhone = "11" + fakeValuesService.regexify("[1-9]{8}");
-        String issuerName = fakeValuesService.bothify("issuer??????");
+        String establishmentName = fakeValuesService.bothify("establishment??????");
 
         extraInfo.setMainPhone(mainPhone);
         extraInfo.setBackupPhone(backupPhone);
         extraInfo.setEmail(email);
 
-        IssuerRequest issuerRequest = new IssuerRequest();
+        EstablishmentRequest establishmentRequest = new EstablishmentRequest();
 
-        issuerRequest.setCnpj(CNPJCreator.featchCNPJWithOutDigit());
-        issuerRequest.setExtraInfo(extraInfo);
-        issuerRequest.setIssuerCode(issuerCode);
-        issuerRequest.setName(issuerName);
+        establishmentRequest.setCnpj(CNPJCreator.featchCNPJWithOutDigit());
+        establishmentRequest.setExtraInfo(extraInfo);
+        establishmentRequest.setName(establishmentName);
 
-        return issuerRequest;
+        return establishmentRequest;
     }
 }

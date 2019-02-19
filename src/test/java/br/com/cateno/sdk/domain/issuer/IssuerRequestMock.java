@@ -1,36 +1,38 @@
-package br.com.cateno.establishment;
+package br.com.cateno.sdk.domain.issuer;
 
-import br.com.cateno.sdk.domain.establishment.EstablishmentRequest;
-import br.com.cateno.sdk.domain.establishment.ExtraInfo;
 import br.com.cateno.util.CNPJCreator;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 
 import java.util.Locale;
 
- class EstablishmentRequestMock {
+class IssuerRequestMock {
 
-    static EstablishmentRequest establismentRequestMock(){
+
+    static IssuerRequest issuerRequestMock(){
 
         FakeValuesService fakeValuesService = new FakeValuesService(
                 new Locale("pt-BR"), new RandomService());
 
         ExtraInfo extraInfo = new ExtraInfo();
+
+        String issuerCode = fakeValuesService.regexify("[1-9]{6}");
         String email = fakeValuesService.bothify("????##@gmail.com");
         String mainPhone = "11" + fakeValuesService.regexify("[1-9]{8}");
         String backupPhone = "11" + fakeValuesService.regexify("[1-9]{8}");
-        String establishmentName = fakeValuesService.bothify("establishment??????");
+        String issuerName = fakeValuesService.bothify("issuer??????");
 
         extraInfo.setMainPhone(mainPhone);
         extraInfo.setBackupPhone(backupPhone);
         extraInfo.setEmail(email);
 
-        EstablishmentRequest establishmentRequest = new EstablishmentRequest();
+        IssuerRequest issuerRequest = new IssuerRequest();
 
-        establishmentRequest.setCnpj(CNPJCreator.featchCNPJWithOutDigit());
-        establishmentRequest.setExtraInfo(extraInfo);
-        establishmentRequest.setName(establishmentName);
+        issuerRequest.setCnpj(CNPJCreator.featchCNPJWithOutDigit());
+        issuerRequest.setExtraInfo(extraInfo);
+        issuerRequest.setIssuerCode(issuerCode);
+        issuerRequest.setName(issuerName);
 
-        return establishmentRequest;
+        return issuerRequest;
     }
 }
