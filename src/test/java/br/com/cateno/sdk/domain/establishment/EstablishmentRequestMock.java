@@ -1,4 +1,4 @@
-package br.com.cateno.establishment;
+package br.com.cateno.sdk.domain.establishment;
 
 import br.com.cateno.sdk.domain.establishment.EstablishmentRequest;
 import br.com.cateno.sdk.domain.establishment.ExtraInfo;
