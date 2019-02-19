@@ -2,7 +2,6 @@ package br.com.cateno.sdk.domain.user;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class UserUpdateRequest {
     private String cpf;
@@ -10,7 +9,7 @@ public class UserUpdateRequest {
     private Status status;
     private String password;
     private UserType userType;
-    private Set<String> issuerIds;
+    private List<String> issuerIds;
     private ExtraInfo extraInfo;
     private List<Machine> machines;
     private String profileId;
@@ -55,11 +54,11 @@ public class UserUpdateRequest {
         this.userType = userType;
     }
 
-    public Set<String> getIssuerIds() {
+    public List<String> getIssuerIds() {
         return issuerIds;
     }
 
-    public void setIssuerIds(Set<String> issuerIds) {
+    public void setIssuerIds(List<String> issuerIds) {
         this.issuerIds = issuerIds;
     }
 

@@ -2,13 +2,12 @@ package br.com.cateno.sdk.domain.user;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class UserCreateRequest {
     private String cpf;
     private String name;
     private UserType userType;
-    private Set<String> issuerIds;
+    private List<String> issuerIds;
     private ExtraInfo extraInfo;
     private List<Machine> machines;
     private String profileId;
@@ -37,11 +36,11 @@ public class UserCreateRequest {
         this.userType = userType;
     }
 
-    public Set<String> getIssuerIds() {
+    public List<String> getIssuerIds() {
         return issuerIds;
     }
 
-    public void setIssuerIds(Set<String> issuerIds) {
+    public void setIssuerIds(List<String> issuerIds) {
         this.issuerIds = issuerIds;
     }
 
