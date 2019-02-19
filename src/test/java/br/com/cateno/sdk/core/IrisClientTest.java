@@ -1,8 +1,5 @@
-package br.com.cateno;
+package br.com.cateno.sdk.core;
 
-import br.com.cateno.sdk.core.CredentialsNotFoundException;
-import br.com.cateno.sdk.core.Iris;
-import br.com.cateno.sdk.core.IrisClientBuilder;
 import br.com.cateno.sdk.domain.auth.ClientCredentials;
 import br.com.cateno.sdk.domain.auth.UserCredentials;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 @DisplayName("Dealing with Iris Client")
-class DefaultIrisClientTest {
+class IrisClientTest {
 
   @Nested
   @DisplayName("When credential are valid")
@@ -27,7 +24,7 @@ class DefaultIrisClientTest {
     @Test
     @DisplayName("Should respond with an instance")
     void shouldRespondWithAnInstance() {
-      final Iris iris = IrisClientBuilder.standard()
+      final IrisClient iris = IrisClientBuilder.standard()
           .withClientCredentials(new ClientCredentials(CLIENT_ID, CLIENT_SECRET))
           .withUserCredentials(new UserCredentials(USERNAME, PASSWORD))
           .build();
