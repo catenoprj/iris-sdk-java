@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.issuer;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Issuer {
@@ -56,5 +57,23 @@ public class Issuer {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Issuer issuer = (Issuer) o;
+        return Objects.equals(id, issuer.id) &&
+                Objects.equals(issuerCode, issuer.issuerCode) &&
+                Objects.equals(cnpj, issuer.cnpj) &&
+                Objects.equals(name, issuer.name) &&
+                status == issuer.status &&
+                Objects.equals(extraInfo, issuer.extraInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, issuerCode, cnpj, name, status, extraInfo);
     }
 }
