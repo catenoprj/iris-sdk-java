@@ -6,6 +6,10 @@ import br.com.cateno.sdk.domain.establishment.EstablishmentService;
 import br.com.cateno.sdk.domain.issuer.Issuer;
 import br.com.cateno.sdk.domain.issuer.IssuerRequest;
 import br.com.cateno.sdk.domain.issuer.IssuerService;
+import br.com.cateno.sdk.domain.user.User;
+import br.com.cateno.sdk.domain.user.UserCreateRequest;
+import br.com.cateno.sdk.domain.user.UserService;
+import br.com.cateno.sdk.domain.user.UserUpdateRequest;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -17,11 +21,13 @@ public class DefaultIrisClient implements Iris {
 
   private final IssuerService issuerService;
   private final EstablishmentService establishmentService;
+  private final UserService userService;
 
   @Inject
-  public DefaultIrisClient(final IssuerService issuerService, final EstablishmentService establishmentService) {
+  public DefaultIrisClient(final IssuerService issuerService, final EstablishmentService establishmentService, final UserService userService) {
     this.issuerService = issuerService;
     this.establishmentService = establishmentService;
+    this.userService = userService;
   }
 
   @Override
@@ -67,5 +73,30 @@ public class DefaultIrisClient implements Iris {
   @Override
   public void deleteEstablishment(UUID id) {
       this.establishmentService.delete(id);
+  }
+
+  @Override
+  public User fetchUser(UUID id) {
+    return this.userService.fetch(id);
+  }
+
+  @Override
+  public List<User> listUsers() {
+    return this.listUsers();
+  }
+
+  @Override
+  public User createUser(UserCreateRequest user) {
+    return this.userService.create(user);
+  }
+
+  @Override
+  public User updateUser(UUID id, UserUpdateRequest user) {
+    return this.userService.update(id, user);
+  }
+
+  @Override
+  public void deleteUser(UUID id) {
+    this.userService.delete(id);
   }
 }

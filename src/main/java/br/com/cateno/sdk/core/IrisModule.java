@@ -5,6 +5,7 @@ import br.com.cateno.sdk.domain.auth.ClientCredentials;
 import br.com.cateno.sdk.domain.auth.UserCredentials;
 import br.com.cateno.sdk.domain.establishment.EstablishmentService;
 import br.com.cateno.sdk.domain.issuer.IssuerService;
+import br.com.cateno.sdk.domain.user.UserService;
 import dagger.Module;
 import dagger.Provides;
 import org.glassfish.jersey.logging.LoggingFeature;
@@ -37,9 +38,11 @@ class IrisModule {
 
   @Provides
   @Singleton
-  Iris provideIrisClient(final IssuerService issuerService, final EstablishmentService establishmentService) {
+  Iris provideIrisClient(final IssuerService issuerService,
+                         final EstablishmentService establishmentService,
+                         final UserService userService) {
     LOGGER.info("providing new default iris client");
-    return new DefaultIrisClient(issuerService, establishmentService);
+    return new DefaultIrisClient(issuerService, establishmentService, userService);
   }
 
   @Provides
