@@ -15,9 +15,9 @@ public class IrisClientBuilder {
     return new IrisClientBuilder();
   }
 
-  public Iris build() {
+  public IrisClient build() {
     if ((this.clientCredentials == null) || (this.userCredentials == null)) throw new CredentialsNotFoundException();
-    return DaggerIris.builder()
+    return DaggerIrisClient.builder()
         .irisModule(new IrisModule(this.clientCredentials, this.userCredentials))
         .build();
   }

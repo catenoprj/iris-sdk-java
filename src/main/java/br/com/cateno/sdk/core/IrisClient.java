@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 
 @Singleton
 @Component(modules = IrisModule.class)
-public interface Iris {
+public interface IrisClient {
 
   IssuerService loadIssuerService();
 
