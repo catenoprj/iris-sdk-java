@@ -65,14 +65,14 @@ public class EstablishmentService {
                 .put(Entity.entity(establishment, MediaType.APPLICATION_JSON), Establishment.class);
     }
 
-    public Void delete(final UUID id) {
+    public void delete(final UUID id) {
         checkNotNull(id);
 
-        return this.webClient
+        this.webClient
                 .target(ESTABLISHMENT_REST_URI)
                 .path(id.toString())
                 .request(MediaType.APPLICATION_JSON)
                 .headers(this.authService.requestHeaders())
-                .delete(Void.class);
+                .delete(void.class);
     }
 }

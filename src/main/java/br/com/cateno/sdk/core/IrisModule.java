@@ -3,6 +3,7 @@ package br.com.cateno.sdk.core;
 import br.com.cateno.sdk.domain.auth.AuthService;
 import br.com.cateno.sdk.domain.auth.ClientCredentials;
 import br.com.cateno.sdk.domain.auth.UserCredentials;
+import br.com.cateno.sdk.domain.establishment.EstablishmentService;
 import br.com.cateno.sdk.domain.issuer.IssuerService;
 import dagger.Module;
 import dagger.Provides;
@@ -36,9 +37,9 @@ class IrisModule {
 
   @Provides
   @Singleton
-  Iris provideIrisClient(final IssuerService issuerService) {
+  Iris provideIrisClient(final IssuerService issuerService, final EstablishmentService establishmentService) {
     LOGGER.info("providing new default iris client");
-    return new DefaultIrisClient(issuerService);
+    return new DefaultIrisClient(issuerService, establishmentService);
   }
 
   @Provides

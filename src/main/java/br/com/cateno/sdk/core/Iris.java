@@ -26,6 +26,6 @@ public interface Iris {
 
   Establishment updateEstablishment(UUID id, EstablishmentRequest establishment);
 
-  Void deleteEstablishment(UUID id);
+  void deleteEstablishment(UUID id);
 
 }

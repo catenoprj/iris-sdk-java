@@ -65,7 +65,7 @@ public class DefaultIrisClient implements Iris {
   }
 
   @Override
-  public Void deleteEstablishment(UUID id) {
-    return this.establishmentService.delete(id);
+  public void deleteEstablishment(UUID id) {
+      this.establishmentService.delete(id);
   }
 }
