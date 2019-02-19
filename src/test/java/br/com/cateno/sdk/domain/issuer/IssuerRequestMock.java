@@ -1,10 +1,9 @@
-package br.com.cateno.issuer;
+package br.com.cateno.sdk.domain.issuer;
 
-import br.com.cateno.sdk.domain.issuer.ExtraInfo;
-import br.com.cateno.sdk.domain.issuer.IssuerRequest;
 import br.com.cateno.util.CNPJCreator;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
+
 import java.util.Locale;
 
 class IssuerRequestMock {
