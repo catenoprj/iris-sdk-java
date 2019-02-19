@@ -1,55 +1,50 @@
 package br.com.cateno.sdk.domain.auth;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Form;
-import javax.ws.rs.core.MediaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
+
+import java.io.IOException;
 import java.util.logging.Logger;
 
-import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
+import static dagger.internal.Preconditions.checkNotNull;
+import static okhttp3.Credentials.basic;
 
 public class AuthService {
 
-  private static final String REST_URI = "https://api-cateno.sensedia.com/hlg/iris/v1/oauth/login";
   private static final Logger LOGGER = Logger.getLogger(AuthService.class.getName());
 
   private final ClientCredentials client;
   private final UserCredentials user;
-  private final Client webClient;
+  private final OAuthApiClient apiClient;
 
-  public AuthService(final Client webClient, final ClientCredentials client, final UserCredentials user) {
-    checkNotNull(webClient);
+  public AuthService(final ClientCredentials client, final UserCredentials user, final OAuthApiClient apiClient) {
     checkNotNull(client);
     checkNotNull(user);
+    checkNotNull(apiClient);
 
-    this.webClient = webClient;
     this.client = client;
     this.user = user;
+    this.apiClient = apiClient;
   }
 
-  public AuthorizationHeaders requestHeaders() {
-    LOGGER.info("getting request authorization headers");
+  public Authorization askForAuthorization() throws IOException {
+
     final Authentication authentication = this.login();
-    return AuthorizationHeaders.of(this.client, authentication);
+    return new Authorization(this.client.getId(), authentication.getAccessToken());
   }
 
-  private Entity<Form> form() {
+  private Authentication login() throws IOException {
+    LOGGER.info("login into the API");
+
+    final String clientId = this.client.getId();
+    final String secret = this.client.getSecret();
     final String username = this.user.getUsername();
     final String password = this.user.getPassword();
 
-    final Form form = new Form();
-    form.param("username", username);
-    form.param("password", password);
-
-    return Entity.form(form);
-  }
-
-  private Authentication login() {
-    LOGGER.info("login into the API");
-    return this.webClient
-        .target(REST_URI)
-        .request(MediaType.APPLICATION_JSON)
-        .headers(AuthorizationHeaders.of(this.client))
-        .post(this.form(), Authentication.class);
+    final retrofit2.Call<Authentication> call = this.apiClient.authenticate(basic(clientId, secret), clientId, username, password);
+    final retrofit2.Response<Authentication> response = call.execute();
+    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    return response.body();
   }
 }
