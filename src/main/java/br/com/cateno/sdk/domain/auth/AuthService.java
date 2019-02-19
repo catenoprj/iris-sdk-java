@@ -28,6 +28,7 @@ public class AuthService {
   }
 
   public AuthorizationHeaders requestHeaders() {
+    LOGGER.info("getting request authorization headers");
     final Authentication authentication = this.login();
     return AuthorizationHeaders.of(this.client, authentication);
   }
@@ -44,6 +45,7 @@ public class AuthService {
   }
 
   private Authentication login() {
+    LOGGER.info("login into the API");
     return this.webClient
         .target(REST_URI)
         .request(MediaType.APPLICATION_JSON)
