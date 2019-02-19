@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.establishment;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Establishment {
@@ -47,5 +48,22 @@ public class Establishment {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Establishment that = (Establishment) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(cnpj, that.cnpj) &&
+                Objects.equals(extraInfo, that.extraInfo) &&
+                Objects.equals(name, that.name) &&
+                status == that.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cnpj, extraInfo, name, status);
     }
 }

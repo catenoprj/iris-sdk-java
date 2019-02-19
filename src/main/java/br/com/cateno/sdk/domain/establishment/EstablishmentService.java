@@ -14,7 +14,7 @@ import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
 
 public class EstablishmentService {
 
-    private static final String ESTABLISHMENT_REST_URI = "https://api-cateno.sensedia.com/hlg/iris/v1/establishment/";
+    private static final String ESTABLISHMENT_REST_URI = "https://api-cateno.sensedia.com/hlg/iris/v1/establishments/";
     private final AuthService authService;
     private final Client webClient;
 
@@ -73,6 +73,6 @@ public class EstablishmentService {
                 .path(id.toString())
                 .request(MediaType.APPLICATION_JSON)
                 .headers(this.authService.requestHeaders())
-                .delete(void.class);
+                .delete();
     }
 }

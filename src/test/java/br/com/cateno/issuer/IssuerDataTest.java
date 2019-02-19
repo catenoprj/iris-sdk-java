@@ -1,6 +1,5 @@
 package br.com.cateno.issuer;
 
-import br.com.cateno.sdk.core.DefaultIrisClient;
 import br.com.cateno.sdk.core.Iris;
 import br.com.cateno.sdk.core.IrisClientBuilder;
 import br.com.cateno.sdk.domain.auth.ClientCredentials;
@@ -25,8 +24,6 @@ class IssuerDataTest {
     private static final String CLIENT_SECRET = "3a984afc-dc55-3cb5-bc2e-9c2fc4ba7204";
     private static final String USERNAME = "00000000000";
     private static final String PASSWORD = "Guilherme#123";
-    private Issuer issuerCreateResponse;
-    private Issuer issuer;
 
 
     Iris authorize(){
@@ -41,10 +38,10 @@ class IssuerDataTest {
     class WhenCreateNewIssuer {
 
         @Test
-        @DisplayName("Should create a new Issuer")
+        @DisplayName("When create a new Issuer")
         void createIssuer() {
 
-            issuerCreateResponse = authorize().createIssuer(IssuerRequestMock.issuerRequestMock());
+            Issuer issuerCreateResponse = authorize().createIssuer(IssuerRequestMock.issuerRequestMock());
             assertThat(issuerCreateResponse.getId()).isNotNull();
         }
     }
@@ -55,23 +52,23 @@ class IssuerDataTest {
     class WhenSearchNewIssuerById {
 
         @Test
-        @DisplayName("Should create a new Issuer and search by your ID")
+        @DisplayName("When create a new Issuer and search by your ID")
         void searchIssuerById() {
-            issuerCreateResponse = authorize().createIssuer(IssuerRequestMock.issuerRequestMock());
+            Issuer issuerCreateResponse = authorize().createIssuer(IssuerRequestMock.issuerRequestMock());
 
-            issuer = authorize().fetchIssuer(issuerCreateResponse.getId());
+            Issuer issuer = authorize().fetchIssuer(issuerCreateResponse.getId());
             assertThat(issuer.getId()).isNotNull();
         }
     }
 
     @Nested
-    @DisplayName("Should search a list Issuer")
+    @DisplayName("Should search a list of Issuers")
     class WhenSearchListIssuer {
 
         @Test
-        @DisplayName("Should create some Issuer and search list Issuers")
-        void searchIssuers() {
-            issuerCreateResponse = authorize().createIssuer(IssuerRequestMock.issuerRequestMock());
+        @DisplayName("When create some Issuers and search list Issuers")
+        void searchIssuers() throws InterruptedException {
+            Issuer issuerCreateResponse = authorize().createIssuer(IssuerRequestMock.issuerRequestMock());
             Issuer issuerCreateResponse2 = authorize().createIssuer(IssuerRequestMock.issuerRequestMock());
 
             List<Issuer> issuers = authorize().listIssuers();
@@ -84,9 +81,9 @@ class IssuerDataTest {
     class WhenUpdateIssuer {
 
         @Test
-        @DisplayName("Should update a Issuer")
-        void searchIssuers() {
-            issuerCreateResponse = authorize().createIssuer(IssuerRequestMock.issuerRequestMock());
+        @DisplayName("When update a Issuer")
+        void updateIssuers() {
+            Issuer issuerCreateResponse = authorize().createIssuer(IssuerRequestMock.issuerRequestMock());
 
             IssuerRequest issuerUpdate = IssuerRequestMock.issuerRequestMock();
 
@@ -97,7 +94,7 @@ class IssuerDataTest {
 
             issuerUpdate.setName(issuerName);
 
-            issuer = authorize().updateIssuer(issuerCreateResponse.getId(), issuerUpdate);
+            Issuer issuer = authorize().updateIssuer(issuerCreateResponse.getId(), issuerUpdate);
 
             assertThat(issuer.getName()).contains(issuerName);
         }
