@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.issuer;
 
+import dagger.Reusable;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
+@Reusable
 public class IssuerService {
 
   private final IssuerApiClient apiClient;
