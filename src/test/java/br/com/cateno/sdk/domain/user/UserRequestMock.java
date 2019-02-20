@@ -1,8 +1,6 @@
 package br.com.cateno.sdk.domain.user;
 
-import br.com.cateno.sdk.domain.establishment.Establishment;
 import br.com.cateno.sdk.domain.establishment.EstablishmentApiClient;
-import br.com.cateno.sdk.domain.establishment.EstablishmentRequestMock;
 import br.com.cateno.sdk.domain.establishment.EstablishmentService;
 import br.com.cateno.sdk.domain.issuer.Issuer;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
@@ -13,7 +11,9 @@ import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class UserRequestMock implements AuthenticatedStageEnvTest {
 
@@ -22,9 +22,6 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
 
         IssuerApiClient issuerApiClient = this.getAuthenticatedRetrofit().create(IssuerApiClient.class);
         IssuerService issuerService = new IssuerService(issuerApiClient);
-
-        EstablishmentApiClient establishmentApiClient = this.getAuthenticatedRetrofit().create(EstablishmentApiClient.class);
-        EstablishmentService establishmentService = new EstablishmentService(establishmentApiClient);
 
         FakeValuesService fakeValuesService = new FakeValuesService(
                 new Locale("pt-BR"), new RandomService());
@@ -52,32 +49,7 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
         userRequest.setProfileId("593f21e7-8485-434b-84ba-d486a63a770e");
 
 
-        if (userType.equals(UserType.CATENO)) {
-
-            IssuerRequestMock issuerMock = new IssuerRequestMock();
-            Issuer issuerCreateResponse = issuerService.create(issuerMock.issuerRequestMock());
-
-            issuerIds.add(issuerCreateResponse.getId().toString());
-
-            userRequest.setIssuerIds(issuerIds);
-
-            EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
-            Establishment establishmentCreateResponse = establishmentService.create(establishmentMock.establismentRequestMock());
-
-            //Criar Maquineta e vincular ao estabelecimento acima
-
-            //userRequest.setMachines();
-
-        } else if (userType.equals(UserType.ESTABELECIMENTO)) {
-
-            EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
-            Establishment establishmentCreateResponse = establishmentService.create(establishmentMock.establismentRequestMock());
-
-            //Criar Maquineta e vincular ao estabelecimento acima
-
-            //userRequest.setMachines();
-
-        } else if (userType.equals(UserType.EMISSOR)) {
+        if (userType.equals(UserType.EMISSOR)) {
 
             IssuerRequestMock issuerMock = new IssuerRequestMock();
             Issuer issuerCreateResponse = issuerService.create(issuerMock.issuerRequestMock());

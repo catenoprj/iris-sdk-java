@@ -28,8 +28,8 @@ class IssuerServiceTest implements AuthenticatedStageEnvTest {
     class WhenCreateANewIssuer {
 
         @Test
-        @DisplayName("Should return the generated resource with Id")
-        void shouldReturnTheGeneratedResourceWithId() throws IOException {
+        @DisplayName("Should return the resource Issuer generated with Id")
+        void shouldReturnTheResourceIssuerGeneratedWithId() throws IOException {
 
             IssuerRequestMock issuerMock = new IssuerRequestMock();
             Issuer issuerCreateResponse = service.create(issuerMock.issuerRequestMock());
@@ -71,8 +71,8 @@ class IssuerServiceTest implements AuthenticatedStageEnvTest {
     }
 
     @Nested
-    @DisplayName("When request to update an Issuer")
-    class WhenRequestToUpdateAnIssuer {
+    @DisplayName("When create and request to update an Issuer")
+    class WhenCreateAndRequestToUpdateAnIssuer {
 
         @Test
         @DisplayName("Should update it properly")

@@ -24,12 +24,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
     @Nested
-    @DisplayName("Should create a new User ADMINISTRADOR")
-    class WhenCreateNewUserAdministrador {
+    @DisplayName("Should create a new User of Type ADMINISTRADOR")
+    class WhenCreateNewUserOfTypeAdministrador {
 
         @Test
-        @DisplayName("When create a new User ADMINISTRADOR")
-        void createUserAdministrador() throws IOException {
+        @DisplayName("Should return the resource User of type Administrator generated with Id")
+        void shouldReturnTheResourceUserOfTypeAdministradorGeneratedWithId() throws IOException {
             UserRequestMock userMock = new UserRequestMock();
             User userCreateResponse = service.create(userMock.userRequestMock(UserType.ADMINISTRADOR));
 
@@ -39,12 +39,12 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Nested
-    @DisplayName("Should create a new User Issuer")
-    class WhenCreateNewUserIssuer {
+    @DisplayName("Should create a new User of type Issuer")
+    class WhenCreateNewUserOfTypeIssuer {
 
         @Test
-        @DisplayName("When create a new User Issuer")
-        void createUserIssuer() throws IOException {
+        @DisplayName("Should return the resource User of type Issuer generated with Id")
+        void shouldReturnTheResourceUserOfTypeIssuerGeneratedWithId() throws IOException {
 
             UserRequestMock userMock = new UserRequestMock();
 
@@ -59,8 +59,8 @@ import static org.assertj.core.api.Assertions.assertThat;
     class WhenSearchUserById {
 
         @Test
-        @DisplayName("When search a new User by your ID")
-        void searchUserById() throws IOException {
+        @DisplayName("Should return the related resource with the same ID")
+        void shouldReturnTheRelatedResourceWithTheSameId() throws IOException {
 
             UserRequestMock userMock = new UserRequestMock();
             User userCreateResponse = service.create(userMock.userRequestMock(UserType.ADMINISTRADOR));
@@ -76,8 +76,8 @@ import static org.assertj.core.api.Assertions.assertThat;
     class WhenSearchListUser {
 
         @Test
-        @DisplayName("When create some Users and search list of Users")
-        void searchUser() throws IOException {
+        @DisplayName("Should return a list of Users containing the last two above Users")
+        void shouldReturnAListOfUsersContainingTheLastTwoAboveUsers() throws IOException {
 
             UserRequestMock userMock = new UserRequestMock();
 
@@ -89,13 +89,13 @@ import static org.assertj.core.api.Assertions.assertThat;
         }
     }
 
-    @Nested
-    @DisplayName("Should delete a User")
-    class WhenDeleteUser {
+     @Nested
+     @DisplayName("When create and request to delete an User")
+     class WhenCreateAndRequestToDeleteAnUser {
 
-        @Test
-        @DisplayName("When create a User and delete User")
-        void deleteUser() throws IOException {
+         @Test
+         @DisplayName("Should delete it properly")
+         void shouldDeleteItProperly() throws IOException {
 
             UserRequestMock userMock = new UserRequestMock();
             User userCreateResponse = service.create(userMock.userRequestMock(UserType.ADMINISTRADOR));
@@ -109,13 +109,13 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
 
-    @Nested
-    @DisplayName("Should update a new User")
-    class WhenUpdateUser {
+     @Nested
+     @DisplayName("When create and request to update an User")
+     class WhenCreateAndRequestToUpdateAnUser {
 
-        @Test
-        @DisplayName("When update a new User")
-        void updateUser() throws IOException {
+         @Test
+         @DisplayName("Should update it properly")
+         void shouldUpdateItProperly() throws IOException {
 
             UserRequestMock userMock = new UserRequestMock();
             User userCreateResponse = service.create(userMock.userRequestMock(UserType.ADMINISTRADOR));
@@ -130,6 +130,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
             userRequest.setName(userName);
             userRequest.setCpf(cpf);
+            userRequest.setExtraInfo(userCreateResponse.getExtraInfo());
+            userRequest.setProfileId(userCreateResponse.getProfileId().toString());
+            userRequest.setUserType(userCreateResponse.getUserType());
 
             User userUpdateResponse = service.update(userCreateResponse.getId(),userRequest);
 
