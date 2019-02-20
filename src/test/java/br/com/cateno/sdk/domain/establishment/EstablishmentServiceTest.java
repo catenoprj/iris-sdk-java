@@ -30,8 +30,9 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
     @Test
     @DisplayName("When create a new Establishment")
     void create() throws IOException {
+      EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
 
-      Establishment establishmentCreateResponse = service.create(EstablishmentRequestMock.establismentRequestMock());
+      Establishment establishmentCreateResponse = service.create(establishmentMock.establismentRequestMock());
       assertThat(establishmentCreateResponse.getId()).isNotNull();
     }
   }
@@ -43,7 +44,9 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
     @Test
     @DisplayName("When create a new Establishment and search by your ID")
     void searchEstablishmentById() throws IOException {
-      Establishment establishmentCreateResponse = service.create(EstablishmentRequestMock.establismentRequestMock());
+      EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
+
+      Establishment establishmentCreateResponse = service.create(establishmentMock.establismentRequestMock());
 
       Establishment establishment = service.fetch(establishmentCreateResponse.getId());
       assertThat(establishment.getId()).isNotNull();
@@ -57,8 +60,10 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
     @Test
     @DisplayName("When create some Establishments and search list Establishments")
     void searchEstablishment() throws IOException {
-      Establishment establishmentCreateResponse = service.create(EstablishmentRequestMock.establismentRequestMock());
-      Establishment establishmentCreateResponse2 = service.create(EstablishmentRequestMock.establismentRequestMock());
+      EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
+
+      Establishment establishmentCreateResponse = service.create(establishmentMock.establismentRequestMock());
+      Establishment establishmentCreateResponse2 = service.create(establishmentMock.establismentRequestMock());
 
       List<Establishment> establishments = service.list();
       assertThat(establishments).contains(establishmentCreateResponse, establishmentCreateResponse2);
@@ -72,9 +77,11 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
     @Test
     @DisplayName("When update a Establishment")
     void update() throws IOException {
-      Establishment establishmentCreateResponse = service.create(EstablishmentRequestMock.establismentRequestMock());
 
-      EstablishmentRequest establishmentUpdate = EstablishmentRequestMock.establismentRequestMock();
+      EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
+      Establishment establishmentCreateResponse = service.create(establishmentMock.establismentRequestMock());
+
+      EstablishmentRequest establishmentUpdate = establishmentMock.establismentRequestMock();
 
       FakeValuesService fakeValuesService = new FakeValuesService(
           new Locale("pt-BR"), new RandomService());
@@ -96,7 +103,8 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
     @Test
     @DisplayName("When create a Establishments and delete Establishment")
     void delete() throws IOException {
-      Establishment establishmentCreateResponse = service.create(EstablishmentRequestMock.establismentRequestMock());
+      EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
+      Establishment establishmentCreateResponse = service.create(establishmentMock.establismentRequestMock());
 
       Establishment establishment = service.fetch(establishmentCreateResponse.getId());
 

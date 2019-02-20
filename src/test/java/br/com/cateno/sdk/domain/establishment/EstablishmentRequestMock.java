@@ -6,9 +6,9 @@ import com.github.javafaker.service.RandomService;
 
 import java.util.Locale;
 
- class EstablishmentRequestMock {
+ public class EstablishmentRequestMock {
 
-    static EstablishmentRequest establismentRequestMock(){
+     public EstablishmentRequest establismentRequestMock(){
 
         FakeValuesService fakeValuesService = new FakeValuesService(
                 new Locale("pt-BR"), new RandomService());
