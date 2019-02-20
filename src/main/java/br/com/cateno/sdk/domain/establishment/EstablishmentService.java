@@ -62,11 +62,10 @@ public class EstablishmentService {
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }
 
-    public List<SampleMachine> listMachines(final UUID id, final EstablishmentRequest establishment) throws  IOException {
+    public List<SampleMachine> listMachines(final UUID id) throws  IOException {
         checkNotNull(id);
-        checkNotNull(establishment);
 
-        final Call<List<SampleMachine>>  call = this.apiClient.findMachinesByEstablishmentId(id.toString(), establishment);
+        final Call<List<SampleMachine>>  call = this.apiClient.findMachinesByEstablishmentId(id.toString());
         final Response<List<SampleMachine>> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
         return response.body();
