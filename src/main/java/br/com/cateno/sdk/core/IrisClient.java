@@ -12,6 +12,7 @@ import br.com.cateno.sdk.domain.user.OperationService;
 import br.com.cateno.sdk.domain.user.PasswordService;
 import br.com.cateno.sdk.domain.user.ProfileService;
 import br.com.cateno.sdk.domain.user.UserService;
+import br.com.cateno.sdk.domain.messenger.MessageService;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -47,4 +48,6 @@ public interface IrisClient {
   UploaderService loadUploaderService();
 
   UserService loadUserService();
+
+  MessageService loadMessageService();
 }
