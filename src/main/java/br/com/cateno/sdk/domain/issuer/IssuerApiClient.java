@@ -17,5 +17,5 @@ public interface IssuerApiClient {
   Call<Issuer> findById(@Path("id") String id);
 
   @PUT("issuers/{id}")
-  Call<Issuer> update(@Path("id") String toString, @Body IssuerRequest issuer);
+  Call<Issuer> update(@Path("id") String id, @Body IssuerRequest issuer);
 }
