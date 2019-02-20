@@ -1,67 +1,57 @@
 package br.com.cateno.sdk.domain.issuer;
 
-import br.com.cateno.sdk.domain.auth.AuthService;
+import retrofit2.Call;
+import retrofit2.Response;
 
 import javax.inject.Inject;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
+import static dagger.internal.Preconditions.checkNotNull;
 
 public class IssuerService {
 
-  private static final String ISSUER_REST_URI = "https://api-cateno.sensedia.com/hlg/iris/v1/issuers/";
-  private final AuthService authService;
-  private final Client webClient;
+  private final IssuerApiClient apiClient;
 
   @Inject
-  public IssuerService(final AuthService authService, final Client webClient) {
-    this.authService = authService;
-    this.webClient = webClient;
+  public IssuerService(final IssuerApiClient apiClient) {
+    checkNotNull(apiClient);
+    this.apiClient = apiClient;
   }
 
-  public Issuer create(final IssuerRequest issuer) {
+  public Issuer create(final IssuerRequest issuer) throws IOException {
     checkNotNull(issuer);
 
-    return this.webClient
-        .target(ISSUER_REST_URI)
-        .request(MediaType.APPLICATION_JSON)
-        .headers(this.authService.requestHeaders())
-        .post(Entity.entity(issuer, MediaType.APPLICATION_JSON), Issuer.class);
+    final Call<Issuer> call = this.apiClient.create(issuer);
+    final Response<Issuer> response = call.execute();
+    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    return response.body();
   }
 
-  public Issuer fetch(final UUID id) {
+  public Issuer fetch(final UUID id) throws IOException {
     checkNotNull(id);
 
-    return this.webClient
-        .target(ISSUER_REST_URI)
-        .path(id.toString())
-        .request(MediaType.APPLICATION_JSON)
-        .headers(this.authService.requestHeaders())
-        .get(Issuer.class);
+    final Call<Issuer> call = this.apiClient.findById(id.toString());
+    final Response<Issuer> response = call.execute();
+    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    return response.body();
   }
 
-  public List<Issuer> list() {
-    return this.webClient
-        .target(ISSUER_REST_URI)
-        .request(MediaType.APPLICATION_JSON)
-        .headers(this.authService.requestHeaders())
-        .get(new GenericType<List<Issuer>>() {});
+  public List<Issuer> list() throws IOException {
+    final Call<List<Issuer>> call = this.apiClient.findAll();
+    final Response<List<Issuer>> response = call.execute();
+    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    return response.body();
   }
 
-  public Issuer update(final UUID id, final IssuerRequest issuer) {
+  public Issuer update(final UUID id, final IssuerRequest issuer) throws IOException {
     checkNotNull(id);
     checkNotNull(issuer);
 
-    return this.webClient
-        .target(ISSUER_REST_URI)
-        .path(id.toString())
-        .request(MediaType.APPLICATION_JSON)
-        .headers(this.authService.requestHeaders())
-        .put(Entity.entity(issuer, MediaType.APPLICATION_JSON), Issuer.class);
+    final Call<Issuer> call = this.apiClient.update(id.toString(), issuer);
+    final Response<Issuer> response = call.execute();
+    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    return response.body();
   }
 }

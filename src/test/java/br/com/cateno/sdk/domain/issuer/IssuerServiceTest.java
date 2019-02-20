@@ -1,48 +1,35 @@
 package br.com.cateno.sdk.domain.issuer;
 
-import br.com.cateno.sdk.domain.auth.AuthService;
-import br.com.cateno.sdk.domain.auth.ClientCredentials;
-import br.com.cateno.sdk.domain.auth.UserCredentials;
+import br.com.cateno.sdk.util.AuthenticatedStageEnvTest;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Dealing with Issuer")
-class IssuerServiceTest {
+class IssuerServiceTest implements AuthenticatedStageEnvTest {
 
-    private static final String CLIENT_ID = "c8da779c-304f-3204-b5db-67bab9d32871";
-    private static final String CLIENT_SECRET = "3a984afc-dc55-3cb5-bc2e-9c2fc4ba7204";
-    private static final String USERNAME = "00000000000";
-    private static final String PASSWORD = "Guilherme#123";
+    private final IssuerService service;
 
-    private IssuerService service;
-
-    @BeforeEach
-    void init() {
-        final Client webClient = ClientBuilder.newClient();
-        final ClientCredentials client = new ClientCredentials(CLIENT_ID, CLIENT_SECRET);
-        final UserCredentials user = new UserCredentials(USERNAME, PASSWORD);
-        final AuthService authService = new AuthService(webClient, client, user);
-        this.service = new IssuerService(authService, webClient);
+    IssuerServiceTest() {
+        final IssuerApiClient issuerApiClient = this.getAuthenticatedRetrofit().create(IssuerApiClient.class);
+        this.service = new IssuerService(issuerApiClient);
     }
 
     @Nested
-    @DisplayName("Should create a new Issuer")
-    class WhenCreateNewIssuer {
+    @DisplayName("When create a new Issuer")
+    class WhenCreateANewIssuer {
 
         @Test
-        @DisplayName("When create a new Issuer")
-        void createIssuer() {
+        @DisplayName("Should return the generated resource with Id")
+        void shouldReturnTheGeneratedResourceWithId() throws IOException {
 
             Issuer issuerCreateResponse = service.create(IssuerRequestMock.issuerRequestMock());
             assertThat(issuerCreateResponse.getId()).isNotNull();
@@ -51,12 +38,12 @@ class IssuerServiceTest {
 
 
     @Nested
-    @DisplayName("Should search a new Issuer by your ID")
-    class WhenSearchNewIssuerById {
+    @DisplayName("When search a Issuer by your ID")
+    class WhenSearchAIssuerByYourId {
 
         @Test
-        @DisplayName("When create a new Issuer and search by your ID")
-        void searchIssuerById() {
+        @DisplayName("Should return the related resource with the same ID")
+        void shouldReturnTheRelatedResourceWithTheSameId() throws IOException {
             Issuer issuerCreateResponse = service.create(IssuerRequestMock.issuerRequestMock());
 
             Issuer issuer = service.fetch(issuerCreateResponse.getId());
@@ -65,12 +52,12 @@ class IssuerServiceTest {
     }
 
     @Nested
-    @DisplayName("Should search a list of Issuers")
-    class WhenSearchListIssuer {
+    @DisplayName("When search a list of Issuers")
+    class WhenSearchAListOfIssuers {
 
         @Test
-        @DisplayName("When create some Issuers and search list Issuers")
-        void searchIssuers() throws InterruptedException {
+        @DisplayName("Should return a list of Issuers containing the last two above Issuers")
+        void shouldReturnAListOfIssuersContainingTheLastTwoAboveIssuers() throws IOException {
             Issuer issuerCreateResponse = service.create(IssuerRequestMock.issuerRequestMock());
             Issuer issuerCreateResponse2 = service.create(IssuerRequestMock.issuerRequestMock());
 
@@ -80,12 +67,12 @@ class IssuerServiceTest {
     }
 
     @Nested
-    @DisplayName("Should update a Issuer")
-    class WhenUpdateIssuer {
+    @DisplayName("When request to update an Issuer")
+    class WhenRequestToUpdateAnIssuer {
 
         @Test
-        @DisplayName("When update a Issuer")
-        void updateIssuers() {
+        @DisplayName("Should update it properly")
+        void shouldUpdateItProperly() throws IOException {
             Issuer issuerCreateResponse = service.create(IssuerRequestMock.issuerRequestMock());
 
             IssuerRequest issuerUpdate = IssuerRequestMock.issuerRequestMock();

@@ -1,6 +1,6 @@
 package br.com.cateno.sdk.domain.auth;
 
-import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
+import static dagger.internal.Preconditions.checkNotNull;
 
 public class ClientCredentials {
 

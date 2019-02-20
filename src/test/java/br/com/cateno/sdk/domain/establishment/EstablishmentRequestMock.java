@@ -1,8 +1,6 @@
 package br.com.cateno.sdk.domain.establishment;
 
-import br.com.cateno.sdk.domain.establishment.EstablishmentRequest;
-import br.com.cateno.sdk.domain.establishment.ExtraInfo;
-import br.com.cateno.util.CNPJCreator;
+import br.com.cateno.sdk.util.CNPJCreator;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 
