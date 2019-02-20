@@ -1,4 +1,4 @@
-package br.com.cateno.util;
+package br.com.cateno.sdk.util;
 
 import java.util.Random;
 
