@@ -11,17 +11,18 @@ public interface ClaimApiClient {
     @GET("claims/count")
     Call<Void> countClaims(@QueryMap Map<String, String> options);
 
-    @POST("claims")
-    Call<Claim> create(@Body ClaimRequest issuer);
-
-
-
     @GET("claims")
-    Call<List<Claim>> findAll();
+    Call<List<Claim>> findClaims(@QueryMap Map<String, String> options, @Query("_limit") int pageSize, @Query("_offset") int page);
+
+    @POST("claims")
+    Call<Claim> create(@Body ClaimRequest claim);
 
     @GET("claims/{id}")
     Call<Claim> findById(@Path("id") String id);
 
     @PATCH("issuers/{id}")
-    Call<Claim> update(@Path("id") String toString, @Body ClaimRequest issuer);
+    Call<Void> update(@Path("id") String toString, @Body ClaimRequest issuer);
+
+    @GET("claims/{id}/status")
+    Call<List<Status>> findClaimStatuses(@Path("id") String id, @Query("statusType") String statusType);
 }

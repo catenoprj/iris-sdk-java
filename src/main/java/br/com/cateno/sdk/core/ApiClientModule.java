@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.core;
 
+import br.com.cateno.sdk.domain.claim.ClaimApiClient;
 import br.com.cateno.sdk.domain.establishment.EstablishmentApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
 import br.com.cateno.sdk.domain.user.UserApiClient;
@@ -33,7 +34,13 @@ class ApiClientModule {
 
   @Provides
   UserApiClient provideUserApiClient(@Named("authenticated") final Retrofit retrofit) {
-    LOGGER.info("providing new oAuth api client");
+    LOGGER.info("providing new user api client");
     return retrofit.create(UserApiClient.class);
+  }
+
+  @Provides
+  ClaimApiClient provideClaimApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new claim api client");
+    return retrofit.create(ClaimApiClient.class);
   }
 }
