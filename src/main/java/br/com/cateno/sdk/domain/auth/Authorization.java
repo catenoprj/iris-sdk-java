@@ -1,6 +1,6 @@
 package br.com.cateno.sdk.domain.auth;
 
-class Authorization {
+public class Authorization {
 
   private final String clientId;
   private final String accessToken;
