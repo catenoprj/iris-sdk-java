@@ -13,12 +13,12 @@ import javax.inject.Named;
 import java.util.logging.Logger;
 
 @Module
-class IrisModule {
+class RetrofitModule {
 
   private static final String DEFAULT_BASE_URL = "https://api-cateno.sensedia.com/hlg/iris/v1/";
-  private static final Logger LOGGER = Logger.getLogger(IrisModule.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(RetrofitModule.class.getName());
 
-  IrisModule() {
+  RetrofitModule() {
     LOGGER.info("loading new IRIS module");
   }
 
