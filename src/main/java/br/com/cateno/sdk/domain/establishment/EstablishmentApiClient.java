@@ -20,5 +20,5 @@ public interface EstablishmentApiClient {
   Call<Establishment> findById(@Path("id") String id);
 
   @PUT("establishments/{id}")
-  Call<Establishment> update(@Path("id") String toString, @Body EstablishmentRequest establishment);
+  Call<Establishment> update(@Path("id") String id, @Body EstablishmentRequest establishment);
 }
