@@ -14,7 +14,7 @@ public class UserModule {
     private static final Logger LOGGER = Logger.getLogger(UserModule.class.getName());
 
     UserModule() {
-        LOGGER.info("loading new Authentication module");
+        LOGGER.info("loading new User module");
     }
 
     @Provides
