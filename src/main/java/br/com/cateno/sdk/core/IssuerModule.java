@@ -14,12 +14,12 @@ class IssuerModule {
   private static final Logger LOGGER = Logger.getLogger(IssuerModule.class.getName());
 
   IssuerModule() {
-    LOGGER.info("loading new Authentication module");
+    LOGGER.info("loading new issuer module");
   }
 
   @Provides
   IssuerApiClient provideIssuerApiClient(@Named("authenticated") final Retrofit retrofit) {
-    LOGGER.info("providing new oAuth api client");
+    LOGGER.info("providing new issuer api client");
     return retrofit.create(IssuerApiClient.class);
   }
 }
