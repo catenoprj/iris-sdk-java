@@ -19,6 +19,9 @@ public interface EstablishmentApiClient {
   @GET("establishments/{id}")
   Call<Establishment> findById(@Path("id") String id);
 
+  @GET("establishments/{id}/machines")
+  Call<List<SampleMachine>> findMachinesByEstablishmentId(@Path("id") String id);
+
   @PUT("establishments/{id}")
   Call<Establishment> update(@Path("id") String id, @Body EstablishmentRequest establishment);
 }
