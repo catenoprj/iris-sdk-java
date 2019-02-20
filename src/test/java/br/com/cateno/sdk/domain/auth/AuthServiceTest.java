@@ -14,7 +14,7 @@ class AuthServiceTest implements StageEnvTest {
 
   private final AuthService service;
 
-  public AuthServiceTest() {
+  AuthServiceTest() {
     final OAuthApiClient oAuthApiClient = this.getRetrofit().create(OAuthApiClient.class);
     this.service = new AuthService(this.getClientCredentials(), this.getUserCredentials(), oAuthApiClient);
   }

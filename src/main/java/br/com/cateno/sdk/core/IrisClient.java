@@ -7,7 +7,11 @@ import dagger.Component;
 import javax.inject.Singleton;
 
 @Singleton
-@Component(modules = {IrisModule.class, AuthModule.class})
+@Component(modules = {
+    ApiClientModule.class,
+    AuthModule.class,
+    RetrofitModule.class
+})
 public interface IrisClient {
 
   IssuerService loadIssuerService();
