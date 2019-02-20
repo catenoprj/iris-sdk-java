@@ -1,79 +1,76 @@
 package br.com.cateno.sdk.domain.user;
 
-import br.com.cateno.sdk.domain.auth.AuthService;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 import javax.inject.Inject;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import static org.glassfish.jersey.internal.guava.Preconditions.checkNotNull;
+import static dagger.internal.Preconditions.checkNotNull;
 
 public class UserService {
 
-    private static final String USER_REST_URI = "https://api-cateno.sensedia.com/hlg/iris/v1/users/";
-
-    private final AuthService authService;
-    private final Client webClient;
+    private final UserApiClient apiClient;
 
     @Inject
-    public UserService(final AuthService authService, final Client webClient) {
-        this.authService = authService;
-        this.webClient = webClient;
+    public UserService(UserApiClient apiClient) {
+        checkNotNull(apiClient);
+        this.apiClient = apiClient;
     }
 
-    public User create(final UserCreateRequest user) {
+    public User create(final UserCreateRequest user) throws IOException {
         checkNotNull(user);
 
-        return this.webClient
-                .target(USER_REST_URI)
-                .request(MediaType.APPLICATION_JSON)
-                .headers(this.authService.requestHeaders())
-                .post(Entity.entity(user, MediaType.APPLICATION_JSON), User.class);
+        final Call<User> call = this.apiClient.create(user);
+        final Response<User> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        return response.body();
     }
 
-    public User fetch(final UUID id) {
+    public User fetch(final UUID id) throws IOException {
         checkNotNull(id);
 
-        return this.webClient
-                .target(USER_REST_URI)
-                .path(id.toString())
-                .request(MediaType.APPLICATION_JSON)
-                .headers(this.authService.requestHeaders())
-                .get(User.class);
+        final Call<User> call = this.apiClient.findById(id.toString());
+        final Response<User> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        return response.body();
     }
 
-    public List<User> list() {
-        return this.webClient
-                .target(USER_REST_URI)
-                .request(MediaType.APPLICATION_JSON)
-                .headers(this.authService.requestHeaders())
-                .get(new GenericType<List<User>>() {});
+    public List<User> list() throws IOException {
+        final Call<List<User>> call = this.apiClient.findAll();
+        final Response<List<User>> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        return response.body();
     }
 
-    public User update(final UUID id, final UserUpdateRequest user) {
+    public User update(final UUID id, final UserUpdateRequest user) throws IOException {
         checkNotNull(id);
         checkNotNull(user);
 
-        return this.webClient
-                .target(USER_REST_URI)
-                .path(id.toString())
-                .request(MediaType.APPLICATION_JSON)
-                .headers(this.authService.requestHeaders())
-                .put(Entity.entity(user, MediaType.APPLICATION_JSON), User.class);
+        final Call<User> call = this.apiClient.update(id.toString(), user);
+        final Response<User> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        return response.body();
     }
 
-    public void delete(final  UUID id) {
+    public User partialUpdate(final UUID id, final UserUpdateRequest user) throws IOException {
+        checkNotNull(id);
+        checkNotNull(user);
+
+        final Call<User> call = this.apiClient.partialUpdate(id.toString(), user);
+        final Response<User> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        return response.body();
+    }
+
+    public void delete(final UUID id) throws IOException {
         checkNotNull(id);
 
-        this.webClient
-                .target(USER_REST_URI)
-                .path(id.toString())
-                .request(MediaType.APPLICATION_JSON)
-                .headers(this.authService.requestHeaders())
-                .delete();
+        final Call<Void> call = this.apiClient.delete(id.toString());
+        Response<Void> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }
 }

@@ -2,6 +2,7 @@ package br.com.cateno.sdk.core;
 
 import br.com.cateno.sdk.domain.establishment.EstablishmentApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
+import br.com.cateno.sdk.domain.user.UserApiClient;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -28,5 +29,11 @@ class ApiClientModule {
   IssuerApiClient provideIssuerApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new issuer api client");
     return retrofit.create(IssuerApiClient.class);
+  }
+
+  @Provides
+  UserApiClient provideUserApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new oAuth api client");
+    return retrofit.create(UserApiClient.class);
   }
 }
