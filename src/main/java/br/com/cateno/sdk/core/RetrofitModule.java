@@ -4,6 +4,7 @@ import br.com.cateno.sdk.domain.auth.AuthorizationInterceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
+import dagger.Reusable;
 import okhttp3.OkHttpClient;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -22,6 +23,7 @@ class RetrofitModule {
     LOGGER.info("loading new IRIS module");
   }
 
+  @Reusable
   @Provides
   @Named("authenticated")
   OkHttpClient provideAuthenticatedHttpClient(final AuthorizationInterceptor interceptor) {
@@ -31,6 +33,7 @@ class RetrofitModule {
         .build();
   }
 
+  @Reusable
   @Provides
   @Named("authenticated")
   Retrofit provideAuthenticatedRetrofit(@Named("authenticated") final OkHttpClient httpClient, final Converter.Factory factory) {
@@ -42,12 +45,14 @@ class RetrofitModule {
         .build();
   }
 
+  @Reusable
   @Provides
   Converter.Factory provideConverterFactory(final ObjectMapper objectMapper) {
     LOGGER.info("providing new converter factory");
     return JacksonConverterFactory.create(objectMapper);
   }
 
+  @Reusable
   @Provides
   OkHttpClient provideHttpClient() {
     LOGGER.info("providing new http client");
@@ -55,12 +60,14 @@ class RetrofitModule {
         .build();
   }
 
+  @Reusable
   @Provides
   ObjectMapper provideObjectMapper() {
     LOGGER.info("providing new object mapper");
     return new ObjectMapper();
   }
 
+  @Reusable
   @Provides
   Retrofit provideRetrofit(final Converter.Factory factory) {
     LOGGER.info("providing new retrofit");

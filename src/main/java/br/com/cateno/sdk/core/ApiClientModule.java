@@ -6,6 +6,7 @@ import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
 import br.com.cateno.sdk.domain.user.UserApiClient;
 import dagger.Module;
 import dagger.Provides;
+import dagger.Reusable;
 import retrofit2.Retrofit;
 
 import javax.inject.Named;
@@ -20,18 +21,21 @@ class ApiClientModule {
     LOGGER.info("loading new api client module");
   }
 
+  @Reusable
   @Provides
   EstablishmentApiClient provideEstablishmentApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new establishment api client");
     return retrofit.create(EstablishmentApiClient.class);
   }
 
+  @Reusable
   @Provides
   IssuerApiClient provideIssuerApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new issuer api client");
     return retrofit.create(IssuerApiClient.class);
   }
 
+  @Reusable
   @Provides
   UserApiClient provideUserApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new user api client");
