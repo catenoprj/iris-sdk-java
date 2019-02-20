@@ -1,9 +1,5 @@
 package br.com.cateno.sdk.domain.auth;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
-
 import java.io.IOException;
 import java.util.logging.Logger;
 
