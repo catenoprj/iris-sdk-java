@@ -7,7 +7,7 @@ import dagger.Component;
 import javax.inject.Singleton;
 
 @Singleton
-@Component(modules = {IrisModule.class, AuthModule.class})
+@Component(modules = {IrisModule.class, AuthModule.class, IssuerModule.class, EstablishmentModule.class})
 public interface IrisClient {
 
   IssuerService loadIssuerService();
