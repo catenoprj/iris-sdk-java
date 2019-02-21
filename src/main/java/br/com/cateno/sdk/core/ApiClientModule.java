@@ -3,6 +3,7 @@ package br.com.cateno.sdk.core;
 import br.com.cateno.sdk.domain.establishment.EstablishmentApiClient;
 import br.com.cateno.sdk.domain.establishment.MachineApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
+import br.com.cateno.sdk.domain.status.ActionApiClient;
 import br.com.cateno.sdk.domain.user.UserApiClient;
 import dagger.Module;
 import dagger.Provides;
@@ -46,5 +47,11 @@ class ApiClientModule {
   MachineApiClient provideMachineApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new machine api client");
     return retrofit.create(MachineApiClient.class);
+  }
+
+  @Provides
+  ActionApiClient provideActionApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new action api client");
+    return retrofit.create(ActionApiClient.class);
   }
 }
