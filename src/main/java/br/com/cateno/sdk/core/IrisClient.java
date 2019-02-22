@@ -1,6 +1,7 @@
 package br.com.cateno.sdk.core;
 
 import br.com.cateno.sdk.domain.claim.ClaimService;
+import br.com.cateno.sdk.domain.claim.ReportService;
 import br.com.cateno.sdk.domain.establishment.EstablishmentService;
 import br.com.cateno.sdk.domain.issuer.IssuerService;
 import br.com.cateno.sdk.domain.user.UserService;
@@ -23,4 +24,6 @@ public interface IrisClient {
   UserService loadUserService();
 
   ClaimService loadClaimService();
+
+  ReportService loadReportService();
 }
