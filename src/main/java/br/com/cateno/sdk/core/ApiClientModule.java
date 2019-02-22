@@ -12,6 +12,7 @@ import br.com.cateno.sdk.domain.user.OperationApiClient;
 import br.com.cateno.sdk.domain.user.PasswordApiClient;
 import br.com.cateno.sdk.domain.user.ProfileApiClient;
 import br.com.cateno.sdk.domain.user.UserApiClient;
+import br.com.cateno.sdk.domain.user.UserTypeApiClient;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Reusable;
@@ -117,5 +118,11 @@ class ApiClientModule {
   UserApiClient provideUserApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new user api client");
     return retrofit.create(UserApiClient.class);
+  }
+
+  @Provides
+  UserTypeApiClient provideUserTypeApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new user type api client");
+    return retrofit.create(UserTypeApiClient.class);
   }
 }
