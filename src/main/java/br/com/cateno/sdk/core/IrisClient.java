@@ -4,6 +4,7 @@ import br.com.cateno.sdk.domain.establishment.EstablishmentService;
 import br.com.cateno.sdk.domain.establishment.MachineService;
 import br.com.cateno.sdk.domain.issuer.IssuerService;
 import br.com.cateno.sdk.domain.user.OperationService;
+import br.com.cateno.sdk.domain.user.PasswordService;
 import br.com.cateno.sdk.domain.user.ProfileService;
 import br.com.cateno.sdk.domain.user.UserService;
 import dagger.Component;
@@ -29,4 +30,6 @@ public interface IrisClient {
   MachineService loadMachineService();
 
   OperationService loadOperationService();
+
+  PasswordService loadPasswordService();
 }
