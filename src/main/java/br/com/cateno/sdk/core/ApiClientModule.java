@@ -3,7 +3,8 @@ package br.com.cateno.sdk.core;
 import br.com.cateno.sdk.domain.establishment.EstablishmentApiClient;
 import br.com.cateno.sdk.domain.establishment.MachineApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
-import br.com.cateno.sdk.domain.status.ActionApiClient;
+import br.com.cateno.sdk.domain.status.DeliveryActionApiClient;
+import br.com.cateno.sdk.domain.status.FinanceActionApiClient;
 import br.com.cateno.sdk.domain.user.UserApiClient;
 import dagger.Module;
 import dagger.Provides;
@@ -50,8 +51,14 @@ class ApiClientModule {
   }
 
   @Provides
-  ActionApiClient provideActionApiClient(@Named("authenticated") final Retrofit retrofit) {
-    LOGGER.info("providing new action api client");
-    return retrofit.create(ActionApiClient.class);
+  DeliveryActionApiClient provideDeliveryActionApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new delivery action api client");
+    return retrofit.create(DeliveryActionApiClient.class);
+  }
+
+  @Provides
+  FinanceActionApiClient provideFinanceActionApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new finance action api client");
+    return retrofit.create(FinanceActionApiClient.class);
   }
 }

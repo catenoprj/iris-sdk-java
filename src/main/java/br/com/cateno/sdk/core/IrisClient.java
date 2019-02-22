@@ -3,7 +3,8 @@ package br.com.cateno.sdk.core;
 import br.com.cateno.sdk.domain.establishment.EstablishmentService;
 import br.com.cateno.sdk.domain.establishment.MachineService;
 import br.com.cateno.sdk.domain.issuer.IssuerService;
-import br.com.cateno.sdk.domain.status.ActionService;
+import br.com.cateno.sdk.domain.status.DeliveryActionService;
+import br.com.cateno.sdk.domain.status.FinanceActionService;
 import br.com.cateno.sdk.domain.user.UserService;
 import dagger.Component;
 
@@ -25,5 +26,7 @@ public interface IrisClient {
 
   MachineService loadMachineService();
 
-  ActionService loadActionService();
+  DeliveryActionService loadDeliveryActionService();
+
+  FinanceActionService loadFinanceActionService();
 }
