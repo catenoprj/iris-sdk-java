@@ -11,11 +11,11 @@ public interface MessageApiClient {
     Call<Message> findById(@Path("id") String id);
 
     @PATCH("messages/{id}")
-    Call<Void> readMessage(@Path("id") String id, @Body MessageReadRequest message);
+    Call<Void> update(@Path("id") String id, @Body boolean read);
 
     @POST("messages/")
     Call<Message> create(@Body MessageRequest message);
 
     @GET("messages/")
-    Call<List<Message>> findAll(@Query("_limit") int pageSize, @Query("_offset") int page);
+    Call<List<Message>> findAll(@Query("parameters") MessageParameters parameters, @Query("_limit") int pageSize, @Query("_offset") int page);
 }

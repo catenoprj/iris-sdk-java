@@ -40,18 +40,17 @@ public class MessageService {
         return response.body();
     }
 
-    public List<Message> list(int pageSize, int page) throws IOException {
-        final Call<List<Message>> call = this.apiClient.findAll(pageSize, page);
+    public List<Message> list(final MessageParameters parameters, int pageSize, int page) throws IOException {
+        final Call<List<Message>> call = this.apiClient.findAll(parameters, pageSize, page);
         final Response<List<Message>> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
         return response.body();
     }
 
-    public void readMessage(final UUID id, final MessageReadRequest message) throws IOException {
+    public void markAsRead(final UUID id) throws IOException {
         checkNotNull(id);
-        checkNotNull(message);
 
-        final Call<Void> call = this.apiClient.readMessage(id.toString(), message);
+        final Call<Void> call = this.apiClient.update(id.toString(), true);
         final Response<Void> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }
