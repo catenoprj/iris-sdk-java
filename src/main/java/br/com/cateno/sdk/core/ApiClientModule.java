@@ -1,6 +1,7 @@
 package br.com.cateno.sdk.core;
 
 import br.com.cateno.sdk.domain.claim.ClaimApiClient;
+import br.com.cateno.sdk.domain.claim.ReportApiClient;
 import br.com.cateno.sdk.domain.establishment.EstablishmentApiClient;
 import br.com.cateno.sdk.domain.establishment.MachineApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
@@ -103,5 +104,11 @@ class ApiClientModule {
   ClaimApiClient provideClaimApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new claim api client");
     return retrofit.create(ClaimApiClient.class);
+  }
+
+  @Provides
+  ReportApiClient provideReportApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new report api client");
+    return retrofit.create(ReportApiClient.class);
   }
 }
