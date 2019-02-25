@@ -9,10 +9,10 @@ import java.util.Map;
 public interface ClaimApiClient {
 
     @GET("claims/count")
-    Call<Void> countClaims(@QueryMap Map<String, String> options);
+    Call<Void> count(@QueryMap Map<String, String> options);
 
     @GET("claims")
-    Call<List<Claim>> findClaims(@QueryMap Map<String, String> options, @Query("_limit") int pageSize, @Query("_offset") int page);
+    Call<List<Claim>> findByFilters(@QueryMap Map<String, String> filters, @Query("_limit") int pageSize, @Query("_offset") int page);
 
     @POST("claims")
     Call<Claim> create(@Body ClaimRequest claim);
@@ -24,5 +24,5 @@ public interface ClaimApiClient {
     Call<Void> update(@Path("id") String toString, @Body ClaimRequest issuer);
 
     @GET("claims/{id}/status")
-    Call<List<Status>> findClaimStatuses(@Path("id") String id, @Query("statusType") String statusType);
+    Call<List<Status>> findStatuses(@Path("id") String id, @Query("statusType") String statusType);
 }

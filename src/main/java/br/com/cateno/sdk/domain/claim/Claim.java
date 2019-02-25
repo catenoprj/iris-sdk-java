@@ -1,6 +1,7 @@
 package br.com.cateno.sdk.domain.claim;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class Claim {
     private String cardNumber;
     private String companyCode;
     private String companyName;
-    private Date authorizationDate;
+    private LocalDate authorizationDate;
     private BigDecimal authorizationValue;
     private String authorizationNumber;
     private String reference;
@@ -30,8 +31,8 @@ public class Claim {
     private String financeStatusDescription;
     private String username;
     private String userId;
-    private Date captureDate;
-    private Date closeDate;
+    private LocalDate captureDate;
+    private LocalDate closeDate;
 
     public String getId() {
         return id;
@@ -105,11 +106,11 @@ public class Claim {
         this.companyName = companyName;
     }
 
-    public Date getAuthorizationDate() {
+    public LocalDate getAuthorizationDate() {
         return authorizationDate;
     }
 
-    public void setAuthorizationDate(Date authorizationDate) {
+    public void setAuthorizationDate(LocalDate authorizationDate) {
         this.authorizationDate = authorizationDate;
     }
 
@@ -225,19 +226,19 @@ public class Claim {
         this.userId = userId;
     }
 
-    public Date getCaptureDate() {
+    public LocalDate getCaptureDate() {
         return captureDate;
     }
 
-    public void setCaptureDate(Date captureDate) {
+    public void setCaptureDate(LocalDate captureDate) {
         this.captureDate = captureDate;
     }
 
-    public Date getCloseDate() {
+    public LocalDate getCloseDate() {
         return closeDate;
     }
 
-    public void setCloseDate(Date closeDate) {
+    public void setCloseDate(LocalDate closeDate) {
         this.closeDate = closeDate;
     }
 
