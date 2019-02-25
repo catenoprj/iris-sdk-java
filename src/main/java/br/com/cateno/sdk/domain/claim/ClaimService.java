@@ -23,19 +23,21 @@ public class ClaimService {
         this.apiClient = apiClient;
     }
 
-    public long countClaim(final Map<String, String> options) throws IOException {
-        checkNotNull(options);
+    public long countClaim(final Map<String, String> filters) throws IOException {
+        checkNotNull(filters);
 
-        final Call<Void> call = this.apiClient.countClaims(options);
+        final Call<Void> call = this.apiClient.count(filters);
         final Response<Void> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
         return Long.parseLong(response.headers().get("x-total-count"));
     }
 
-    public List<Claim> list(final Map<String, String> options, final int pageSize, final int page) throws IOException {
-        checkNotNull(options);
+    public List<Claim> list(final Map<String, String> filters, final int pageSize, final int page) throws IOException {
+        checkNotNull(filters);
+        checkNotNull(pageSize);
+        checkNotNull(page);
 
-        final Call<List<Claim>> call = this.apiClient.findClaims(options, pageSize, page);
+        final Call<List<Claim>> call = this.apiClient.findByFilters(filters, pageSize, page);
         Response<List<Claim>> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
         return response.body();
@@ -66,10 +68,10 @@ public class ClaimService {
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }
 
-    public List<Status> findClaimStatuses(final UUID id, final String statusType) throws IOException {
+    public List<Status> findStatuses(final UUID id, final String statusType) throws IOException {
         checkNotNull(id);
 
-        final Call<List<Status>> call = this.apiClient.findClaimStatuses(id.toString(), statusType);
+        final Call<List<Status>> call = this.apiClient.findStatuses(id.toString(), statusType);
         Response<List<Status>> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
