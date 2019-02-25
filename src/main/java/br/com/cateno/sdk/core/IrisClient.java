@@ -3,6 +3,7 @@ package br.com.cateno.sdk.core;
 import br.com.cateno.sdk.domain.establishment.EstablishmentService;
 import br.com.cateno.sdk.domain.establishment.MachineService;
 import br.com.cateno.sdk.domain.issuer.IssuerService;
+import br.com.cateno.sdk.domain.uploader.UploaderService;
 import br.com.cateno.sdk.domain.user.OperationService;
 import br.com.cateno.sdk.domain.user.ProfileService;
 import br.com.cateno.sdk.domain.user.UserService;
@@ -29,4 +30,6 @@ public interface IrisClient {
   MachineService loadMachineService();
 
   OperationService loadOperationService();
+
+  UploaderService loadUploaderService();
 }

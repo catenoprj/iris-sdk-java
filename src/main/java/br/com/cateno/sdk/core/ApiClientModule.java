@@ -3,6 +3,7 @@ package br.com.cateno.sdk.core;
 import br.com.cateno.sdk.domain.establishment.EstablishmentApiClient;
 import br.com.cateno.sdk.domain.establishment.MachineApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
+import br.com.cateno.sdk.domain.uploader.UploaderApiClient;
 import br.com.cateno.sdk.domain.user.OperationApiClient;
 import br.com.cateno.sdk.domain.user.ProfileApiClient;
 import br.com.cateno.sdk.domain.user.UserApiClient;
@@ -61,5 +62,11 @@ class ApiClientModule {
   OperationApiClient provideOperationApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new operation api client");
     return retrofit.create(OperationApiClient.class);
+  }
+
+  @Provides
+  UploaderApiClient provideUploaderApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new operation api client");
+    return retrofit.create(UploaderApiClient.class);
   }
 }
