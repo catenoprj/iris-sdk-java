@@ -28,10 +28,12 @@ class IssuerServiceTest implements AuthenticatedStageEnvTest {
     class WhenCreateANewIssuer {
 
         @Test
-        @DisplayName("Should return the generated resource with Id")
-        void shouldReturnTheGeneratedResourceWithId() throws IOException {
+        @DisplayName("Should return the resource Issuer generated with Id")
+        void shouldReturnTheResourceIssuerGeneratedWithId() throws IOException {
 
-            Issuer issuerCreateResponse = service.create(IssuerRequestMock.issuerRequestMock());
+            IssuerRequestMock issuerMock = new IssuerRequestMock();
+            Issuer issuerCreateResponse = service.create(issuerMock.issuerRequestMock());
+
             assertThat(issuerCreateResponse.getId()).isNotNull();
         }
     }
@@ -44,7 +46,8 @@ class IssuerServiceTest implements AuthenticatedStageEnvTest {
         @Test
         @DisplayName("Should return the related resource with the same ID")
         void shouldReturnTheRelatedResourceWithTheSameId() throws IOException {
-            Issuer issuerCreateResponse = service.create(IssuerRequestMock.issuerRequestMock());
+            IssuerRequestMock issuerMock = new IssuerRequestMock();
+            Issuer issuerCreateResponse = service.create(issuerMock.issuerRequestMock());
 
             Issuer issuer = service.fetch(issuerCreateResponse.getId());
             assertThat(issuer.getId()).isNotNull();
@@ -58,8 +61,9 @@ class IssuerServiceTest implements AuthenticatedStageEnvTest {
         @Test
         @DisplayName("Should return a list of Issuers containing the last two above Issuers")
         void shouldReturnAListOfIssuersContainingTheLastTwoAboveIssuers() throws IOException {
-            Issuer issuerCreateResponse = service.create(IssuerRequestMock.issuerRequestMock());
-            Issuer issuerCreateResponse2 = service.create(IssuerRequestMock.issuerRequestMock());
+            IssuerRequestMock issuerMock = new IssuerRequestMock();
+            Issuer issuerCreateResponse = service.create(issuerMock.issuerRequestMock());
+            Issuer issuerCreateResponse2 = service.create(issuerMock.issuerRequestMock());
 
             List<Issuer> issuers = service.list();
             assertThat(issuers).contains(issuerCreateResponse, issuerCreateResponse2);
@@ -67,15 +71,16 @@ class IssuerServiceTest implements AuthenticatedStageEnvTest {
     }
 
     @Nested
-    @DisplayName("When request to update an Issuer")
-    class WhenRequestToUpdateAnIssuer {
+    @DisplayName("When create and request to update an Issuer")
+    class WhenCreateAndRequestToUpdateAnIssuer {
 
         @Test
         @DisplayName("Should update it properly")
         void shouldUpdateItProperly() throws IOException {
-            Issuer issuerCreateResponse = service.create(IssuerRequestMock.issuerRequestMock());
+            IssuerRequestMock issuerMock = new IssuerRequestMock();
+            Issuer issuerCreateResponse = service.create(issuerMock.issuerRequestMock());
 
-            IssuerRequest issuerUpdate = IssuerRequestMock.issuerRequestMock();
+            IssuerRequest issuerUpdate = issuerMock.issuerRequestMock();
 
             FakeValuesService fakeValuesService = new FakeValuesService(
                     new Locale("pt-BR"), new RandomService());
