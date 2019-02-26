@@ -17,5 +17,5 @@ public interface MessageApiClient {
     Call<Message> create(@Body MessageRequest message);
 
     @GET("messages/")
-    Call<List<Message>> findAll(@Query("parameters") MessageParameters parameters, @Query("_limit") int pageSize, @Query("_offset") int page);
+    Call<List<Message>> findAll(@Query("parameters") MessageFilters filters, @Query("_limit") int pageSize, @Query("_offset") int page);
 }

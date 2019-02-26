@@ -40,8 +40,11 @@ public class MessageService {
         return response.body();
     }
 
-    public List<Message> list(final MessageParameters parameters, int pageSize, int page) throws IOException {
-        final Call<List<Message>> call = this.apiClient.findAll(parameters, pageSize, page);
+    public List<Message> list(final MessageFilters filters, final Pagination pagination) throws IOException {
+        checkNotNull(filters);
+        checkNotNull(pagination);
+
+        final Call<List<Message>> call = this.apiClient.findAll(filters, pagination.getLimit(), pagination.getOffset());
         final Response<List<Message>> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
         return response.body();
