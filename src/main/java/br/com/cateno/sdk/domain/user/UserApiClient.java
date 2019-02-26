@@ -25,4 +25,7 @@ public interface UserApiClient {
 
     @DELETE("users/{id}")
     Call<Void> delete(@Path("id") String id);
+
+    @GET("user-types/")
+    Call<List<String>> findTypes();
 }
