@@ -6,6 +6,7 @@ import br.com.cateno.sdk.domain.issuer.IssuerService;
 import br.com.cateno.sdk.domain.status.DeliveryActionService;
 import br.com.cateno.sdk.domain.status.FinanceActionService;
 import br.com.cateno.sdk.domain.user.OperationService;
+import br.com.cateno.sdk.domain.user.PasswordService;
 import br.com.cateno.sdk.domain.user.ProfileService;
 import br.com.cateno.sdk.domain.user.UserService;
 import dagger.Component;
@@ -35,4 +36,6 @@ public interface IrisClient {
   FinanceActionService loadFinanceActionService();
   
   OperationService loadOperationService();
+
+  PasswordService loadPasswordService();
 }

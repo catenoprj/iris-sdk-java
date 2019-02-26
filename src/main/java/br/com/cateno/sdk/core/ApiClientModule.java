@@ -6,6 +6,7 @@ import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
 import br.com.cateno.sdk.domain.status.DeliveryActionApiClient;
 import br.com.cateno.sdk.domain.status.FinanceActionApiClient;
 import br.com.cateno.sdk.domain.user.OperationApiClient;
+import br.com.cateno.sdk.domain.user.PasswordApiClient;
 import br.com.cateno.sdk.domain.user.ProfileApiClient;
 import br.com.cateno.sdk.domain.user.UserApiClient;
 import dagger.Module;
@@ -79,5 +80,11 @@ class ApiClientModule {
   OperationApiClient provideOperationApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new operation api client");
     return retrofit.create(OperationApiClient.class);
+  }
+
+  @Provides
+  PasswordApiClient providePasswordApiClient(final Retrofit retrofit) {
+    LOGGER.info("providing new password api client");
+    return retrofit.create(PasswordApiClient.class);
   }
 }
