@@ -3,6 +3,8 @@ package br.com.cateno.sdk.core;
 import br.com.cateno.sdk.domain.establishment.EstablishmentApiClient;
 import br.com.cateno.sdk.domain.establishment.MachineApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
+import br.com.cateno.sdk.domain.status.DeliveryActionApiClient;
+import br.com.cateno.sdk.domain.status.FinanceActionApiClient;
 import br.com.cateno.sdk.domain.user.OperationApiClient;
 import br.com.cateno.sdk.domain.user.ProfileApiClient;
 import br.com.cateno.sdk.domain.user.UserApiClient;
@@ -50,13 +52,29 @@ class ApiClientModule {
     LOGGER.info("providing new profile api client");
     return retrofit.create(ProfileApiClient.class);
   }
-
+  
+  @Reusable
   @Provides
   MachineApiClient provideMachineApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new machine api client");
     return retrofit.create(MachineApiClient.class);
   }
 
+  @Reusable
+  @Provides
+  DeliveryActionApiClient provideDeliveryActionApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new delivery action api client");
+    return retrofit.create(DeliveryActionApiClient.class);
+  }
+
+  @Reusable
+  @Provides
+  FinanceActionApiClient provideFinanceActionApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new finance action api client");
+    return retrofit.create(FinanceActionApiClient.class);
+  }
+
+  @Reusable
   @Provides
   OperationApiClient provideOperationApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new operation api client");
