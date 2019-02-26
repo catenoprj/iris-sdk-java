@@ -8,21 +8,27 @@ import java.util.Map;
 
 public interface ClaimApiClient {
 
-    @GET("claims/count")
-    Call<Void> count(@QueryMap Map<String, String> options);
+  @GET("claims/count")
+  Call<Void> count();
 
-    @GET("claims")
-    Call<List<Claim>> findByFilters(@QueryMap Map<String, String> filters, @Query("_limit") int pageSize, @Query("_offset") int page);
+  @GET("claims/count")
+  Call<Void> count(@QueryMap Map<String, String> filters);
 
-    @POST("claims")
-    Call<Claim> create(@Body ClaimRequest claim);
+  @POST("claims")
+  Call<Claim> create(@Body ClaimRequest claim);
 
-    @GET("claims/{id}")
-    Call<Claim> findById(@Path("id") String id);
+  @GET("claims")
+  Call<List<Claim>> find(@Query("_limit") Integer limit, @Query("_offset") Integer offset);
 
-    @PATCH("issuers/{id}")
-    Call<Void> update(@Path("id") String toString, @Body ClaimRequest issuer);
+  @GET("claims")
+  Call<List<Claim>> find(@QueryMap Map<String, String> filters, @Query("_limit") Integer limit, @Query("_offset") Integer offset);
 
-    @GET("claims/{id}/status")
-    Call<List<Status>> findStatuses(@Path("id") String id, @Query("statusType") String statusType);
+  @GET("claims/{id}")
+  Call<Claim> findById(@Path("id") String id);
+
+  @GET("claims/{id}/status")
+  Call<List<Status>> findStatuses(@Path("id") String id, @Query("statusType") String statusType);
+
+  @PATCH("issuers/{id}")
+  Call<Void> update(@Path("id") String toString, @Body ClaimRequest issuer);
 }
