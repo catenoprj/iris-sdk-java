@@ -6,10 +6,10 @@ import com.github.javafaker.service.RandomService;
 
 import java.util.Locale;
 
-class IssuerRequestMock {
+public class IssuerRequestMock {
 
 
-    static IssuerRequest issuerRequestMock(){
+    public IssuerRequest issuerRequestMock(){
 
         FakeValuesService fakeValuesService = new FakeValuesService(
                 new Locale("pt-BR"), new RandomService());
