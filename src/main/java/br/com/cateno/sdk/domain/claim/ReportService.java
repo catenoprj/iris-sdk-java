@@ -6,7 +6,6 @@ import retrofit2.Response;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.Map;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
@@ -21,34 +20,62 @@ public class ReportService {
         this.apiClient = apiClient;
     }
 
-    public void downloadReportClaimXLSX(final Map<String, String> options) throws IOException {
-        checkNotNull(options);
+    public void downloadReportClaimXLSX() throws IOException {
 
-        final Call<String> call = this.apiClient.downloadReportClaimXLSX(options);
+        final Call<String> call = this.apiClient.downloadReportClaimXLSX();
         final Response<String> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }
 
-    public void downloadReportClaimCSV(final Map<String, String> options) throws IOException {
-        checkNotNull(options);
+    public void downloadReportClaimXLSX(final ClaimFilters filters) throws IOException {
+        checkNotNull(filters);
 
-        final Call<String> call = this.apiClient.downloadReportClaimCSV(options);
+        final Call<String> call = this.apiClient.downloadReportClaimXLSX(filters);
         final Response<String> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }
 
-    public void downloadReportHistoryXLSX(final Map<String, String> options) throws IOException {
-        checkNotNull(options);
+    public void downloadReportClaimCSV() throws IOException {
 
-        final Call<String> call = this.apiClient.downloadReportHistoryXLSX(options);
+        final Call<String> call = this.apiClient.downloadReportClaimCSV();
         final Response<String> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }
 
-    public void downloadReportHistoryCSV(final Map<String, String> options) throws IOException {
-        checkNotNull(options);
+    public void downloadReportClaimCSV(final ClaimFilters filters) throws IOException {
+        checkNotNull(filters);
 
-        final Call<String> call = this.apiClient.downloadReportHistoryCSV(options);
+        final Call<String> call = this.apiClient.downloadReportClaimCSV(filters);
+        final Response<String> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    }
+
+    public void downloadReportHistoryXLSX() throws IOException {
+
+        final Call<String> call = this.apiClient.downloadReportHistoryXLSX();
+        final Response<String> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    }
+
+    public void downloadReportHistoryXLSX(final ClaimFilters filters) throws IOException {
+        checkNotNull(filters);
+
+        final Call<String> call = this.apiClient.downloadReportHistoryXLSX(filters);
+        final Response<String> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    }
+
+    public void downloadReportHistoryCSV() throws IOException {
+
+        final Call<String> call = this.apiClient.downloadReportHistoryCSV();
+        final Response<String> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    }
+
+    public void downloadReportHistoryCSV(final ClaimFilters filters) throws IOException {
+        checkNotNull(filters);
+
+        final Call<String> call = this.apiClient.downloadReportHistoryCSV(filters);
         final Response<String> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }

@@ -29,6 +29,6 @@ public interface ClaimApiClient {
   @GET("claims/{id}/status")
   Call<List<Status>> findStatuses(@Path("id") String id, @Query("statusType") String statusType);
 
-  @PATCH("issuers/{id}")
-  Call<Void> update(@Path("id") String toString, @Body ClaimRequest issuer);
+  @PATCH("claims/{id}")
+  Call<Void> update(@Path("id") String id, @Body ClaimRequest issuer);
 }
