@@ -16,6 +16,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.Reusable;
 import retrofit2.Retrofit;
+import br.com.cateno.sdk.domain.messenger.MessageApiClient;
 
 import javax.inject.Named;
 import java.util.logging.Logger;
@@ -69,6 +70,12 @@ class ApiClientModule {
   MachineApiClient provideMachineApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new machine api client");
     return retrofit.create(MachineApiClient.class);
+  }
+
+  @Provides
+  MessageApiClient provideMessageApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new machine api client");
+    return retrofit.create(MessageApiClient.class);
   }
 
   @Reusable
