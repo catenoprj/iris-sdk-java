@@ -6,13 +6,14 @@ import com.github.javafaker.service.RandomService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+ @DisplayName("Given a User service")
  class UserServiceTest implements AuthenticatedStageEnvTest {
 
     private final UserService service;
@@ -24,12 +25,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
     @Nested
-    @DisplayName("Should create a new User of Type ADMINISTRADOR")
+    @DisplayName("When create a new User of Type ADMINISTRADOR")
     class WhenCreateNewUserOfTypeAdministrador {
 
         @Test
-        @DisplayName("Should return the resource User of type Administrator generated with Id")
-        void shouldReturnTheResourceUserOfTypeAdministradorGeneratedWithId() throws IOException {
+        @DisplayName("Then return the resource User of type Administrator generated with Id")
+        void thenReturnTheResourceUserOfTypeAdministradorGeneratedWithId() throws IOException {
             UserRequestMock userMock = new UserRequestMock();
             User userCreateResponse = service.create(userMock.userRequestMock(UserType.ADMINISTRADOR));
 
@@ -39,12 +40,12 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Nested
-    @DisplayName("Should create a new User of type Issuer")
+    @DisplayName("When create a new User of type Issuer")
     class WhenCreateNewUserOfTypeIssuer {
 
         @Test
-        @DisplayName("Should return the resource User of type Issuer generated with Id")
-        void shouldReturnTheResourceUserOfTypeIssuerGeneratedWithId() throws IOException {
+        @DisplayName("Then return the resource User of type Issuer generated with Id")
+        void thenReturnTheResourceUserOfTypeIssuerGeneratedWithId() throws IOException {
 
             UserRequestMock userMock = new UserRequestMock();
 
@@ -55,12 +56,12 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Nested
-    @DisplayName("Should search a new User by your ID")
+    @DisplayName("When search a new User by your ID")
     class WhenSearchUserById {
 
         @Test
-        @DisplayName("Should return the related resource with the same ID")
-        void shouldReturnTheRelatedResourceWithTheSameId() throws IOException {
+        @DisplayName("Then return the related resource with the same ID")
+        void thenReturnTheRelatedResourceWithTheSameId() throws IOException {
 
             UserRequestMock userMock = new UserRequestMock();
             User userCreateResponse = service.create(userMock.userRequestMock(UserType.ADMINISTRADOR));
@@ -72,12 +73,12 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Nested
-    @DisplayName("Should search a list Users")
+    @DisplayName("When search a list Users")
     class WhenSearchListUser {
 
         @Test
-        @DisplayName("Should return a list of Users containing the last two above Users")
-        void shouldReturnAListOfUsersContainingTheLastTwoAboveUsers() throws IOException {
+        @DisplayName("Then return a list of Users containing the last two above Users")
+        void thenReturnAListOfUsersContainingTheLastTwoAboveUsers() throws IOException {
 
             UserRequestMock userMock = new UserRequestMock();
 
@@ -94,8 +95,8 @@ import static org.assertj.core.api.Assertions.assertThat;
      class WhenCreateAndRequestToDeleteAnUser {
 
          @Test
-         @DisplayName("Should delete it properly")
-         void shouldDeleteItProperly() throws IOException {
+         @DisplayName("Then delete it properly")
+         void thenDeleteItProperly() throws IOException {
 
             UserRequestMock userMock = new UserRequestMock();
             User userCreateResponse = service.create(userMock.userRequestMock(UserType.ADMINISTRADOR));
@@ -114,8 +115,8 @@ import static org.assertj.core.api.Assertions.assertThat;
      class WhenCreateAndRequestToUpdateAnUser {
 
          @Test
-         @DisplayName("Should update it properly")
-         void shouldUpdateItProperly() throws IOException {
+         @DisplayName("Then update it properly")
+         void thenUpdateItProperly() throws IOException {
 
             UserRequestMock userMock = new UserRequestMock();
             User userCreateResponse = service.create(userMock.userRequestMock(UserType.ADMINISTRADOR));
@@ -142,28 +143,32 @@ import static org.assertj.core.api.Assertions.assertThat;
     }
 
     @Nested
-    @DisplayName("Should partial update a new User")
+    @DisplayName("When partial update a new User")
     class WhenPartialUpdateUser {
 
         @Test
-        @DisplayName("When partial update a new User")
-        void partialUpdateUser() throws IOException {
+        @DisplayName("Then partial update a new User")
+        void thenPartialUpdateANewUser() throws IOException {
 
-            UserRequestMock userMock = new UserRequestMock();
-            User userCreateResponse = service.create(userMock.userRequestMock(UserType.ADMINISTRADOR));
+            UUID userId = UUID.fromString("c947262e-2d8d-45e1-9c89-e44dd454325c");
+
+            User userRequestResponse = service.fetch(userId);
 
             UserUpdateRequest userRequest = new UserUpdateRequest();
 
             FakeValuesService fakeValuesService = new FakeValuesService(
                     new Locale("pt-BR"), new RandomService());
 
-            String userName = fakeValuesService.bothify("user??????");
+            String name = fakeValuesService.bothify("user-cateno??????");
 
-            userRequest.setName(userName);
+            userRequest.setName(name);
 
-            User userpartialUpdateResponse = service.partialUpdate(userCreateResponse.getId(),userRequest);
+            User userpartialUpdateResponse = service.partialUpdate(userId,userRequest);
 
-            assertThat(userpartialUpdateResponse.getName()).isNotEqualTo(userCreateResponse.getName());
+            assertThat(userpartialUpdateResponse.getName()).isNotEqualTo(userRequestResponse.getName());
+
+            userRequest.setName("User Admin");
+            service.partialUpdate(userId,userRequest);
         }
     }
 }

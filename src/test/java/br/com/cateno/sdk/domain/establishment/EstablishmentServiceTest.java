@@ -24,12 +24,12 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
   }
 
   @Nested
-  @DisplayName("Should create a new Establishment")
+  @DisplayName("When create a new Establishment")
   class WhenCreateNewEstablishment {
 
     @Test
-    @DisplayName("Should return the resource Establishment generated with Id")
-    void shouldReturnTheResourceEstablishmentGeneratedWithId() throws IOException {
+    @DisplayName("Then return the resource Establishment generated with Id")
+    void thenReturnTheResourceEstablishmentGeneratedWithId() throws IOException {
       EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
 
       Establishment establishmentCreateResponse = service.create(establishmentMock.establismentRequestMock());
@@ -38,12 +38,12 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
   }
 
   @Nested
-  @DisplayName("Should search a new Establishment by your ID")
+  @DisplayName("When search a new Establishment by your ID")
   class WhenSearchNewEstablishmentById {
 
     @Test
-    @DisplayName("Should return the related resource with the same ID")
-    void shouldReturnTheRelatedResourceWithTheSameId() throws IOException {
+    @DisplayName("Then return the related resource with the same ID")
+    void thenReturnTheRelatedResourceWithTheSameId() throws IOException {
       EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
 
       Establishment establishmentCreateResponse = service.create(establishmentMock.establismentRequestMock());
@@ -54,12 +54,12 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
   }
 
   @Nested
-  @DisplayName("Should search a list Establishments")
+  @DisplayName("When search a list Establishments")
   class WhenSearchListEstablishment {
 
     @Test
-    @DisplayName("Should return a list of Establihments containing the last two above Establihments")
-    void shouldReturnAListOfEstablishmentsContainingTheLastTwoAboveEstablishments() throws IOException {
+    @DisplayName("Then return a list of Establihments containing the last two above Establihments")
+    void thenReturnAListOfEstablishmentsContainingTheLastTwoAboveEstablishments() throws IOException {
       EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
 
       Establishment establishmentCreateResponse = service.create(establishmentMock.establismentRequestMock());
@@ -75,8 +75,8 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
   class WhenCreateAndRequestToUpdateAnEstablishment {
 
     @Test
-    @DisplayName("Should update it properly")
-    void shouldUpdateItProperly() throws IOException {
+    @DisplayName("Then update it properly")
+    void thenUpdateItProperly() throws IOException {
 
       EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
       Establishment establishmentCreateResponse = service.create(establishmentMock.establismentRequestMock());
@@ -101,8 +101,8 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
   class WhenCreateAndRequestToDeleteAnEstablishment {
 
     @Test
-    @DisplayName("Should delete it properly")
-    void shouldDeleteItProperly() throws IOException {
+    @DisplayName("Then delete it properly")
+    void thenDeleteItProperly() throws IOException {
 
       EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
       Establishment establishmentCreateResponse = service.create(establishmentMock.establismentRequestMock());
