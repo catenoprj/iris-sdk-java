@@ -72,6 +72,12 @@ class ApiClientModule {
     return retrofit.create(MachineApiClient.class);
   }
 
+  @Provides
+  MessageApiClient provideMessageApiClient(@Named("authenticated") final Retrofit retrofit) {
+    LOGGER.info("providing new machine api client");
+    return retrofit.create(MessageApiClient.class);
+  }
+
   @Reusable
   @Provides
   OperationApiClient provideOperationApiClient(@Named("authenticated") final Retrofit retrofit) {
@@ -111,11 +117,5 @@ class ApiClientModule {
   UserApiClient provideUserApiClient(@Named("authenticated") final Retrofit retrofit) {
     LOGGER.info("providing new user api client");
     return retrofit.create(UserApiClient.class);
-  }
-
-  @Provides
-  MessageApiClient provideMessageApiClient(@Named("authenticated") final Retrofit retrofit) {
-    LOGGER.info("providing new machine api client");
-    return retrofit.create(MessageApiClient.class);
   }
 }

@@ -37,6 +37,8 @@ public interface IrisClient {
 
   MachineService loadMachineService();
 
+  MessageService loadMessageService();
+
   OperationService loadOperationService();
 
   PasswordService loadPasswordService();
@@ -48,6 +50,4 @@ public interface IrisClient {
   UploaderService loadUploaderService();
 
   UserService loadUserService();
-
-  MessageService loadMessageService();
 }
