@@ -2,14 +2,12 @@ package br.com.cateno.sdk.domain.claim;
 
 import java.util.Objects;
 
-public class ClaimRequest {
+public class ClaimUpdateRequest {
 
     private String claimStatus;
     private String claimStatusDescription;
     private String deliveryStatusId;
     private String financeStatusId;
-    private String reason;
-
 
     public String getClaimStatus() {
         return claimStatus;
@@ -43,28 +41,19 @@ public class ClaimRequest {
         this.financeStatusId = financeStatusId;
     }
 
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ClaimRequest that = (ClaimRequest) o;
+        ClaimUpdateRequest that = (ClaimUpdateRequest) o;
         return Objects.equals(claimStatus, that.claimStatus) &&
                 Objects.equals(claimStatusDescription, that.claimStatusDescription) &&
                 Objects.equals(deliveryStatusId, that.deliveryStatusId) &&
-                Objects.equals(financeStatusId, that.financeStatusId) &&
-                Objects.equals(reason, that.reason);
+                Objects.equals(financeStatusId, that.financeStatusId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(claimStatus, claimStatusDescription, deliveryStatusId, financeStatusId, reason);
+        return Objects.hash(claimStatus, claimStatusDescription, deliveryStatusId, financeStatusId);
     }
 }

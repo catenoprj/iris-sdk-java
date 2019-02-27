@@ -40,7 +40,7 @@ public class ClaimService {
     return Long.parseLong(response.headers().get("x-total-count"));
   }
 
-  public Claim create(final ClaimRequest claim) throws IOException {
+  public Claim create(final ClaimCreateRequest claim) throws IOException {
     final Call<Claim> call = this.apiClient.create(claim);
     final Response<Claim> response = call.execute();
     if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
@@ -85,7 +85,7 @@ public class ClaimService {
     return Optional.ofNullable(response.body()).orElseGet(Collections::emptyList);
   }
 
-  public void update(final UUID id, final ClaimRequest claim) throws IOException {
+  public void update(final UUID id, final ClaimUpdateRequest claim) throws IOException {
     checkNotNull(id);
     checkNotNull(claim);
 
