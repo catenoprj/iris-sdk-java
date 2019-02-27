@@ -13,6 +13,8 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 import javax.inject.Named;
 import java.util.logging.Logger;
 
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+
 @Module
 class RetrofitModule {
 
@@ -64,7 +66,7 @@ class RetrofitModule {
   @Provides
   ObjectMapper provideObjectMapper() {
     LOGGER.info("providing new object mapper");
-    return new ObjectMapper();
+    return new ObjectMapper().configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
   }
 
   @Reusable

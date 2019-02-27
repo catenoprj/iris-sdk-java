@@ -1,5 +1,7 @@
 package br.com.cateno.sdk.core;
 
+import br.com.cateno.sdk.domain.claim.ClaimService;
+import br.com.cateno.sdk.domain.claim.ReportService;
 import br.com.cateno.sdk.domain.establishment.EstablishmentService;
 import br.com.cateno.sdk.domain.establishment.MachineService;
 import br.com.cateno.sdk.domain.issuer.IssuerService;
@@ -22,23 +24,27 @@ import javax.inject.Singleton;
 })
 public interface IrisClient {
 
-  IssuerService loadIssuerService();
-
-  EstablishmentService loadEstablishmentService();
-
-  UserService loadUserService();
-
-  ProfileService loadProfileService();
-
-  MachineService loadMachineService();
+  ClaimService loadClaimService();
 
   DeliveryActionService loadDeliveryActionService();
 
+  EstablishmentService loadEstablishmentService();
+
   FinanceActionService loadFinanceActionService();
-  
+
+  IssuerService loadIssuerService();
+
+  MachineService loadMachineService();
+
   OperationService loadOperationService();
+
+  PasswordService loadPasswordService();
+
+  ProfileService loadProfileService();
+
+  ReportService loadReportService();
 
   UploaderService loadUploaderService();
 
-  PasswordService loadPasswordService();
+  UserService loadUserService();
 }
