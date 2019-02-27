@@ -1,16 +1,11 @@
-package br.com.cateno.sdk.domain.profile;
+package br.com.cateno.sdk.domain.user;
 
-import br.com.cateno.sdk.domain.user.Profile;
-import br.com.cateno.sdk.domain.user.ProfileApiClient;
-import br.com.cateno.sdk.domain.user.ProfileRequest;
-import br.com.cateno.sdk.domain.user.ProfileService;
 import br.com.cateno.sdk.util.AuthenticatedStageEnvTest;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
