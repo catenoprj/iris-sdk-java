@@ -22,7 +22,7 @@ public class ReportService {
         this.apiClient = apiClient;
     }
 
-    public InputStream downloadReportClaimXLSX(final ClaimFilters filters) throws IOException {
+    public InputStream xlsxClaimReport(final ClaimFilters filters) throws IOException {
         checkNotNull(filters);
 
         final Call<ResponseBody> call = this.apiClient.xlsxClaimReport(filters);
@@ -31,7 +31,7 @@ public class ReportService {
         return response.body().byteStream();
     }
 
-    public InputStream downloadReportClaimCSV(final ClaimFilters filters) throws IOException {
+    public InputStream csvClaimReport(final ClaimFilters filters) throws IOException {
         checkNotNull(filters);
 
         final Call<ResponseBody> call = this.apiClient.csvClaimReport(filters);
@@ -40,7 +40,7 @@ public class ReportService {
         return response.body().byteStream();
     }
 
-    public InputStream downloadReportHistoryXLSX(final ClaimFilters filters) throws IOException {
+    public InputStream xlsxHistoryReport(final ClaimFilters filters) throws IOException {
         checkNotNull(filters);
 
         final Call<ResponseBody> call = this.apiClient.xlsxClaimHistory(filters);
@@ -49,7 +49,7 @@ public class ReportService {
         return response.body().byteStream();
     }
 
-    public InputStream downloadReportHistoryCSV(final ClaimFilters filters) throws IOException {
+    public InputStream csvHistoryReport(final ClaimFilters filters) throws IOException {
         checkNotNull(filters);
 
         final Call<ResponseBody> call = this.apiClient.csvClaimHistory(filters);
