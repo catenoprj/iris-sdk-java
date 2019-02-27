@@ -74,4 +74,11 @@ public class UserService {
         Response<Void> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }
+
+    public List<String> types() throws IOException {
+        final Call<List<String>> call = this.apiClient.types();
+        final Response<List<String>> response = call.execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        return response.body();
+    }
 }
