@@ -24,27 +24,27 @@ import javax.inject.Singleton;
 })
 public interface IrisClient {
 
-  IssuerService loadIssuerService();
-
-  EstablishmentService loadEstablishmentService();
-
-  UserService loadUserService();
-
-  ProfileService loadProfileService();
-
-  MachineService loadMachineService();
+  ClaimService loadClaimService();
 
   DeliveryActionService loadDeliveryActionService();
 
+  EstablishmentService loadEstablishmentService();
+
   FinanceActionService loadFinanceActionService();
+
+  IssuerService loadIssuerService();
+
+  MachineService loadMachineService();
 
   OperationService loadOperationService();
 
-  UploaderService loadUploaderService();
-
   PasswordService loadPasswordService();
 
-  ClaimService loadClaimService();
+  ProfileService loadProfileService();
 
   ReportService loadReportService();
+
+  UploaderService loadUploaderService();
+
+  UserService loadUserService();
 }
