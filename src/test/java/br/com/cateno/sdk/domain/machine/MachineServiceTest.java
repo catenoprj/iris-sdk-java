@@ -57,6 +57,22 @@ class MachineServiceTest implements AuthenticatedStageEnvTest {
     }
 
     @Nested
+    @DisplayName("When search a new Machine by your Number")
+    class WhenSearchNewMachineByNumber {
+
+        @Test
+        @DisplayName("Then return the related resource with the same Number")
+        void thenReturnTheRelatedResourceWithTheSameNumber() throws IOException {
+            MachineRequestMock machineMock = new MachineRequestMock();
+
+            Machine machineCreateResponse = service.create(machineMock.machineRequestMock());
+
+            Machine machine = service.fetchByNumber(machineCreateResponse.getNumber());
+            assertThat(machine.getNumber()).isNotNull();
+        }
+    }
+
+    @Nested
     @DisplayName("When create and request to update an Machine")
     class WhenCreateAndRequestToUpdateAnMachine {
 

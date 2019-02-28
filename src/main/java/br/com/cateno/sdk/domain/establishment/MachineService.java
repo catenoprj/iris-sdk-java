@@ -6,7 +6,6 @@ import retrofit2.Response;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
@@ -39,9 +38,9 @@ public class MachineService {
         return response.body();
     }
 
-    public List<Machine> list() throws IOException {
-        final Call<List<Machine>> call = this.apiClient.findAll();
-        final Response<List<Machine>> response = call.execute();
+    public Machine fetchByNumber(final String number) throws IOException {
+        final Call<Machine> call = this.apiClient.findByNumber(number);
+        final Response<Machine> response = call.execute();
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
         return response.body();
     }
