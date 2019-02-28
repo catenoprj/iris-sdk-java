@@ -1,9 +1,25 @@
 package br.com.cateno.sdk.domain.issuer;
 
+/**
+ *
+ * Represents a issuer used to does request a operation in server
+ */
 public class IssuerRequest {
+    /**
+     *  The CNPJ of an issuer
+     */
     private String cnpj;
+    /**
+     * The name of an issuer
+     */
     private String name;
+    /**
+     * The code identification to an issuer
+     */
     private String issuerCode;
+    /**
+     * The extra information of an issuer
+     */
     private ExtraInfo extraInfo;
 
     public String getCnpj() {
