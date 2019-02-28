@@ -6,8 +6,7 @@ import com.github.javafaker.service.RandomService;
 
 import java.util.Locale;
 
-public class IssuerRequestMock {
-
+ public class IssuerRequestMock {
 
     public IssuerRequest issuerRequestMock(){
 

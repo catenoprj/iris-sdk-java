@@ -1,0 +1,2 @@
+Codigo Emissor;Número da Companhia;Numeros do Plastico;Nome da Companhia;Data da Autorização;Hora da Autorização;Número da Autorização;Valor da Transação;Número Referência Intercâmbio Transação;Código do Ramo de Atividade;Número de Referência da Transação Autorizada;Código da Moeda do Valor de Origem
+%s;%s;%s;NETFLIX.COM              ;2018-05-07;19:54:48;038221;45,9; ;4814;000000298795;986
