@@ -24,7 +24,7 @@ Basta adicionar Cateno Íris SDK como uma dependência:
 
   <dependency>
     <groupId>br.com.cateno</groupId>
-    <artifactId>iris-sdk</artifactId>
+    <artifactId>iris-sdk-java</artifactId>
     <version>1.0.0</version>
   </dependency>
   
