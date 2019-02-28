@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Represents an user used to does request a operation of update in server
+ * Represents a body to update an User
  */
 public class UserUpdateRequest {
     /**
