@@ -10,6 +10,14 @@ Você pode começar em minutos usando ***Maven*** ou baixando um [único arquivo
 
 ## Instalar
 
+#### Construindo a partir do código fonte ####
+Depois de fazer o checkout do código fonte no GitHub, você pode empacotar o jar usando o Maven:
+```sh
+mvn clean package
+```
+
+#### Usando os módulos Maven do SDK ####
+
 Basta adicionar Cateno Íris SDK como uma dependência:
 ```xml
 <dependencies>
