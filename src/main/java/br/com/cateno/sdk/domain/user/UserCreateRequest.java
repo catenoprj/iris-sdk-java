@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Represents an user used to does request a operation of create in server
+ * Represents a body to create an User
  */
 public class UserCreateRequest {
     /**
