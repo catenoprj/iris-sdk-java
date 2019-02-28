@@ -1,7 +1,7 @@
 package br.com.cateno.sdk.domain.issuer;
 
 /**
- * Represents an Issuer used to does request a operation in server
+ * Represents a body to create or update an Issuer
  */
 public class IssuerRequest {
     /**
