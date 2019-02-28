@@ -11,6 +11,9 @@ import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
+/**
+ * Provides the local service for accessing, adding, updating and deleting an Action Delivery
+ */
 @Reusable
 public class DeliveryActionService {
 
@@ -22,6 +25,15 @@ public class DeliveryActionService {
         this.apiClient = apiClient;
     }
 
+    /**
+     * Create a new Action Delivery
+     *
+     * @param action necessary to create a new Action Delivery
+     * @return action delivery that was created
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see ActionRequest
+     * @see Action
+     */
     public Action create(final ActionRequest action) throws IOException {
         checkNotNull(action);
 
@@ -31,6 +43,15 @@ public class DeliveryActionService {
         return response.body();
     }
 
+    /**
+     * Fetch an Action Delivery by Id existent
+     *
+     * @param id action delivery already create
+     * @return action that was found
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     * @see Action
+     */
     public Action fetch(final UUID id) throws IOException {
         checkNotNull(id);
 
@@ -40,6 +61,13 @@ public class DeliveryActionService {
         return response.body();
     }
 
+    /**
+     * Fetch all Actions Delivery
+     *
+     * @return list of Actions Delivery
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see Action
+     */
     public List<Action> list() throws IOException {
         final Call<List<Action>> call = this.apiClient.findAll();
         final Response<List<Action>> response = call.execute();
@@ -47,6 +75,16 @@ public class DeliveryActionService {
         return response.body();
     }
 
+    /**
+     * Update Action Delivery by Id existent
+     *
+     * @param id action delivery already created
+     * @param action  object necessary to update a Action Delivery
+     * @return action delivery that was updated
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     * @see ActionRequest
+     */
     public Action update(final UUID id, final ActionRequest action) throws IOException {
         checkNotNull(id);
         checkNotNull(action);
@@ -57,6 +95,13 @@ public class DeliveryActionService {
         return response.body();
     }
 
+    /**
+     * Delete Action Delivery by Id existent
+     *
+     * @param id action delivery already created
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     */
     public void delete(final UUID id) throws IOException {
         checkNotNull(id);
 

@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
-
+/**
+ * Provides the local service for accessing, adding, updating and deleting an Action Finance
+ */
 @Reusable
 public class FinanceActionService {
 
@@ -22,6 +24,15 @@ public class FinanceActionService {
         this.apiClient = apiClient;
     }
 
+    /**
+     * Create a new Action Finance
+     *
+     * @param action necessary to create a new Action Finance
+     * @return action finance that was created
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see ActionRequest
+     * @see Action
+     */
     public Action create(final ActionRequest action) throws IOException {
         checkNotNull(action);
 
@@ -31,6 +42,15 @@ public class FinanceActionService {
         return response.body();
     }
 
+    /**
+     * Fetch an Action Finance by Id existent
+     *
+     * @param id action finance already create
+     * @return action that was found
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     * @see Action
+     */
     public Action fetch(final UUID id) throws IOException {
         checkNotNull(id);
 
@@ -40,6 +60,13 @@ public class FinanceActionService {
         return response.body();
     }
 
+    /**
+     * Fetch all Actions Finance
+     *
+     * @return list of Actions Finance
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see Action
+     */
     public List<Action> list() throws IOException {
         final Call<List<Action>> call = this.apiClient.findAll();
         final Response<List<Action>> response = call.execute();
@@ -47,6 +74,16 @@ public class FinanceActionService {
         return response.body();
     }
 
+    /**
+     * Update Action Finance by Id existent
+     *
+     * @param id action finance already created
+     * @param action  object necessary to update a Action Finance
+     * @return action finance that was updated
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     * @see ActionRequest
+     */
     public Action update(final UUID id, final ActionRequest action) throws IOException {
         checkNotNull(id);
         checkNotNull(action);
@@ -57,6 +94,13 @@ public class FinanceActionService {
         return response.body();
     }
 
+    /**
+     * Delete Action Finance by Id existent
+     *
+     * @param id action finance already created
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     */
     public void delete(final UUID id) throws IOException {
         checkNotNull(id);
 
