@@ -27,7 +27,7 @@ Basta adicionar Cateno Íris SDK como uma dependência:
 
 #### Configurar credenciais Cateno Íris ####
 
-Antes de começar, você precisa de uma conta Cateno Íris. Cadastre-se em [Inscreva-se no Cateno Íris](https://portal-cateno.sensedia.com/api-portal/user/register) 
+Antes de começar, você precisa de uma conta Cateno Íris. Inscreva-se no [Portal Cateno Íris](https://portal-cateno.sensedia.com/api-portal/user/register) 
 para obter informações sobre como criar uma app Cateno Íris e recuperar suas credenciais.
 
 Para definir suas credenciais pelo Cateno Íris SDK para Java basta:
