@@ -9,6 +9,9 @@ import java.io.IOException;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
+/**
+ * Provides the local service for resetting e updating a Password of User
+ */
 @Reusable
 public class PasswordService {
 
@@ -20,6 +23,12 @@ public class PasswordService {
         this.apiClient = apiClient;
     }
 
+    /**
+     * Reset a Password
+     *
+     * @param cpf user
+     * @throws IOException does occur if response by server for unsuccessful
+     */
     public void reset(final String cpf) throws IOException {
         checkNotNull(cpf);
 
@@ -28,6 +37,13 @@ public class PasswordService {
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }
 
+    /**
+     * Update a Password
+     *
+     * @param password object necessary to update a Password
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UpdatePasswordRequest
+     */
     public void update(final UpdatePasswordRequest password) throws IOException {
         checkNotNull(password);
 
@@ -36,6 +52,14 @@ public class PasswordService {
         if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
     }
 
+    /**
+     * Reset a Password
+     *
+     * @param token necessary to update a Password
+     * @param password object necessary to update a Password
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UpdatePasswordRequest
+     */
     public void reset(String token, ResetNewPasswordRequest password) throws IOException {
         final Call<Void> call = this.apiClient.reset(token, password);
         final Response<Void> response = call.execute();

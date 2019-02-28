@@ -11,6 +11,9 @@ import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
+/**
+ * Provides the local service for accessing, adding, and updating a Profile
+ */
 @Reusable
 public class ProfileService {
 

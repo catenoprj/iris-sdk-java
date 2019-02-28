@@ -2,9 +2,21 @@ package br.com.cateno.sdk.domain.user;
 
 import java.util.Objects;
 
+/**
+ * Represents object necessary to update a password of user
+ */
 public class UpdatePasswordRequest {
+    /**
+     * The CPF of user
+     */
     private String cpf;
+    /**
+     * The new password
+     */
     private String passwordNew;
+    /**
+     * The old password
+     */
     private String passwordOld;
 
     public String getCpf() {

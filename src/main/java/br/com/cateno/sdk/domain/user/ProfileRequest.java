@@ -3,10 +3,23 @@ package br.com.cateno.sdk.domain.user;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents a profile used to does request a operation in server
+ */
 public class ProfileRequest {
-
+    /**
+     * The name of profile
+     */
     private String name;
+    /**
+     * The type of user
+     * @see UserType
+     */
     private UserType userType;
+    /**
+     * The operations that profile has
+     * @see Operation
+     */
     private List<Operation> operations;
 
     public String getName() {

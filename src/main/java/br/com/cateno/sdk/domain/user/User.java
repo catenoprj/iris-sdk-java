@@ -10,16 +10,58 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a user
+ */
 public class User {
+    /**
+     * The Id of user
+     * @see UUID
+     * */
     private UUID id;
+    /**
+     * The cpf of user
+     */
     private String cpf;
+    /**
+     * The name of user
+     */
     private String name;
+    /**
+     * The extra information of user
+     * @see ExtraInfo
+     */
     private ExtraInfo extraInfo;
+    /**
+     * The status of user
+     * @see Status
+     */
     private Status status;
+    /**
+     * The type of user
+     * @see UserType
+     */
     private UserType userType;
+    /**
+     * The list content ids of issuers of user
+     * @see Profile
+     */
     private List<UUID> issuerIds;
+    /**
+     * The list of content machines of user
+     * @see Machine
+     */
     private List<Machine> machines;
+    /**
+     * The id of profile
+     * @see UUID
+     * @see Profile
+     */
     private UUID profileId;
+    /**
+     * The date that created password
+     * @see LocalDateTime
+     */
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime passwordDate;

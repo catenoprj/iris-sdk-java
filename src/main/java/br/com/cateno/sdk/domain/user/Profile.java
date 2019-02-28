@@ -10,14 +10,35 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a profile of user
+ */
 public class Profile {
-
+    /**
+     * The id of profile
+     * @see UUID
+     */
     private UUID id;
+    /**
+     * The name of profile
+     */
     private String name;
+    /**
+     * The date of creation of profile
+     * @see LocalDateTime
+     */
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createdDate;
+    /**
+     * The type de user
+     * @see UserType
+     */
     private UserType userType;
+    /**
+     * The operations that profile has
+     * @see Operation
+     */
     private List<Operation> operations;
 
     public UUID getId() {

@@ -12,7 +12,7 @@ import java.util.UUID;
 import static dagger.internal.Preconditions.checkNotNull;
 
 /**
- * Provides the local service for accessing, adding e updating an Issuer
+ * Provides the local service for accessing, adding and updating an Issuer
  */
 @Reusable
 public class IssuerService {
@@ -29,8 +29,8 @@ public class IssuerService {
    * Create a new Issuer
    *
    * @param issuer object necessary to create a new Issuer
-   * @return issuer that was created
-   * @throws IOException
+   * @return Issuer that was created
+   * @throws IOException does occur if response by server for unsuccessful
    * @see IssuerRequest
    * @see Issuer
    */
@@ -47,8 +47,8 @@ public class IssuerService {
    * Fetch an Issuer by Id existent
    *
    * @param id issuer already created
-   * @return issuer that was found
-   * @throws IOException
+   * @return Issuer that was found
+   * @throws IOException does occur if response by server for unsuccessful
    * @see UUID
    * @see Issuer
    */
@@ -64,8 +64,8 @@ public class IssuerService {
   /**
    * Fetch all Issuers
    *
-   * @return list of issuers
-   * @throws IOException
+   * @return list of Issuers
+   * @throws IOException does occur if response by server for unsuccessful
    * @see Issuer
    */
   public List<Issuer> list() throws IOException {
@@ -80,8 +80,11 @@ public class IssuerService {
    *
    * @param id issuer already created
    * @param issuer object necessary to update a Issuer
-   * @return
-   * @throws IOException
+   * @return Issuer that was updated
+   * @throws IOException does occur if response by server for unsuccessful
+   * @see UUID
+   * @see IssuerRequest
+   * @see Issuer
    */
   public Issuer update(final UUID id, final IssuerRequest issuer) throws IOException {
     checkNotNull(id);
