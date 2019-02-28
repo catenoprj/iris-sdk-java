@@ -15,7 +15,7 @@ public interface ClaimApiClient {
   Call<Void> count(@QueryMap Map<String, String> filters);
 
   @POST("claims")
-  Call<Claim> create(@Body ClaimRequest claim);
+  Call<Claim> create(@Body ClaimCreateRequest claim);
 
   @GET("claims")
   Call<List<Claim>> find(@Query("_limit") Integer limit, @Query("_offset") Integer offset);
@@ -30,5 +30,5 @@ public interface ClaimApiClient {
   Call<List<Status>> findStatuses(@Path("id") String id, @Query("statusType") String statusType);
 
   @PATCH("claims/{id}")
-  Call<Void> update(@Path("id") String id, @Body ClaimRequest issuer);
+  Call<Void> update(@Path("id") String id, @Body ClaimUpdateRequest issuer);
 }
