@@ -3,7 +3,7 @@ package br.com.cateno.sdk.domain.user;
 import java.util.Objects;
 
 /**
- * Represents an operation
+ * Represents an Operation
  */
 public class OperationResponse {
     /**
