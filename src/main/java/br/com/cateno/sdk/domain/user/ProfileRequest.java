@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a profile used to does request a operation in server
+ * Represents a body to create or update a Profile
  */
 public class ProfileRequest {
     /**
