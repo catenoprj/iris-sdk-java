@@ -3,7 +3,7 @@ package br.com.cateno.sdk.domain.user;
 import java.util.Objects;
 
 /**
- * Represents object necessary to update a password of user
+ * Represents a body to update a Password of User
  */
 public class UpdatePasswordRequest {
     /**
