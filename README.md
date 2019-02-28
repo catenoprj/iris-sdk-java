@@ -37,3 +37,18 @@ IrisClient iris = IrisClientBuilder.standard()
     .withUserCredentials(new UserCredentials(USERNAME, PASSWORD))
     .build();
 ```
+Uma vez autenticado, a instância de `IrisClient` provê acesso aos serviços responsáveis por cada componente do Cateno Íris.
+Abaixo, o exemplo de uma consulta a contestações:
+```java
+ClaimService claimService = iris.loadClaimService();
+
+ClaimFilters filters = ClaimFilters.builder()
+    .closeDate(CloseDateRange.from(2013, 2, 7))
+    .issuer("ebaea3a9-4ff1-4353-83bf-e9e033f86dae")
+    .status("C")
+    .term("Owagner Lane")
+    .value(ValueRange.between(1100.6, 1200.0))
+    .build();
+
+List<Claim> claims = claimService.list(filters, Pagination.with(10, 0));
+```
