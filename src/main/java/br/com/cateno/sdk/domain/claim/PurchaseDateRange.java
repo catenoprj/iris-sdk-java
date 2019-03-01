@@ -1,9 +1,11 @@
 package br.com.cateno.sdk.domain.claim;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
+import static dagger.internal.Preconditions.checkNotNull;
 import static java.util.Optional.ofNullable;
 
 public class PurchaseDateRange extends HashMap<String, String> {
@@ -16,7 +18,17 @@ public class PurchaseDateRange extends HashMap<String, String> {
   }
 
   public static PurchaseDateRange between(final LocalDate from, final LocalDate to) {
+    checkNotNull(from);
+    checkNotNull(to);
+
     return new PurchaseDateRange(from, to);
+  }
+
+  public static PurchaseDateRange between(final ZonedDateTime from, final ZonedDateTime to) {
+    checkNotNull(from);
+    checkNotNull(to);
+
+    return new PurchaseDateRange(from.toLocalDate(), to.toLocalDate());
   }
 
   public static PurchaseDateRange from(final int year, final int month, final int dayOfMonth) {
@@ -25,6 +37,8 @@ public class PurchaseDateRange extends HashMap<String, String> {
   }
 
   public static PurchaseDateRange from(final LocalDate from) {
+    checkNotNull(from);
+
     return new PurchaseDateRange(from, null);
   }
 
@@ -34,6 +48,8 @@ public class PurchaseDateRange extends HashMap<String, String> {
   }
 
   public static PurchaseDateRange to(final LocalDate to) {
+    checkNotNull(to);
+
     return new PurchaseDateRange(null, to);
   }
 }
