@@ -32,7 +32,7 @@ public class UploaderService {
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("upload claim file", file.getName(), requestBody);
 
-        final Call<Response<?>> call = this.apiClient.upload(body);
+        Call<Response<?>> call = this.apiClient.upload(body);
         Response<Response<?>> response = call.execute();
         new ApiResponseBody<>(response).successfulBodyOrThrow();
     }

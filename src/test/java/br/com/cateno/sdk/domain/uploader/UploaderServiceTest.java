@@ -1,11 +1,6 @@
 package br.com.cateno.sdk.domain.uploader;
 
-
 import br.com.cateno.sdk.domain.claim.Claim;
-import br.com.cateno.sdk.domain.claim.ClaimApiClient;
-import br.com.cateno.sdk.domain.claim.ClaimService;
-import br.com.cateno.sdk.domain.establishment.MachineApiClient;
-import br.com.cateno.sdk.domain.establishment.MachineService;
 import br.com.cateno.sdk.util.AuthenticatedStageEnvTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -19,7 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class UploaderServiceTest implements AuthenticatedStageEnvTest {
 
     private final UploaderService service;
-    private final String directoryArchive = "/home/grogatto/Documentos/Projetos/Cateno/Iris/JAVA-SDK/iris-sdk-java/src/test/java/br/com/cateno/sdk/domain/resources/";
+    private final String directoryArchive = System.getProperty("user.dir") + "/src/test/java/br/com/cateno/sdk/domain/resources/";
 
     UploaderServiceTest() {
         final UploaderApiClient uploaderApiClient = this.getAuthenticatedRetrofit().create(UploaderApiClient.class);

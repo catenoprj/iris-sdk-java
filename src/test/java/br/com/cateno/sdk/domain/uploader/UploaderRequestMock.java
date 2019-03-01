@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class UploaderRequestMock implements AuthenticatedStageEnvTest {
 
-        public final String directoryArchive = "/home/grogatto/Documentos/Projetos/Cateno/Iris/JAVA-SDK/iris-sdk-java/src/test/java/br/com/cateno/sdk/domain/resources/";
+        public final String directoryArchive = System.getProperty("user.dir") + "/src/test/java/br/com/cateno/sdk/domain/resources/";
 
         public String setIssuerMachineUploadArchive(String diretory, String nameArchive) throws IOException {
 

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -60,8 +61,8 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
         void thenReturnATotalOfClaims() throws IOException {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
-            Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
-            Claim claimCreateResponse2 = service.create(claimMock.claimRequestMock());
+            service.create(claimMock.claimRequestMock());
+            service.create(claimMock.claimRequestMock());
 
             long claimCountRequest = service.count();
 
@@ -79,12 +80,178 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
-            Claim claimCreateResponse2 = service.create(claimMock.claimRequestMock());
 
-            //Arrumar para colocar Issuer aqui como parametro
-            long claimCountRequest = service.count();
+            Pagination pagination = Pagination.with(1, 0);
+            ClaimFilters clamFiltes = ClaimFilters.builder().issuer(claimCreateResponse.getIssuerId()).build();
 
-            assertThat(claimCountRequest).isEqualTo(2);
+            List<Claim> claim = service.list(clamFiltes, pagination);
+
+            assertThat(claim).contains(claimCreateResponse);
         }
     }
+
+    @Nested
+    @DisplayName("When search Claims with parameter Establishment")
+    class whenSearchClaimsWithParameterEstablishment {
+
+        @Test
+        @DisplayName("Then return a total of Claims with parameter Establishment")
+        void thenReturnATotalOfClaimsWithParameterEstablishment() throws IOException {
+            ClaimRequestMock claimMock = new ClaimRequestMock();
+
+            Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+
+            Pagination pagination = Pagination.with(1, 0);
+            ClaimFilters clamFiltes = ClaimFilters.builder().establishment(claimCreateResponse.getCompanyCode()).build();
+
+            List<Claim> claim = service.list(clamFiltes, pagination);
+
+            assertThat(claim).contains(claimCreateResponse);
+        }
+    }
+
+    @Nested
+    @DisplayName("When search Claims with parameter Search Term")
+    class whenSearchClaimsWithParameterSearchTerm {
+
+        @Test
+        @DisplayName("Then return a total of Claims with parameter Search Term")
+        void thenReturnATotalOfClaimsWithParameterSearchTerm() throws IOException {
+            ClaimRequestMock claimMock = new ClaimRequestMock();
+
+            Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+
+            String searchTerm = claimCreateResponse.getIssuerName();
+
+            Pagination pagination = Pagination.with(1, 0);
+            ClaimFilters clamFiltes = ClaimFilters.builder().term(searchTerm).build();
+
+            List<Claim> claim = service.list(clamFiltes, pagination);
+
+            assertThat(claim).contains(claimCreateResponse);
+        }
+    }
+
+
+    @Nested
+    @DisplayName("When search Claims with parameter Status")
+    class whenSearchClaimsWithParameterStatus {
+
+        @Test
+        @DisplayName("Then return a total of Claims with parameter Status")
+        void thenReturnATotalOfClaimsWithParameterStatus() throws IOException {
+            ClaimRequestMock claimMock = new ClaimRequestMock();
+
+            service.create(claimMock.claimRequestMock());
+
+            Pagination pagination = Pagination.with(10, 0);
+            ClaimFilters clamFiltes = ClaimFilters.builder().status("a").build();
+
+            List<Claim> claim = service.list(clamFiltes, pagination);
+
+            assertThat(claim).isNotEmpty();
+        }
+    }
+
+    @Nested
+    @DisplayName("When search Claims with parameter Authorization Value")
+    class whenSearchClaimsWithParameterAuthorizationValue {
+
+        @Test
+        @DisplayName("Then return a total of Claims with parameter Authorization Value")
+        void thenReturnATotalOfClaimsWithParameterAuthorizationValue() throws IOException {
+            ClaimRequestMock claimMock = new ClaimRequestMock();
+
+            Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+
+            Pagination pagination = Pagination.with(10, 0);
+            ValueRange authorizationValue = ValueRange.between(claimCreateResponse.getAuthorizationValue(), claimCreateResponse.getAuthorizationValue());
+
+
+            ClaimFilters clamFiltes = ClaimFilters.builder().value(authorizationValue).build();
+
+            List<Claim> claim = service.list(clamFiltes, pagination);
+
+            assertThat(claim).contains(claimCreateResponse);
+        }
+    }
+
+    @Nested
+    @DisplayName("When search Claims with parameter Purchase Date")
+    class whenSearchClaimsWithParameterPurchaseDate {
+
+        @Test
+        @DisplayName("Then return a total of Claims with parameter Purchase Date")
+        void thenReturnATotalOfClaimsWithParameterPurchaseDate() throws IOException {
+            ClaimRequestMock claimMock = new ClaimRequestMock();
+
+            Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+
+            Pagination pagination = Pagination.with(10, 0);
+            PurchaseDateRange purchaseDateRangeDateRange = PurchaseDateRange.between(claimCreateResponse.getAuthorizationDate(), claimCreateResponse.getAuthorizationDate());
+
+            ClaimFilters clamFiltes = ClaimFilters.builder().purchaseDate(purchaseDateRangeDateRange).build();
+
+            List<Claim> claim = service.list(clamFiltes, pagination);
+
+            assertThat(claim).contains(claimCreateResponse);
+        }
+    }
+
+    @Nested
+    @DisplayName("When search Claims with parameter Close Date")
+    class whenSearchClaimsWithParameterCloseDate {
+
+        @Test
+        @DisplayName("Then return a total of Claims with parameter Close Date")
+        void thenReturnATotalOfClaimsWithParameterCloseDate() throws IOException {
+            ClaimRequestMock claimMock = new ClaimRequestMock();
+
+            Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+
+            //tratar claims aqui
+            Pagination pagination = Pagination.with(10, 0);
+            CloseDateRange closeDateRange = CloseDateRange.between(claimCreateResponse.getCloseDate(), claimCreateResponse.getCloseDate());
+
+            ClaimFilters clamFiltes = ClaimFilters.builder().closeDate(closeDateRange).build();
+
+            List<Claim> claim = service.list(clamFiltes, pagination);
+
+            assertThat(claim).contains(claimCreateResponse);
+        }
+    }
+
+
+    @Nested
+    @DisplayName("When update Claims Status")
+    class whenUpdateClaimsStatus {
+
+        @Test
+        @DisplayName("Then return a status of done Claims")
+        void thenReturnAStatusOfDoneClaims() throws IOException {
+            ClaimRequestMock claimMock = new ClaimRequestMock();
+
+            Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+
+            ClaimUpdateRequest claimUpdateRequest = new ClaimUpdateRequest();
+
+            claimUpdateRequest.setClaimStatus("Em análise");
+
+            service.update(UUID.fromString(claimCreateResponse.getId()), claimUpdateRequest);
+
+            Claim claim = service.fetch(UUID.fromString(claimCreateResponse.getId()));
+
+            //claimUpdateRequest.setClaimStatusDescription();
+            //claimUpdateRequest.setDeliveryStatusId();
+            //claimUpdateRequest.setFinanceStatusId();
+
+            /*service.update(UUID.fromString(claimCreateResponse.getId()), claimUpdateRequest);
+
+            Claim claim = service.fetch(UUID.fromString(claimCreateResponse.getId()))*/;
+
+            assertThat(claim.getDeliveryStatusDescription()).isNotEmpty();
+        }
+    }
+
+
 }
