@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.status;
 
+import br.com.cateno.sdk.infra.ApiResponseBody;
 import dagger.Reusable;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -27,8 +28,7 @@ public class FinanceActionService {
 
         final Call<Action> call = this.apiClient.create(action);
         final Response<Action> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public Action fetch(final UUID id) throws IOException {
@@ -36,15 +36,13 @@ public class FinanceActionService {
 
         final Call<Action> call = this.apiClient.findById(id.toString());
         final Response<Action> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public List<Action> list() throws IOException {
         final Call<List<Action>> call = this.apiClient.findAll();
         final Response<List<Action>> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public Action update(final UUID id, final ActionRequest action) throws IOException {
@@ -53,8 +51,7 @@ public class FinanceActionService {
 
         final Call<Action> call = this.apiClient.update(id.toString(), action);
         final Response<Action> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public void delete(final UUID id) throws IOException {
@@ -62,6 +59,6 @@ public class FinanceActionService {
 
         final Call<Void> call = this.apiClient.delete(id.toString());
         Response<Void> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 }

@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.uploader;
 
+import br.com.cateno.sdk.infra.ApiResponseBody;
 import dagger.Reusable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -33,6 +34,6 @@ public class UploaderService {
 
         final Call<Response<?>> call = this.apiClient.upload(body);
         Response<Response<?>> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 }

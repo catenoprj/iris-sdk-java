@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.establishment;
 
+import br.com.cateno.sdk.infra.ApiResponseBody;
 import dagger.Reusable;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -26,8 +27,7 @@ public class EstablishmentService {
 
         final Call<Establishment> call = this.apiClient.create(establishment);
         final Response<Establishment> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public Establishment fetch(final UUID id) throws IOException {
@@ -35,15 +35,13 @@ public class EstablishmentService {
 
         final Call<Establishment> call = this.apiClient.findById(id.toString());
         final Response<Establishment> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public List<Establishment> list() throws IOException {
         final Call<List<Establishment>> call = this.apiClient.findAll();
         final Response<List<Establishment>> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public Establishment update(final UUID id, final EstablishmentRequest establishment) throws IOException {
@@ -52,8 +50,7 @@ public class EstablishmentService {
 
         final Call<Establishment> call = this.apiClient.update(id.toString(), establishment);
         final Response<Establishment> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public void delete(final UUID id) throws IOException {
@@ -61,7 +58,7 @@ public class EstablishmentService {
 
         final Call<Void> call = this.apiClient.delete(id.toString());
         final Response<Void> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public List<SampleMachine> listMachines(final UUID id) throws  IOException {
@@ -69,7 +66,6 @@ public class EstablishmentService {
 
         final Call<List<SampleMachine>>  call = this.apiClient.findMachinesByEstablishmentId(id.toString());
         final Response<List<SampleMachine>> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 }

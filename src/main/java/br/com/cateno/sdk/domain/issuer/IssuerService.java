@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.issuer;
 
+import br.com.cateno.sdk.infra.ApiResponseBody;
 import dagger.Reusable;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -39,8 +40,7 @@ public class IssuerService {
 
     final Call<Issuer> call = this.apiClient.create(issuer);
     final Response<Issuer> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-    return response.body();
+    return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 
   /**
@@ -57,8 +57,7 @@ public class IssuerService {
 
     final Call<Issuer> call = this.apiClient.findById(id.toString());
     final Response<Issuer> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-    return response.body();
+    return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 
   /**
@@ -71,8 +70,7 @@ public class IssuerService {
   public List<Issuer> list() throws IOException {
     final Call<List<Issuer>> call = this.apiClient.findAll();
     final Response<List<Issuer>> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-    return response.body();
+    return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 
   /**
@@ -89,7 +87,6 @@ public class IssuerService {
 
     final Call<Issuer> call = this.apiClient.update(id.toString(), issuer);
     final Response<Issuer> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-    return response.body();
+    return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 }

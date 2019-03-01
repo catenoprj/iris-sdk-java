@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.user;
 
+import br.com.cateno.sdk.infra.ApiResponseBody;
 import dagger.Reusable;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -27,8 +28,7 @@ public class ProfileService {
 
         final Call<Profile> call = this.apiClient.create(profile);
         final Response<Profile> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public Profile fetch(final UUID id) throws IOException {
@@ -36,15 +36,13 @@ public class ProfileService {
 
         final Call<Profile> call = this.apiClient.findById(id.toString());
         final Response<Profile> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public List<Profile> list() throws IOException {
         final Call<List<Profile>> call = this.apiClient.findAll();
         final Response<List<Profile>> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public Profile update(final UUID id, final ProfileRequest profile) throws IOException {
@@ -53,7 +51,6 @@ public class ProfileService {
 
         final Call<Profile> call = this.apiClient.update(id.toString(), profile);
         final Response<Profile> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 }
