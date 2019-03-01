@@ -14,7 +14,7 @@ import com.github.javafaker.service.RandomService;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Locale;
 
 class ClaimRequestMock implements AuthenticatedStageEnvTest {
@@ -43,7 +43,7 @@ class ClaimRequestMock implements AuthenticatedStageEnvTest {
          Issuer issuerResponse = issuerService.fetch(userCreateResponse.getIssuerIds().get(0));
 
          String cardNumber = fakeValuesService.regexify("[1-9]{16}");
-         LocalDateTime authorizationDate = LocalDateTime.now();
+         ZonedDateTime authorizationDate = ZonedDateTime.now();
          String authorizationValue = fakeValuesService.regexify("[1-9]{3}");
          String authorizationNumber = fakeValuesService.regexify("[1-9]{3}");
 

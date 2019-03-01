@@ -20,8 +20,6 @@ public class User {
     private List<UUID> issuerIds;
     private List<Machine> machines;
     private UUID profileId;
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime passwordDate;
 
     public UUID getId() {

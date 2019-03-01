@@ -1,7 +1,10 @@
 package br.com.cateno.sdk.core;
 
 import br.com.cateno.sdk.domain.auth.AuthorizationInterceptor;
+import br.com.cateno.sdk.infra.ZonedDateTimeDeserializer;
+import br.com.cateno.sdk.infra.ZonedDateTimeSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Reusable;
@@ -11,15 +14,21 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import javax.inject.Named;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Logger;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+import static com.fasterxml.jackson.databind.DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE;
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
 
 @Module
 class RetrofitModule {
 
-  private static final String DEFAULT_BASE_URL = "https://api-cateno.sensedia.com/hlg/iris/v1/";
+  private static final DateTimeFormatter ZONED_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
   private static final Logger LOGGER = Logger.getLogger(RetrofitModule.class.getName());
+  private static final String DEFAULT_BASE_URL = "https://api-cateno.sensedia.com/hlg/iris/v1/";
 
   RetrofitModule() {
     LOGGER.info("loading new IRIS module");
@@ -66,7 +75,16 @@ class RetrofitModule {
   @Provides
   ObjectMapper provideObjectMapper() {
     LOGGER.info("providing new object mapper");
-    return new ObjectMapper().configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+    final JavaTimeModule javaTimeModule = new JavaTimeModule();
+    javaTimeModule.addSerializer(ZonedDateTime.class, new ZonedDateTimeSerializer(ZONED_DATE_TIME_FORMATTER));
+    javaTimeModule.addDeserializer(ZonedDateTime.class, new ZonedDateTimeDeserializer(ZONED_DATE_TIME_FORMATTER));
+    return new ObjectMapper()
+        .disable(ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
+        .disable(FAIL_ON_UNKNOWN_PROPERTIES)
+        .disable(WRITE_DATES_AS_TIMESTAMPS)
+        .registerModule(javaTimeModule)
+        .findAndRegisterModules()
+        .setSerializationInclusion(NON_NULL);
   }
 
   @Reusable
