@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.auth;
 
+import br.com.cateno.sdk.infra.ApiResponseBody;
 import com.github.benmanes.caffeine.cache.Cache;
 
 import java.io.IOException;
@@ -50,8 +51,7 @@ public class AuthService {
 
     final retrofit2.Call<Authentication> call = this.apiClient.authenticate(basic(clientId, secret), clientId, username, password);
     final retrofit2.Response<Authentication> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-    return response.body();
+    return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 
   private Authorization newAuthorization() {

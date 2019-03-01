@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.establishment;
 
+import br.com.cateno.sdk.infra.ApiResponseBody;
 import dagger.Reusable;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -25,8 +26,7 @@ public class MachineService {
 
         final Call<Machine> call = this.apiClient.create(machine);
         final Response<Machine> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public Machine fetch(final UUID id) throws IOException {
@@ -34,15 +34,13 @@ public class MachineService {
 
         final Call<Machine> call = this.apiClient.findById(id.toString());
         final Response<Machine> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public Machine fetchByNumber(final String number) throws IOException {
         final Call<Machine> call = this.apiClient.findByNumber(number);
         final Response<Machine> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public Machine update(final UUID id, final MachineRequest machine) throws IOException {
@@ -51,8 +49,7 @@ public class MachineService {
 
         final Call<Machine> call = this.apiClient.update(id.toString(), machine);
         final Response<Machine> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public void delete(final UUID id) throws IOException {
@@ -60,6 +57,6 @@ public class MachineService {
 
         final Call<Void> call = this.apiClient.delete(id.toString());
         final Response<Void> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 }

@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.messenger;
 
+import br.com.cateno.sdk.infra.ApiResponseBody;
 import dagger.Reusable;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -27,8 +28,7 @@ public class MessageService {
 
         final Call<Message> call = this.apiClient.create(message);
         final Response<Message> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public Message fetch(final UUID id) throws IOException {
@@ -36,8 +36,7 @@ public class MessageService {
 
         final Call<Message> call = this.apiClient.findById(id.toString());
         final Response<Message> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public List<Message> list(final MessageFilters filters, final Pagination pagination) throws IOException {
@@ -46,8 +45,7 @@ public class MessageService {
 
         final Call<List<Message>> call = this.apiClient.findAll(filters, pagination.getLimit(), pagination.getOffset());
         final Response<List<Message>> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
     public void markAsRead(final UUID id) throws IOException {
@@ -55,6 +53,6 @@ public class MessageService {
 
         final Call<Void> call = this.apiClient.update(id.toString(), true);
         final Response<Void> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 }

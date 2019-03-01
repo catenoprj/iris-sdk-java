@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.user;
 
+import br.com.cateno.sdk.infra.ApiResponseBody;
 import dagger.Reusable;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -24,7 +25,6 @@ public class OperationService {
     public List<OperationResponse> list() throws IOException {
         final Call<List<OperationResponse>> call = this.apiClient.findAll();
         final Response<List<OperationResponse>> response = call.execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-        return response.body();
+        return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 }

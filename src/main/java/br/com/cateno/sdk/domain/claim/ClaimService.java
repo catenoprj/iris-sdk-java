@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.claim;
 
+import br.com.cateno.sdk.infra.ApiResponseBody;
 import dagger.Reusable;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -27,7 +28,7 @@ public class ClaimService {
   public long count() throws IOException {
     final Call<Void> call = this.apiClient.count();
     final Response<Void> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    new ApiResponseBody<>(response).successfulBodyOrThrow();
     return Long.parseLong(response.headers().get("x-total-count"));
   }
 
@@ -36,15 +37,14 @@ public class ClaimService {
 
     final Call<Void> call = this.apiClient.count(filters);
     final Response<Void> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    new ApiResponseBody<>(response).successfulBodyOrThrow();
     return Long.parseLong(response.headers().get("x-total-count"));
   }
 
   public Claim create(final ClaimCreateRequest claim) throws IOException {
     final Call<Claim> call = this.apiClient.create(claim);
     final Response<Claim> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-    return response.body();
+    return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 
   public Claim fetch(final UUID id) throws IOException {
@@ -52,8 +52,7 @@ public class ClaimService {
 
     final Call<Claim> call = this.apiClient.findById(id.toString());
     final Response<Claim> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-    return response.body();
+    return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 
   public List<Status> findStatuses(final UUID id, final String statusType) throws IOException {
@@ -61,9 +60,7 @@ public class ClaimService {
 
     final Call<List<Status>> call = this.apiClient.findStatuses(id.toString(), statusType);
     Response<List<Status>> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-    return response.body();
+    return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 
   public List<Claim> list(final Pagination pagination) throws IOException {
@@ -71,8 +68,8 @@ public class ClaimService {
 
     final Call<List<Claim>> call = this.apiClient.find(pagination.getLimit(), pagination.getOffset());
     Response<List<Claim>> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-    return Optional.ofNullable(response.body()).orElseGet(Collections::emptyList);
+    final List<Claim> claims = new ApiResponseBody<>(response).successfulBodyOrThrow();
+    return Optional.ofNullable(claims).orElseGet(Collections::emptyList);
   }
 
   public List<Claim> list(final ClaimFilters filters, final Pagination pagination) throws IOException {
@@ -81,8 +78,8 @@ public class ClaimService {
 
     final Call<List<Claim>> call = this.apiClient.find(filters, pagination.getLimit(), pagination.getOffset());
     Response<List<Claim>> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-    return Optional.ofNullable(response.body()).orElseGet(Collections::emptyList);
+    final List<Claim> claims = new ApiResponseBody<>(response).successfulBodyOrThrow();
+    return Optional.ofNullable(claims).orElseGet(Collections::emptyList);
   }
 
   public void update(final UUID id, final ClaimUpdateRequest claim) throws IOException {
@@ -91,6 +88,6 @@ public class ClaimService {
 
     final Call<Void> call = this.apiClient.update(id.toString(), claim);
     final Response<Void> response = call.execute();
-    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 }
