@@ -7,6 +7,9 @@ import static dagger.internal.Preconditions.checkNotNull;
 import static java.math.RoundingMode.HALF_UP;
 import static java.util.Optional.ofNullable;
 
+/**
+ * Represents value range of Claims
+ */
 public class ValueRange extends HashMap<String, String> {
 
   private ValueRange(final BigDecimal from, final BigDecimal to) {

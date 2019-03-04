@@ -14,6 +14,9 @@ import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
+/**
+ * Provides the local service for accessing, counting, adding and updating a Claim
+ */
 @Reusable
 public class ClaimService {
 
@@ -25,6 +28,12 @@ public class ClaimService {
     this.apiClient = apiClient;
   }
 
+  /**
+   * Count Claims
+   *
+   * @return count of Claims
+   * @throws IOException does occur if response by server for unsuccessful
+   */
   public long count() throws IOException {
     final Call<Void> call = this.apiClient.count();
     final Response<Void> response = call.execute();
@@ -32,6 +41,14 @@ public class ClaimService {
     return Long.parseLong(response.headers().get("x-total-count"));
   }
 
+  /**
+   * Count Claims
+   *
+   * @param filters object necessary to filter Claims
+   * @return count of Claims
+   * @throws IOException does occur if response by server for unsuccessful
+   * @see ClaimFilters
+   */
   public long count(final ClaimFilters filters) throws IOException {
     checkNotNull(filters);
 
@@ -41,12 +58,30 @@ public class ClaimService {
     return Long.parseLong(response.headers().get("x-total-count"));
   }
 
+  /**
+   * Create a new Claim
+   *
+   * @param claim object necessary to create a new Claim
+   * @return Claim that was created
+   * @throws IOException does occur if response by server for unsuccessful
+   * @see ClaimCreateRequest
+   * @see Claim
+   */
   public Claim create(final ClaimCreateRequest claim) throws IOException {
     final Call<Claim> call = this.apiClient.create(claim);
     final Response<Claim> response = call.execute();
     return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 
+  /**
+   * Fetch a Claim by Id existent
+   *
+   * @param id Claim already created
+   * @return Claim that was found
+   * @throws IOException does occur if response by server for unsuccessful
+   * @see UUID
+   * @see Claim
+   */
   public Claim fetch(final UUID id) throws IOException {
     checkNotNull(id);
 
@@ -55,6 +90,16 @@ public class ClaimService {
     return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 
+  /**
+   * Fetch a Status of Claim by Id Claim existent and type of Status
+   *
+   * @param id Claim already created
+   * @param statusType type of Status
+   * @return Status that was found
+   * @throws IOException does occur if response by server for unsuccessful
+   * @see UUID
+   * @see Status
+   */
   public List<Status> findStatuses(final UUID id, final String statusType) throws IOException {
     checkNotNull(id);
 
@@ -63,6 +108,15 @@ public class ClaimService {
     return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
 
+  /**
+   * Fetch Claims
+   *
+   * @param pagination object necessary to define quantity Claims
+   * @return list of Claim
+   * @throws IOException does occur if response by server for unsuccessful
+   * @see Pagination
+   * @see Claim
+   */
   public List<Claim> list(final Pagination pagination) throws IOException {
     checkNotNull(pagination);
 
@@ -72,6 +126,17 @@ public class ClaimService {
     return Optional.ofNullable(claims).orElseGet(Collections::emptyList);
   }
 
+  /**
+   * Fetch Claims
+   *
+   * @param filters object necessary to filter Claims
+   * @param pagination object necessary to define quantity Claims
+   * @return list of Claim
+   * @throws IOException does occur if response by server for unsuccessful
+   * @see ClaimFilters
+   * @see Pagination
+   * @see Claim
+   */
   public List<Claim> list(final ClaimFilters filters, final Pagination pagination) throws IOException {
     checkNotNull(filters);
     checkNotNull(pagination);
@@ -82,6 +147,15 @@ public class ClaimService {
     return Optional.ofNullable(claims).orElseGet(Collections::emptyList);
   }
 
+  /**
+   * Update a Claim
+   *
+   * @param id Claim already created
+   * @param claim object necessary to update a Claim
+   * @throws IOException does occur if response by server for unsuccessful
+   * @see UUID
+   * @see ClaimUpdateRequest
+   */
   public void update(final UUID id, final ClaimUpdateRequest claim) throws IOException {
     checkNotNull(id);
     checkNotNull(claim);
