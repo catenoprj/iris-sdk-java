@@ -11,7 +11,7 @@ public class Pagination {
      */
     private final Integer limit;
     /**
-     * The specify page os Messages
+     * The specify page of Messages
      */
     private final Integer offset;
 
