@@ -12,6 +12,9 @@ import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
+/**
+ * Provides the local service for accessing, adding, updating and deleting an Establishment
+ */
 @Reusable
 public class EstablishmentService {
 
@@ -22,6 +25,15 @@ public class EstablishmentService {
         this.apiClient = apiClient;
     }
 
+    /**
+     * Create a new Establishment
+     *
+     * @param establishment object necessary to create a new Establishment
+     * @return Establishment that was created
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see EstablishmentRequest
+     * @see Establishment
+     */
     public Establishment create(final EstablishmentRequest establishment) throws IOException {
         checkNotNull(establishment);
 
@@ -30,6 +42,15 @@ public class EstablishmentService {
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
+    /**
+     * Fetch an Establishment by Id existent
+     *
+     * @param id Establishment already created
+     * @return Establishment that was found
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     * @see Establishment
+     */
     public Establishment fetch(final UUID id) throws IOException {
         checkNotNull(id);
 
@@ -38,12 +59,30 @@ public class EstablishmentService {
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
+    /**
+     * Fetch all Establishments
+     *
+     * @return list of Establishments
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see Establishment
+     */
     public List<Establishment> list() throws IOException {
         final Call<List<Establishment>> call = this.apiClient.findAll();
         final Response<List<Establishment>> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
+    /**
+     * Update an Establishment
+     *
+     * @param id Establishment already created
+     * @param establishment object necessary to update an Establishment
+     * @return Establishment that was updated
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     * @see EstablishmentRequest
+     * @see Establishment
+     */
     public Establishment update(final UUID id, final EstablishmentRequest establishment) throws IOException {
         checkNotNull(id);
         checkNotNull(establishment);
@@ -53,6 +92,13 @@ public class EstablishmentService {
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
+    /**
+     * Delete an Establishment
+     *
+     * @param id Establishment already created
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     */
     public void delete(final UUID id) throws IOException {
         checkNotNull(id);
 
@@ -61,6 +107,15 @@ public class EstablishmentService {
         new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
+    /**
+     * Fetch all SampleMachine by Establishment Id
+     *
+     * @param id Establishment already created
+     * @return list of Sample Machines
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     * @see SampleMachine
+     */
     public List<SampleMachine> listMachines(final UUID id) throws  IOException {
         checkNotNull(id);
 
