@@ -12,9 +12,8 @@ public class Claim {
 
     /**
      * The Id of Claim
-     * @see UUID
      */
-    private UUID id;
+    private String id;
     /**
      * The Id of Issuer of Claim
      * @see UUID
@@ -133,11 +132,11 @@ public class Claim {
      */
     private LocalDate closeDate;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
