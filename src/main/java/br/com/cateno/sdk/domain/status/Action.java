@@ -3,10 +3,23 @@ package br.com.cateno.sdk.domain.status;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents an Action
+ */
 public class Action {
-
+    /**
+     * The description of Action
+     */
     private String description;
+    /**
+     * The id of Action
+     * @see UUID
+     */
     private UUID id;
+    /**
+     * The type of Action
+     * @see ActionType
+     */
     private ActionType type;
 
     public String getDescription() {
