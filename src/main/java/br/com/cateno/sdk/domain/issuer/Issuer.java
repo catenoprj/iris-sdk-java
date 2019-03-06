@@ -3,12 +3,35 @@ package br.com.cateno.sdk.domain.issuer;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents an Issuer
+ */
 public class Issuer {
+    /**
+     * The Id of Issuer
+     */
     private UUID id;
+    /**
+     * The code of Issuer
+     */
     private String issuerCode;
+    /**
+     * The CMPJ of Issuer
+     */
     private String cnpj;
+    /**
+     * The name of Issuer
+     */
     private String name;
+    /**
+     * The status of Issuer
+     * @see Status
+     */
     private Status status;
+    /**
+     * The extra information of Issuer
+     * @see ExtraInfo
+     */
     private ExtraInfo extraInfo;
 
     public String getCnpj() {

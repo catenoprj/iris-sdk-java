@@ -11,6 +11,9 @@ import java.util.List;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
+/**
+ * Provides the local service for accessing all types of Operation
+ */
 @Reusable
 public class OperationService {
 
@@ -22,6 +25,13 @@ public class OperationService {
         this.apiClient = apiClient;
     }
 
+    /**
+     * Fetch all Operations
+     *
+     * @return list of Operations
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see OperationResponse
+     */
     public List<OperationResponse> list() throws IOException {
         final Call<List<OperationResponse>> call = this.apiClient.findAll();
         final Response<List<OperationResponse>> response = call.execute();

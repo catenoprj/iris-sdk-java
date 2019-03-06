@@ -132,7 +132,7 @@ import static org.assertj.core.api.Assertions.assertThat;
             userRequest.setName(userName);
             userRequest.setCpf(cpf);
             userRequest.setExtraInfo(userCreateResponse.getExtraInfo());
-            userRequest.setProfileId(userCreateResponse.getProfileId().toString());
+            userRequest.setProfileId(userCreateResponse.getProfileId());
             userRequest.setUserType(userCreateResponse.getUserType());
 
             User userUpdateResponse = service.update(userCreateResponse.getId(),userRequest);

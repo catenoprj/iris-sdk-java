@@ -1,18 +1,37 @@
 package br.com.cateno.sdk.domain.user;
 
 import java.util.Objects;
+import java.util.UUID;
 
+/**
+ * Represents a machine of an user
+ */
 public class Machine {
-    private String id;
+    /**
+     * The id of machine
+     * @see UUID
+     */
+    private UUID id;
+    /**
+     * The number of machine
+     */
     private String number;
+    /**
+     * The label of machine
+     */
     private String label;
-    private String establishmentId;
+    /**
+     * The id of establishment
+     * @see UUID
+     * @see br.com.cateno.sdk.domain.establishment.Establishment
+     */
+    private UUID establishmentId;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -32,11 +51,11 @@ public class Machine {
         this.label = label;
     }
 
-    public String getEstablishmentId() {
+    public UUID getEstablishmentId() {
         return establishmentId;
     }
 
-    public void setEstablishmentId(String establishmentId) {
+    public void setEstablishmentId(UUID establishmentId) {
         this.establishmentId = establishmentId;
     }
 

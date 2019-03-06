@@ -2,6 +2,9 @@ package br.com.cateno.sdk.domain.user;
 
 import java.util.Objects;
 
+/**
+ * Represents a body to reset a Passoword of User
+ */
 public class ResetNewPasswordRequest {
     private String password;
     private String token;

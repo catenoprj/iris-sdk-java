@@ -1,7 +1,5 @@
 package br.com.cateno.sdk.domain.user;
 
-import br.com.cateno.sdk.domain.establishment.EstablishmentApiClient;
-import br.com.cateno.sdk.domain.establishment.EstablishmentService;
 import br.com.cateno.sdk.domain.issuer.Issuer;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerRequestMock;
@@ -14,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class UserRequestMock implements AuthenticatedStageEnvTest {
 
@@ -33,7 +32,7 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
         String cpf = fakeValuesService.regexify("[1-9]{11}");
         String backupPhone = "11" + fakeValuesService.regexify("[1-9]{8}");
         String userName = fakeValuesService.bothify("user??????");
-        List<String> issuerIds = new ArrayList<>();
+        List<UUID> issuerIds = new ArrayList<>();
 
         extraInfo.setMainPhone(mainPhone);
         extraInfo.setBackupPhone(backupPhone);
@@ -46,7 +45,7 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
         userRequest.setName(userName);
         userRequest.setUserType(userType);
 
-        userRequest.setProfileId("593f21e7-8485-434b-84ba-d486a63a770e");
+        userRequest.setProfileId(UUID.fromString("593f21e7-8485-434b-84ba-d486a63a770e"));
 
 
         if (userType.equals(UserType.EMISSOR)) {
@@ -54,7 +53,7 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
             IssuerRequestMock issuerMock = new IssuerRequestMock();
             Issuer issuerCreateResponse = issuerService.create(issuerMock.issuerRequestMock());
 
-            issuerIds.add(issuerCreateResponse.getId().toString());
+            issuerIds.add(issuerCreateResponse.getId());
 
             userRequest.setIssuerIds(issuerIds);
         }
