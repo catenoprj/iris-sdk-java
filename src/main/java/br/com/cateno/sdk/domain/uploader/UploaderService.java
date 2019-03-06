@@ -14,6 +14,9 @@ import java.io.IOException;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
+/**
+ * Provides the local service for uploading a file Claim
+ */
 @Reusable
 public class UploaderService {
 
@@ -25,6 +28,12 @@ public class UploaderService {
         this.apiClient = apiClient;
     }
 
+    /**
+     * Update a file claim
+     *
+     * @param pathFile path of file
+     * @throws IOException does occur if response by server for unsuccessful
+     */
     public void upload(final String pathFile) throws IOException {
         checkNotNull(pathFile);
 
