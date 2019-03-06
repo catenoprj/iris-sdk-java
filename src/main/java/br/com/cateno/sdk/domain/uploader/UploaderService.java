@@ -5,6 +5,7 @@ import dagger.Reusable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -39,10 +40,10 @@ public class UploaderService {
 
         File file = new File(pathFile);
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("upload claim file", file.getName(), requestBody);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
 
-        final Call<Response<?>> call = this.apiClient.upload(body);
-        Response<Response<?>> response = call.execute();
+        final Call<ResponseBody> call = this.apiClient.upload(body);
+        Response<ResponseBody> response = call.execute();
         new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 }
