@@ -47,7 +47,7 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
 
-            Claim claimFetchResponse = service.fetch(UUID.fromString(claimCreateResponse.getId()));
+            Claim claimFetchResponse = service.fetch(UUID.fromString(claimCreateResponse.getId().toString()));
             assertThat(claimFetchResponse.getId()).isNotNull();
         }
     }

@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class StatusRequestMock implements AuthenticatedStageEnvTest {
 
-    public void actionRequestMock() throws IOException {
+    public Action deliveryCreateResponse() throws IOException {
 
 
         DeliveryActionApiClient deliveryApiClient = this.getAuthenticatedRetrofit().create(DeliveryActionApiClient.class);
@@ -25,11 +25,20 @@ public class StatusRequestMock implements AuthenticatedStageEnvTest {
 
         actionRequestDelivery.setDescription(deliveryActionName);
 
-        deliveryService.create(actionRequestDelivery);
+        Action deliveryAction = deliveryService.create(actionRequestDelivery);
+
+        return deliveryAction;
+    }
+
+
+    public Action financeCreateResponse() throws IOException {
 
 
         FinanceActionApiClient financeApiClient = this.getAuthenticatedRetrofit().create(FinanceActionApiClient.class);
         FinanceActionService financeService = new FinanceActionService(financeApiClient);
+
+        FakeValuesService fakeValuesService = new FakeValuesService(
+                new Locale("pt-BR"), new RandomService());
 
         String financeActionName = fakeValuesService.bothify("financeAction????##");
 
@@ -37,7 +46,9 @@ public class StatusRequestMock implements AuthenticatedStageEnvTest {
 
         actionRequestFinance.setDescription(financeActionName);
 
-        financeService.create(actionRequestFinance);
+        Action financeAction = financeService.create(actionRequestFinance);
+
+        return financeAction;
 
     }
 }
