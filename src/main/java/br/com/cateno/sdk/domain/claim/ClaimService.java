@@ -79,13 +79,12 @@ public class ClaimService {
    * @param id Claim already created
    * @return Claim that was found
    * @throws IOException does occur if response by server for unsuccessful
-   * @see UUID
    * @see Claim
    */
-  public Claim fetch(final UUID id) throws IOException {
+  public Claim fetch(final String id) throws IOException {
     checkNotNull(id);
 
-    final Call<Claim> call = this.apiClient.findById(id.toString());
+    final Call<Claim> call = this.apiClient.findById(id);
     final Response<Claim> response = call.execute();
     return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
@@ -97,13 +96,12 @@ public class ClaimService {
    * @param statusType type of Status
    * @return Status that was found
    * @throws IOException does occur if response by server for unsuccessful
-   * @see UUID
    * @see Status
    */
-  public List<Status> findStatuses(final UUID id, final String statusType) throws IOException {
+  public List<Status> findStatuses(final String id, final String statusType) throws IOException {
     checkNotNull(id);
 
-    final Call<List<Status>> call = this.apiClient.findStatuses(id.toString(), statusType);
+    final Call<List<Status>> call = this.apiClient.findStatuses(id, statusType);
     Response<List<Status>> response = call.execute();
     return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
@@ -153,14 +151,13 @@ public class ClaimService {
    * @param id Claim already created
    * @param claim object necessary to update a Claim
    * @throws IOException does occur if response by server for unsuccessful
-   * @see UUID
    * @see ClaimUpdateRequest
    */
-  public void update(final UUID id, final ClaimUpdateRequest claim) throws IOException {
+  public void update(final String id, final ClaimUpdateRequest claim) throws IOException {
     checkNotNull(id);
     checkNotNull(claim);
 
-    final Call<Void> call = this.apiClient.update(id.toString(), claim);
+    final Call<Void> call = this.apiClient.update(id, claim);
     final Response<Void> response = call.execute();
     new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
