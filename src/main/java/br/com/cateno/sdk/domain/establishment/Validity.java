@@ -3,8 +3,17 @@ package br.com.cateno.sdk.domain.establishment;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Represents Validity of Machine
+ */
 public class Validity {
+    /**
+     * The start validity
+     */
     private LocalDate from;
+    /**
+     * The end validity
+     */
     private LocalDate to;
 
     public LocalDate getFrom() {

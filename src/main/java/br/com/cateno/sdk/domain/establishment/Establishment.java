@@ -3,11 +3,32 @@ package br.com.cateno.sdk.domain.establishment;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents an Establishment
+ */
 public class Establishment {
+    /**
+     * The Id of Establishment
+     * @see UUID
+     */
     private UUID id;
+    /**
+     * The CNPJ of Establishment
+     */
     private String cnpj;
+    /**
+     * The extra information of Establishment
+     * @see ExtraInfo
+     */
     private ExtraInfo extraInfo;
+    /**
+     * The name of Establishment
+     */
     private String name;
+    /**
+     * The status of Establishment
+     * @see Status
+     */
     private Status status;
 
     public UUID getId() {

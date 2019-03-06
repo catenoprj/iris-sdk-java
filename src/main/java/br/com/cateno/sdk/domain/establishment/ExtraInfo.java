@@ -2,9 +2,21 @@ package br.com.cateno.sdk.domain.establishment;
 
 import java.util.Objects;
 
+/**
+ * Represents extra information
+ */
 public class ExtraInfo {
+    /**
+     * The principal contact phone
+     */
     private String mainPhone;
+    /**
+     * The another option to contact phone
+     */
     private String backupPhone;
+    /**
+     * The e-mail
+     */
     private String email;
 
     public String getMainPhone() {
