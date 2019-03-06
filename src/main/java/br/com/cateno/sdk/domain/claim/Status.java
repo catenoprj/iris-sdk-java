@@ -1,31 +1,64 @@
 package br.com.cateno.sdk.domain.claim;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
+/**
+ * Represents a Status of Claim
+ */
 public class Status {
-    private String id;
-    private String idClaim;
+    /**
+     * The Id of Status of Claim
+     * @see UUID
+     */
+    private UUID id;
+    /**
+     * The Id of Claim
+     * @see UUID
+     */
+    private UUID idClaim;
+    /**
+     * The code of Status
+     */
     private String statusCode;
+    /**
+     * The type of Status
+     */
     private String statusType;
+    /**
+     * The description of Status
+     */
     private String description;
+    /**
+     * The username of Status of Claim
+     */
     private String username;
-    private String userId;
-    private Date date;
+    /**
+     * The Id of User of Claim
+     * @see UUID
+     */
+    private UUID userId;
+    /**
+     * The date of Status
+     * @see LocalDateTime
+     */
+    private LocalDateTime date;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public String getIdClaim() {
+    public UUID getIdClaim() {
         return idClaim;
     }
 
-    public void setIdClaim(String idClaim) {
+    public void setIdClaim(UUID idClaim) {
         this.idClaim = idClaim;
     }
 
@@ -61,19 +94,19 @@ public class Status {
         this.username = username;
     }
 
-    public String getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

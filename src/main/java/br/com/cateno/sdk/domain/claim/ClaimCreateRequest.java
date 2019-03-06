@@ -1,18 +1,52 @@
 package br.com.cateno.sdk.domain.claim;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Represents a body to create a Claim
+ */
 public class ClaimCreateRequest {
+    /**
+     * The code of Issuer of Claim
+     * @see br.com.cateno.sdk.domain.issuer.Issuer
+     */
     private String issuerCode;
+    /**
+     * The Machine of Claim
+     * @see br.com.cateno.sdk.domain.establishment.Machine
+     */
     private String machine;
+    /**
+     * The card number of Claim
+     */
     private String cardNumber;
+    /**
+     * The date of authorization of Claim
+     * @see LocalDate
+     */
     private LocalDateTime authorizationDate;
+    /**
+     * The value of authorization of Claim
+     */
     private BigDecimal authorizationValue;
+    /**
+     * The number of authorization of Claim
+     */
     private String authorizationNumber;
+    /**
+     * Tne reference of Claim
+     */
     private String reference;
+    /**
+     * The industry of Claim
+     */
     private String industry;
+    /**
+     * The reference transaction of Claim
+     */
     private String transactionReference;
 
     public String getIssuerCode() {

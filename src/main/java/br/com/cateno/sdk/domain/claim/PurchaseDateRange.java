@@ -6,6 +6,9 @@ import java.util.HashMap;
 
 import static java.util.Optional.ofNullable;
 
+/**
+ * Represents purchase date range of Claims
+ */
 public class PurchaseDateRange extends HashMap<String, String> {
 
   private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");

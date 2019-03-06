@@ -4,6 +4,10 @@ import java.util.HashMap;
 
 import static java.util.Optional.ofNullable;
 
+/**
+ * Represents a filter of Claims
+ * @see ClaimFiltersBuilder
+ */
 public class ClaimFilters extends HashMap<String, String> {
 
   ClaimFilters(final CloseDateRange closeDate, final String establishment, final String issuer, final PurchaseDateRange purchaseDate, final String status, final String term, final ValueRange value) {
