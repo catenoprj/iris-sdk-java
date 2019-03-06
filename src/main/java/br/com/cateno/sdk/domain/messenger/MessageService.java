@@ -12,6 +12,9 @@ import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
+/**
+ * Provides the local service for accessing, adding and updating a Message
+ */
 @Reusable
 public class MessageService {
 
@@ -23,6 +26,15 @@ public class MessageService {
         this.apiClient = apiClient;
     }
 
+    /**
+     * Create a new Message
+     *
+     * @param message object necessary to create a new Message
+     * @return Message that was created
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see MessageRequest
+     * @see Message
+     */
     public Message create(final MessageRequest message) throws IOException {
         checkNotNull(message);
 
@@ -31,6 +43,15 @@ public class MessageService {
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
+    /**
+     * Fetch an Message by Id existent
+     *
+     * @param id Message already created
+     * @return Message that was found
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     * @see Message
+     */
     public Message fetch(final UUID id) throws IOException {
         checkNotNull(id);
 
@@ -39,6 +60,17 @@ public class MessageService {
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
+    /**
+     * Fetch all Messages
+     *
+     * @param filters object necessary to filter messages
+     * @param pagination object necessary to define quantity messages
+     * @return list of Messages
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see MessageFilters
+     * @see Pagination
+     * @see Message
+     */
     public List<Message> list(final MessageFilters filters, final Pagination pagination) throws IOException {
         checkNotNull(filters);
         checkNotNull(pagination);
@@ -48,6 +80,13 @@ public class MessageService {
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
+    /**
+     * Mark a message as read
+     *
+     * @param id Message already created
+     * @throws IOException does occur if response by server for unsuccessful
+     * @see UUID
+     */
     public void markAsRead(final UUID id) throws IOException {
         checkNotNull(id);
 
