@@ -2,37 +2,134 @@ package br.com.cateno.sdk.domain.claim;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
+/**
+ * Represents a Claim
+ */
 public class Claim {
 
+    /**
+     * The Id of Claim
+     */
     private String id;
-    private String issuerId;
+    /**
+     * The Id of Issuer of Claim
+     * @see UUID
+     */
+    private UUID issuerId;
+    /**
+     * The code of Issuer of Claim
+     * @see br.com.cateno.sdk.domain.issuer.Issuer
+     */
     private String issuerCode;
+    /**
+     * The name of Issuer of Claim
+     * @see br.com.cateno.sdk.domain.issuer.Issuer
+     */
     private String issuerName;
+    /**
+     * The machine of Claim
+     * @see br.com.cateno.sdk.domain.establishment.Machine
+     */
     private String machine;
+    /**
+     * The label of Machine of Claim
+     */
     private String machineLabel;
+    /**
+     * The card number of Claim
+     */
     private String cardNumber;
+    /**
+     * The company code of Claim
+     */
     private String companyCode;
+    /**
+     * The company name of Claim
+     */
     private String companyName;
+    /**
+     * The date of authorization of Claim
+     * @see LocalDate
+     */
     private ZonedDateTime authorizationDate;
+    /**
+     * The value of authorization of Claim
+     */
     private BigDecimal authorizationValue;
+    /**
+     * The number of authorization of Claim
+     */
     private String authorizationNumber;
+    /**
+     * Tne reference of Claim
+     */
     private String reference;
+    /**
+     * The industry of Claim
+     */
     private String industry;
+    /**
+     * The reference transaction of Claim
+     */
     private String transactionReference;
+    /**
+     * The currency of Claim
+     */
     private String currency;
+    /**
+     * The status of Claim
+     * @see Status
+     */
     private String claimStatus;
+    /**
+     * The description of status of Claim
+     * @see Status
+     */
     private String claimStatusDescription;
-    private String deliveryStatusId;
+    /**
+     * The id of action delivery of Claim
+     * @see UUID
+     * @see br.com.cateno.sdk.domain.status.Action
+     */
+    private UUID deliveryStatusId;
+    /**
+     * The id description action delivery of Claim
+     * @see br.com.cateno.sdk.domain.status.Action
+     */
     private String deliveryStatusDescription;
-    private String financeStatusId;
+    /**
+     * The id of action finance of Claim
+     * @see UUID
+     * @see br.com.cateno.sdk.domain.status.Action
+     */
+    private UUID financeStatusId;
+    /**
+     * The id description action finance of Claim
+     * @see br.com.cateno.sdk.domain.status.Action
+     */
     private String financeStatusDescription;
+    /**
+     * The username of Claim
+     */
     private String username;
-    private String userId;
+    /**
+     * The id of User of Claim
+     * @see UUID
+     * @see br.com.cateno.sdk.domain.user.User
+     */
+    private UUID userId;
+    /**
+     * The date of capture of Claim
+     * @see LocalDate
+     */
     private ZonedDateTime captureDate;
+    /**
+     * The date of close of Claim
+     * @see LocalDate
+     */
     private LocalDate closeDate;
 
     public String getId() {
@@ -43,11 +140,11 @@ public class Claim {
         this.id = id;
     }
 
-    public String getIssuerId() {
+    public UUID getIssuerId() {
         return issuerId;
     }
 
-    public void setIssuerId(String issuerId) {
+    public void setIssuerId(UUID issuerId) {
         this.issuerId = issuerId;
     }
 
@@ -179,11 +276,11 @@ public class Claim {
         this.claimStatusDescription = claimStatusDescription;
     }
 
-    public String getDeliveryStatusId() {
+    public UUID getDeliveryStatusId() {
         return deliveryStatusId;
     }
 
-    public void setDeliveryStatusId(String deliveryStatusId) {
+    public void setDeliveryStatusId(UUID deliveryStatusId) {
         this.deliveryStatusId = deliveryStatusId;
     }
 
@@ -195,11 +292,11 @@ public class Claim {
         this.deliveryStatusDescription = deliveryStatusDescription;
     }
 
-    public String getFinanceStatusId() {
+    public UUID getFinanceStatusId() {
         return financeStatusId;
     }
 
-    public void setFinanceStatusId(String financeStatusId) {
+    public void setFinanceStatusId(UUID financeStatusId) {
         this.financeStatusId = financeStatusId;
     }
 
@@ -219,23 +316,23 @@ public class Claim {
         this.username = username;
     }
 
-    public String getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 
-  public ZonedDateTime getCaptureDate() {
-    return this.captureDate;
-  }
+    public ZonedDateTime getCaptureDate() {
+        return this.captureDate;
+    }
 
-  public void setCaptureDate(final ZonedDateTime captureDate) {
-    this.captureDate = captureDate;
-  }
+    public void setCaptureDate(final ZonedDateTime captureDate) {
+        this.captureDate = captureDate;
+    }
 
-  public LocalDate getCloseDate() {
+    public LocalDate getCloseDate() {
         return closeDate;
     }
 

@@ -2,17 +2,56 @@ package br.com.cateno.sdk.domain.user;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
+/**
+ * Represents a body to update an User
+ */
 public class UserUpdateRequest {
+    /**
+     * The CPF of user
+     */
     private String cpf;
+    /**
+     * The name of user
+     */
     private String name;
-    private Status status;
-    private String password;
+    /**
+     * The type of user
+     * @see UserType
+     */
     private UserType userType;
-    private List<String> issuerIds;
+    /**
+     * The status of user
+     * @see Status
+     */
+    private Status status;
+    /**
+     * The password of user
+     */
+    private String password;
+    /**
+     * The list content ids of issuers of user
+     * @see UUID
+     * @see Profile
+     */
+    private List<UUID> issuerIds;
+    /**
+     * The extra information of user
+     * @see ExtraInfo
+     */
     private ExtraInfo extraInfo;
+    /**
+     * The list of content machines of user
+     * @see Machine
+     */
     private List<Machine> machines;
-    private String profileId;
+    /**
+     * The id of profile of an user
+     * @see UUID
+     * @see Profile
+     */
+    private UUID profileId;
 
     public String getCpf() {
         return cpf;
@@ -54,11 +93,11 @@ public class UserUpdateRequest {
         this.userType = userType;
     }
 
-    public List<String> getIssuerIds() {
+    public List<UUID> getIssuerIds() {
         return issuerIds;
     }
 
-    public void setIssuerIds(List<String> issuerIds) {
+    public void setIssuerIds(List<UUID> issuerIds) {
         this.issuerIds = issuerIds;
     }
 
@@ -78,11 +117,11 @@ public class UserUpdateRequest {
         this.machines = machines;
     }
 
-    public String getProfileId() {
+    public UUID getProfileId() {
         return profileId;
     }
 
-    public void setProfileId(String profileId) {
+    public void setProfileId(UUID profileId) {
         this.profileId = profileId;
     }
 

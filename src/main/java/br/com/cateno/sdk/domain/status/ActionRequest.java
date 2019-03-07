@@ -2,8 +2,13 @@ package br.com.cateno.sdk.domain.status;
 
 import java.util.Objects;
 
+/**
+ * Represents a body to create or update an Action
+ */
 public class ActionRequest {
-
+    /**
+     * The description of Action
+     */
     String description;
 
     public String getDescription() {

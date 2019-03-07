@@ -3,12 +3,33 @@ package br.com.cateno.sdk.domain.establishment;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a Machine
+ */
 public class Machine {
 
+    /**
+     * The Establishment of Machine
+     * @see Establishment
+     */
     private Establishment establishment;
+    /**
+     * The Id of Machine
+     * @see UUID
+     */
     private UUID id;
+    /**
+     * The label of Machine
+     */
     private String label;
+    /**
+     * The number of Machine
+     */
     private String number;
+    /**
+     * The validity of Machine
+     * @see Validity
+     */
     private Validity validity;
 
     public Establishment getEstablishment() {

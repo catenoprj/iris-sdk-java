@@ -1,24 +1,24 @@
 package br.com.cateno.sdk.domain.issuer;
 
 /**
- *
- * Represents a issuer used to does request a operation in server
+ * Represents a body to create or update an Issuer
  */
 public class IssuerRequest {
     /**
-     *  The CNPJ of an issuer
+     * The CNPJ of Issuer
      */
     private String cnpj;
     /**
-     * The name of an issuer
+     * The name of Issuer
      */
     private String name;
     /**
-     * The code identification to an issuer
+     * The code identification of Issuer
      */
     private String issuerCode;
     /**
-     * The extra information of an issuer
+     * The extra information of Issuer
+     * @see ExtraInfo
      */
     private ExtraInfo extraInfo;
 

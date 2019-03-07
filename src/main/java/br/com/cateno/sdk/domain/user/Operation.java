@@ -1,5 +1,8 @@
 package br.com.cateno.sdk.domain.user;
 
+/**
+ * Represents types of operation
+ */
 public enum Operation {
     PROFILE_READ,
     PROFILE_CREATE,

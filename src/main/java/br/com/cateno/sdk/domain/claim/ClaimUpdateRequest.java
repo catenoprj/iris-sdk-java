@@ -1,13 +1,31 @@
 package br.com.cateno.sdk.domain.claim;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class ClaimUpdateRequest {
-
+    /**
+     * The status of Claim
+     * @see Status
+     */
     private String claimStatus;
+    /**
+     * The description of status of Claim
+     * @see Status
+     */
     private String claimStatusDescription;
-    private String deliveryStatusId;
-    private String financeStatusId;
+    /**
+     * The id of action delivery of Claim
+     * @see UUID
+     * @see br.com.cateno.sdk.domain.status.Action
+     */
+    private UUID deliveryStatusId;
+    /**
+     * The id of action finance of Claim
+     * @see UUID
+     * @see br.com.cateno.sdk.domain.status.Action
+     */
+    private UUID financeStatusId;
 
     public String getClaimStatus() {
         return claimStatus;
@@ -25,19 +43,19 @@ public class ClaimUpdateRequest {
         this.claimStatusDescription = claimStatusDescription;
     }
 
-    public String getDeliveryStatusId() {
+    public UUID getDeliveryStatusId() {
         return deliveryStatusId;
     }
 
-    public void setDeliveryStatusId(String deliveryStatusId) {
+    public void setDeliveryStatusId(UUID deliveryStatusId) {
         this.deliveryStatusId = deliveryStatusId;
     }
 
-    public String getFinanceStatusId() {
+    public UUID getFinanceStatusId() {
         return financeStatusId;
     }
 
-    public void setFinanceStatusId(String financeStatusId) {
+    public void setFinanceStatusId(UUID financeStatusId) {
         this.financeStatusId = financeStatusId;
     }
 

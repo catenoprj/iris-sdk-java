@@ -1,16 +1,42 @@
 package br.com.cateno.sdk.domain.user;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a profile of user
+ */
 public class Profile {
-
+    /**
+     * The id of profile
+     * @see UUID
+     */
     private UUID id;
+    /**
+     * The name of profile
+     */
     private String name;
+    /**
+     * The date of creation of profile
+     * @see LocalDateTime
+     */
     private LocalDateTime createdDate;
+    /**
+     * The type de user
+     * @see UserType
+     */
     private UserType userType;
+    /**
+     * The operations that profile has
+     * @see Operation
+     */
     private List<Operation> operations;
 
     public UUID getId() {

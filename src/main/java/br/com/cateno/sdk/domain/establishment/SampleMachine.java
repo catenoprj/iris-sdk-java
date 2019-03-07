@@ -3,10 +3,25 @@ package br.com.cateno.sdk.domain.establishment;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a sample Machine
+ */
 public class SampleMachine {
+    /**
+     * The Id of Machine
+     */
     private UUID id;
+    /**
+     * The label of Machine
+     */
     private String label;
+    /**
+     * The number of Machine
+     */
     private String number;
+    /**
+     * The validity of Machine
+     */
     private Validity validity;
 
     public UUID getId() {

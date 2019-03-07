@@ -1,13 +1,42 @@
 package br.com.cateno.sdk.domain.claim;
 
+/**
+ * Represents a builder of filters of Claims
+ */
 public class ClaimFiltersBuilder {
-
+  /**
+   * The close date range of Claim
+   * @see CloseDateRange
+   */
   private CloseDateRange closeDate;
+  /**
+   * The Establishment of Claim
+   * @see br.com.cateno.sdk.domain.establishment.Establishment
+   */
   private String establishment;
+  /**
+   * The Issuer of Claim
+   * @see br.com.cateno.sdk.domain.issuer.Issuer
+   */
   private String issuer;
+  /**
+   * The purchase date range of Claim
+   * @see PurchaseDateRange
+   */
   private PurchaseDateRange purchaseDate;
+  /**
+   * The Status of Claim
+   * @see Status
+   */
   private String status;
+  /**
+   * The any term related with Claim
+   */
   private String term;
+  /**
+   * The value range of Claim
+   * @see ValueRange
+   */
   private ValueRange value;
 
   public ClaimFilters build() {

@@ -2,9 +2,21 @@ package br.com.cateno.sdk.domain.user;
 
 import java.util.Objects;
 
+/**
+ * Represents an Operation
+ */
 public class OperationResponse {
+    /**
+     * The functionality of operation
+     */
     private String functionality;
+    /**
+     * The action of operation
+     */
     private String action;
+    /**
+     * The role of operation
+     */
     private String role;
 
     public String getFunctionality() {
