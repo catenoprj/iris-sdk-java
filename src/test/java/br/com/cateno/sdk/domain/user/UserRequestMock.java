@@ -1,6 +1,9 @@
 package br.com.cateno.sdk.domain.user;
 
-import br.com.cateno.sdk.domain.establishment.*;
+import br.com.cateno.sdk.domain.establishment.Establishment;
+import br.com.cateno.sdk.domain.establishment.MachineApiClient;
+import br.com.cateno.sdk.domain.establishment.MachineRequestMock;
+import br.com.cateno.sdk.domain.establishment.MachineService;
 import br.com.cateno.sdk.domain.issuer.Issuer;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerRequestMock;
@@ -26,8 +29,6 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
         MachineApiClient machineApiClient = this.getAuthenticatedRetrofit().create(MachineApiClient.class);
         MachineService machineService = new MachineService(machineApiClient);
 
-        EstablishmentApiClient establishmentApiClient = this.getAuthenticatedRetrofit().create(EstablishmentApiClient.class);
-        EstablishmentService establishmentService = new EstablishmentService(establishmentApiClient);
         FakeValuesService fakeValuesService = new FakeValuesService(
                 new Locale("pt-BR"), new RandomService());
 

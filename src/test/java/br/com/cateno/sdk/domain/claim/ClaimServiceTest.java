@@ -3,16 +3,12 @@ package br.com.cateno.sdk.domain.claim;
 import br.com.cateno.sdk.domain.Status.DeliveryActionRequestMock;
 import br.com.cateno.sdk.domain.Status.FinanceActionRequestMock;
 import br.com.cateno.sdk.domain.status.Action;
-import br.com.cateno.sdk.domain.status.DeliveryActionApiClient;
-import br.com.cateno.sdk.domain.status.DeliveryActionService;
 import br.com.cateno.sdk.util.AuthenticatedStageEnvTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;

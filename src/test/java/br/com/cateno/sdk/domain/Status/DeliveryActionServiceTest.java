@@ -17,7 +17,7 @@ import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DeliveryActionServiceTest implements AuthenticatedStageEnvTest {
+class DeliveryActionServiceTest implements AuthenticatedStageEnvTest {
 
     private final DeliveryActionService service;
 

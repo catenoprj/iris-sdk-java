@@ -1,6 +1,5 @@
 package br.com.cateno.sdk.domain.establishment;
 
-import br.com.cateno.sdk.domain.establishment.*;
 import br.com.cateno.sdk.util.AuthenticatedStageEnvTest;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;

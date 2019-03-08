@@ -17,7 +17,7 @@ import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FinanceActionServiceTest implements AuthenticatedStageEnvTest {
+class FinanceActionServiceTest implements AuthenticatedStageEnvTest {
 
     private final FinanceActionService service;
 
