@@ -1,7 +1,6 @@
 package br.com.cateno.sdk.domain.user;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents a machine of an user
@@ -9,9 +8,8 @@ import java.util.UUID;
 public class Machine {
     /**
      * The id of machine
-     * @see UUID
      */
-    private UUID id;
+    private String id;
     /**
      * The number of machine
      */
@@ -22,16 +20,15 @@ public class Machine {
     private String label;
     /**
      * The id of establishment
-     * @see UUID
      * @see br.com.cateno.sdk.domain.establishment.Establishment
      */
-    private UUID establishmentId;
+    private String establishmentId;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -51,11 +48,11 @@ public class Machine {
         this.label = label;
     }
 
-    public UUID getEstablishmentId() {
+    public String getEstablishmentId() {
         return establishmentId;
     }
 
-    public void setEstablishmentId(UUID establishmentId) {
+    public void setEstablishmentId(String establishmentId) {
         this.establishmentId = establishmentId;
     }
 

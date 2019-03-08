@@ -78,13 +78,13 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
             MachineRequestMock machineMock = new MachineRequestMock();
             br.com.cateno.sdk.domain.establishment.Machine machineCreateResponse = machineService.create(machineMock.machineRequestMock());
 
-            userMachine.setId(machineCreateResponse.getId());
+            userMachine.setId(machineCreateResponse.getId().toString());
             userMachine.setLabel(machineCreateResponse.getLabel());
             userMachine.setNumber(machineCreateResponse.getNumber());
 
             Establishment establishment = machineCreateResponse.getEstablishment();
 
-            userMachine.setEstablishmentId(establishment.getId());
+            userMachine.setEstablishmentId(establishment.getId().toString());
 
             listMachines.add(userMachine);
 
@@ -95,13 +95,13 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
             MachineRequestMock machineMock = new MachineRequestMock();
             br.com.cateno.sdk.domain.establishment.Machine machineCreateResponse = machineService.create(machineMock.machineRequestMock());
 
-            userMachine.setId(machineCreateResponse.getId());
+            userMachine.setId(machineCreateResponse.getId().toString());
             userMachine.setLabel(machineCreateResponse.getLabel());
             userMachine.setNumber(machineCreateResponse.getNumber());
 
             Establishment establishment = machineCreateResponse.getEstablishment();
 
-            userMachine.setEstablishmentId(establishment.getId());
+            userMachine.setEstablishmentId(establishment.getId().toString());
 
             listMachines.add(userMachine);
 

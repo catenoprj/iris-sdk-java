@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -81,17 +82,24 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
         @Test
         @DisplayName("Then return a total of Claims with parameter Issuer")
-        void thenReturnATotalOfClaimsWithParameterIssuer() throws IOException {
+        void thenReturnATotalOfClaimsWithParameterIssuer() throws IOException, InterruptedException {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+            Thread.sleep(2000);
+
+            String expectedId = claimCreateResponse.getId();
 
             Pagination pagination = Pagination.with(1, 0);
-            ClaimFilters clamFiltes = ClaimFilters.builder().issuer(claimCreateResponse.getIssuerId().toString()).build();
+            ClaimFilters claimFilters = ClaimFilters.builder().issuer(claimCreateResponse.getIssuerId().toString()).build();
 
-            List<Claim> claim = service.list(clamFiltes, pagination);
+            String foundId = service.list(claimFilters, pagination)
+                    .stream()
+                    .findAny()
+                    .map(Claim::getId)
+                    .get();
 
-            assertThat(claim).contains(claimCreateResponse);
+            assertThat(foundId).isEqualTo(expectedId);
         }
     }
 
@@ -101,10 +109,12 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
         @Test
         @DisplayName("Then return a total of Claims with parameter Establishment")
-        void thenReturnATotalOfClaimsWithParameterEstablishment() throws IOException {
+        void thenReturnATotalOfClaimsWithParameterEstablishment() throws IOException, InterruptedException {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+            Thread.sleep(2000);
+
             String expectedId = claimCreateResponse.getId();
 
             Pagination pagination = Pagination.with(1, 0);
@@ -130,14 +140,14 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
-            String expectedId = claimCreateResponse.getId();
+            Thread.sleep(2000);
 
+            String expectedId = claimCreateResponse.getId();
             String searchTerm = claimCreateResponse.getCompanyName();
 
             Pagination pagination = Pagination.with(1, 0);
             ClaimFilters claimFilters = ClaimFilters.builder().term(searchTerm).build();
 
-            Thread.sleep(3000);
             String foundId = service.list(claimFilters, pagination)
                     .stream()
                     .findAny()
@@ -179,24 +189,24 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
         @Test
         @DisplayName("Then return a total of Claims with parameter Authorization Value")
-        void thenReturnATotalOfClaimsWithParameterAuthorizationValue() throws IOException {
+        void thenReturnATotalOfClaimsWithParameterAuthorizationValue() throws IOException, InterruptedException {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+
+            Thread.sleep(2000);
             String expectedId = claimCreateResponse.getId();
 
-            Pagination pagination = Pagination.with(10, 0);
+            Pagination pagination = Pagination.with(30, 0);
             ValueRange authorizationValue = ValueRange.between(claimCreateResponse.getAuthorizationValue(), claimCreateResponse.getAuthorizationValue());
 
             ClaimFilters claimFilters = ClaimFilters.builder().value(authorizationValue).build();
 
-            String foundId = service.list(claimFilters, pagination)
+            Stream<Claim> found = service.list(claimFilters, pagination)
                     .stream()
-                    .findAny()
-                    .map(Claim::getId)
-                    .get();
+                    .filter(claim -> claim.getId().equals(expectedId));
 
-            assertThat(foundId).contains(expectedId);
+            assertThat(found.count()).isGreaterThan(0);
         }
     }
 
@@ -206,10 +216,12 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
         @Test
         @DisplayName("Then return a total of Claims with parameter Purchase Date")
-        void thenReturnATotalOfClaimsWithParameterPurchaseDate() throws IOException {
+        void thenReturnATotalOfClaimsWithParameterPurchaseDate() throws IOException, InterruptedException {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+
+            Thread.sleep(2000);
             String expectedId = claimCreateResponse.getId();
 
             Claim claimFetchResponse = service.fetch(claimCreateResponse.getId());
@@ -219,9 +231,13 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
             ClaimFilters claimFilters = ClaimFilters.builder().purchaseDate(purchaseDateRangeDateRange).build();
 
-            List<Claim> claimList = service.list(claimFilters, pagination);
+            Stream<Claim> found = service.list(claimFilters, pagination)
+                    .stream()
+                    .filter(claim -> claim.getId().equals(expectedId));
 
-            assertThat(claimList).contains(claimFetchResponse);
+            assertThat(found.count()).isGreaterThan(0);
+
+
         }
     }
 
@@ -231,10 +247,12 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
         @Test
         @DisplayName("Then return a total of Claims with parameter Close Date")
-        void thenReturnATotalOfClaimsWithParameterCloseDate() throws IOException {
+        void thenReturnATotalOfClaimsWithParameterCloseDate() throws IOException, InterruptedException {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+
+            Thread.sleep(2000);
             String expectedId = claimCreateResponse.getId();
 
             DeliveryActionRequestMock deliveryMock = new DeliveryActionRequestMock();
@@ -250,21 +268,20 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
             claimUpdateRequest.setFinanceStatusId(financeAction.getId());
 
             service.update(claimCreateResponse.getId(), claimUpdateRequest);
+            Thread.sleep(2000);
 
             Claim claimFetchResponse = service.fetch(claimCreateResponse.getId());
 
-            Pagination pagination = Pagination.with(10, 0);
+            Pagination pagination = Pagination.with(30, 0);
             CloseDateRange closeDateRange = CloseDateRange.between(claimFetchResponse.getCloseDate(), claimFetchResponse.getCloseDate());
 
             ClaimFilters claimFilters = ClaimFilters.builder().closeDate(closeDateRange).build();
 
-            String foundId = service.list(claimFilters, pagination)
+            Stream<Claim> found = service.list(claimFilters, pagination)
                     .stream()
-                    .findAny()
-                    .map(Claim::getId)
-                    .get();
+                    .filter(claim -> claim.getId().equals(expectedId));
 
-            assertThat(foundId).contains(expectedId);
+            assertThat(found.count()).isGreaterThan(0);
         }
     }
 
