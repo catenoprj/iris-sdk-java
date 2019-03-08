@@ -8,7 +8,6 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
@@ -49,13 +48,12 @@ public class IssuerService {
    * @param id issuer already created
    * @return Issuer that was found
    * @throws IOException does occur if response by server for unsuccessful
-   * @see UUID
    * @see Issuer
    */
-  public Issuer fetch(final UUID id) throws IOException {
+  public Issuer fetch(final String id) throws IOException {
     checkNotNull(id);
 
-    final Call<Issuer> call = this.apiClient.findById(id.toString());
+    final Call<Issuer> call = this.apiClient.findById(id);
     final Response<Issuer> response = call.execute();
     return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }
@@ -80,15 +78,14 @@ public class IssuerService {
    * @param issuer object necessary to update a Issuer
    * @return Issuer that was updated
    * @throws IOException does occur if response by server for unsuccessful
-   * @see UUID
    * @see IssuerRequest
    * @see Issuer
    */
-  public Issuer update(final UUID id, final IssuerRequest issuer) throws IOException {
+  public Issuer update(final String id, final IssuerRequest issuer) throws IOException {
     checkNotNull(id);
     checkNotNull(issuer);
 
-    final Call<Issuer> call = this.apiClient.update(id.toString(), issuer);
+    final Call<Issuer> call = this.apiClient.update(id, issuer);
     final Response<Issuer> response = call.execute();
     return new ApiResponseBody<>(response).successfulBodyOrThrow();
   }

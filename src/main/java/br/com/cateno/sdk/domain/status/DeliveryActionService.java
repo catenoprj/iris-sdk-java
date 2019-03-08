@@ -8,7 +8,6 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
@@ -49,13 +48,12 @@ public class DeliveryActionService {
      * @param id action delivery already create
      * @return action that was found
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      * @see Action
      */
-    public Action fetch(final UUID id) throws IOException {
+    public Action fetch(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<Action> call = this.apiClient.findById(id.toString());
+        final Call<Action> call = this.apiClient.findById(id);
         final Response<Action> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -80,14 +78,13 @@ public class DeliveryActionService {
      * @param action  object necessary to update a Action Delivery
      * @return action delivery that was updated
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      * @see ActionRequest
      */
-    public Action update(final UUID id, final ActionRequest action) throws IOException {
+    public Action update(final String id, final ActionRequest action) throws IOException {
         checkNotNull(id);
         checkNotNull(action);
 
-        final Call<Action> call = this.apiClient.update(id.toString(), action);
+        final Call<Action> call = this.apiClient.update(id, action);
         final Response<Action> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -97,12 +94,11 @@ public class DeliveryActionService {
      *
      * @param id action delivery already created
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      */
-    public void delete(final UUID id) throws IOException {
+    public void delete(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<Void> call = this.apiClient.delete(id.toString());
+        final Call<Void> call = this.apiClient.delete(id);
         Response<Void> response = call.execute();
         new ApiResponseBody<>(response).successfulBodyOrThrow();
     }

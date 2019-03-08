@@ -7,7 +7,6 @@ import retrofit2.Response;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
@@ -47,13 +46,12 @@ public class MachineService {
      * @param id Machine already created
      * @return Machine that was found
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      * @see Machine
      */
-    public Machine fetch(final UUID id) throws IOException {
+    public Machine fetch(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<Machine> call = this.apiClient.findById(id.toString());
+        final Call<Machine> call = this.apiClient.findById(id);
         final Response<Machine> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -79,15 +77,14 @@ public class MachineService {
      * @param machine object necessary to update a Machine
      * @return Machine that was updated
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      * @see MachineRequest
      * @see Machine
      */
-    public Machine update(final UUID id, final MachineRequest machine) throws IOException {
+    public Machine update(final String id, final MachineRequest machine) throws IOException {
         checkNotNull(id);
         checkNotNull(machine);
 
-        final Call<Machine> call = this.apiClient.update(id.toString(), machine);
+        final Call<Machine> call = this.apiClient.update(id, machine);
         final Response<Machine> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -97,12 +94,11 @@ public class MachineService {
      *
      * @param id Machine already created
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      */
-    public void delete(final UUID id) throws IOException {
+    public void delete(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<Void> call = this.apiClient.delete(id.toString());
+        final Call<Void> call = this.apiClient.delete(id);
         final Response<Void> response = call.execute();
         new ApiResponseBody<>(response).successfulBodyOrThrow();
     }

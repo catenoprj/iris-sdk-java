@@ -87,7 +87,7 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
             String expectedId = claimCreateResponse.getId();
 
             Pagination pagination = Pagination.with(1, 0);
-            ClaimFilters claimFilters = ClaimFilters.builder().issuer(claimCreateResponse.getIssuerId().toString()).build();
+            ClaimFilters claimFilters = ClaimFilters.builder().issuer(claimCreateResponse.getIssuerId()).build();
 
             String foundId = service.list(claimFilters, pagination)
                     .stream()

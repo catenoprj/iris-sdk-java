@@ -8,7 +8,6 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
@@ -49,13 +48,12 @@ public class MessageService {
      * @param id Message already created
      * @return Message that was found
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      * @see Message
      */
-    public Message fetch(final UUID id) throws IOException {
+    public Message fetch(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<Message> call = this.apiClient.findById(id.toString());
+        final Call<Message> call = this.apiClient.findById(id);
         final Response<Message> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -85,12 +83,11 @@ public class MessageService {
      *
      * @param id Message already created
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      */
-    public void markAsRead(final UUID id) throws IOException {
+    public void markAsRead(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<Void> call = this.apiClient.update(id.toString(), true);
+        final Call<Void> call = this.apiClient.update(id, true);
         final Response<Void> response = call.execute();
         new ApiResponseBody<>(response).successfulBodyOrThrow();
     }

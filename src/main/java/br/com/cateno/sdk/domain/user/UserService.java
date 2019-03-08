@@ -8,7 +8,6 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
@@ -49,13 +48,12 @@ public class UserService {
      * @param id user already created
      * @return User that was found
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      * @see User
      */
-    public User fetch(final UUID id) throws IOException {
+    public User fetch(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<User> call = this.apiClient.findById(id.toString());
+        final Call<User> call = this.apiClient.findById(id);
         final Response<User> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -83,11 +81,11 @@ public class UserService {
      * @see UserUpdateRequest
      * @see User
      */
-    public User update(final UUID id, final UserUpdateRequest user) throws IOException {
+    public User update(final String id, final UserUpdateRequest user) throws IOException {
         checkNotNull(id);
         checkNotNull(user);
 
-        final Call<User> call = this.apiClient.update(id.toString(), user);
+        final Call<User> call = this.apiClient.update(id, user);
         final Response<User> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -99,15 +97,14 @@ public class UserService {
      * @param user object necessary to update a User (will be updated only fields present in object)
      * @return User thas was partial updated
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      * @see UserUpdateRequest
      * @see User
      */
-    public User partialUpdate(final UUID id, final UserUpdateRequest user) throws IOException {
+    public User partialUpdate(final String id, final UserUpdateRequest user) throws IOException {
         checkNotNull(id);
         checkNotNull(user);
 
-        final Call<User> call = this.apiClient.partialUpdate(id.toString(), user);
+        final Call<User> call = this.apiClient.partialUpdate(id, user);
         final Response<User> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -118,10 +115,10 @@ public class UserService {
      * @param id user already created
      * @throws IOException does occur if response by server for unsuccessful
      */
-    public void delete(final UUID id) throws IOException {
+    public void delete(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<Void> call = this.apiClient.delete(id.toString());
+        final Call<Void> call = this.apiClient.delete(id);
         Response<Void> response = call.execute();
         new ApiResponseBody<>(response).successfulBodyOrThrow();
     }

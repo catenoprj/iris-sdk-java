@@ -1,14 +1,8 @@
 package br.com.cateno.sdk.domain.user;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents a user
@@ -16,9 +10,8 @@ import java.util.UUID;
 public class User {
     /**
      * The Id of user
-     * @see UUID
      * */
-    private UUID id;
+    private String id;
     /**
      * The cpf of user
      */
@@ -46,7 +39,7 @@ public class User {
      * The list content ids of issuers of user
      * @see Profile
      */
-    private List<UUID> issuerIds;
+    private List<String> issuerIds;
     /**
      * The list of content machines of user
      * @see Machine
@@ -54,21 +47,20 @@ public class User {
     private List<Machine> machines;
     /**
      * The id of profile
-     * @see UUID
      * @see Profile
      */
-    private UUID profileId;
+    private String profileId;
     /**
      * The date that created password
      * @see LocalDateTime
      */
     private LocalDateTime passwordDate;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -112,11 +104,11 @@ public class User {
         this.userType = userType;
     }
 
-    public List<UUID> getIssuerIds() {
+    public List<String> getIssuerIds() {
         return issuerIds;
     }
 
-    public void setIssuerIds(List<UUID> issuerIds) {
+    public void setIssuerIds(List<String> issuerIds) {
         this.issuerIds = issuerIds;
     }
 
@@ -128,11 +120,11 @@ public class User {
         this.machines = machines;
     }
 
-    public UUID getProfileId() {
+    public String getProfileId() {
         return profileId;
     }
 
-    public void setProfileId(UUID profileId) {
+    public void setProfileId(String profileId) {
         this.profileId = profileId;
     }
 

@@ -1,7 +1,6 @@
 package br.com.cateno.sdk.domain.status;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents an Action
@@ -13,9 +12,8 @@ public class Action {
     private String description;
     /**
      * The id of Action
-     * @see UUID
      */
-    private UUID id;
+    private String id;
     /**
      * The type of Action
      * @see ActionType
@@ -30,11 +28,11 @@ public class Action {
         this.description = description;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

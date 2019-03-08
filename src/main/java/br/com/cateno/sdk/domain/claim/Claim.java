@@ -3,7 +3,6 @@ package br.com.cateno.sdk.domain.claim;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents a Claim
@@ -16,9 +15,8 @@ public class Claim {
     private String id;
     /**
      * The Id of Issuer of Claim
-     * @see UUID
      */
-    private UUID issuerId;
+    private String issuerId;
     /**
      * The code of Issuer of Claim
      * @see br.com.cateno.sdk.domain.issuer.Issuer
@@ -91,10 +89,9 @@ public class Claim {
     private String claimStatusDescription;
     /**
      * The id of action delivery of Claim
-     * @see UUID
      * @see br.com.cateno.sdk.domain.status.Action
      */
-    private UUID deliveryStatusId;
+    private String deliveryStatusId;
     /**
      * The id description action delivery of Claim
      * @see br.com.cateno.sdk.domain.status.Action
@@ -102,10 +99,9 @@ public class Claim {
     private String deliveryStatusDescription;
     /**
      * The id of action finance of Claim
-     * @see UUID
      * @see br.com.cateno.sdk.domain.status.Action
      */
-    private UUID financeStatusId;
+    private String financeStatusId;
     /**
      * The id description action finance of Claim
      * @see br.com.cateno.sdk.domain.status.Action
@@ -117,10 +113,9 @@ public class Claim {
     private String username;
     /**
      * The id of User of Claim
-     * @see UUID
      * @see br.com.cateno.sdk.domain.user.User
      */
-    private UUID userId;
+    private String userId;
     /**
      * The date of capture of Claim
      * @see ZonedDateTime
@@ -140,11 +135,11 @@ public class Claim {
         this.id = id;
     }
 
-    public UUID getIssuerId() {
+    public String getIssuerId() {
         return issuerId;
     }
 
-    public void setIssuerId(UUID issuerId) {
+    public void setIssuerId(String issuerId) {
         this.issuerId = issuerId;
     }
 
@@ -276,11 +271,11 @@ public class Claim {
         this.claimStatusDescription = claimStatusDescription;
     }
 
-    public UUID getDeliveryStatusId() {
+    public String getDeliveryStatusId() {
         return deliveryStatusId;
     }
 
-    public void setDeliveryStatusId(UUID deliveryStatusId) {
+    public void setDeliveryStatusId(String deliveryStatusId) {
         this.deliveryStatusId = deliveryStatusId;
     }
 
@@ -292,11 +287,11 @@ public class Claim {
         this.deliveryStatusDescription = deliveryStatusDescription;
     }
 
-    public UUID getFinanceStatusId() {
+    public String getFinanceStatusId() {
         return financeStatusId;
     }
 
-    public void setFinanceStatusId(UUID financeStatusId) {
+    public void setFinanceStatusId(String financeStatusId) {
         this.financeStatusId = financeStatusId;
     }
 
@@ -316,11 +311,11 @@ public class Claim {
         this.username = username;
     }
 
-    public UUID getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

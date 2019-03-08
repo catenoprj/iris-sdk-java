@@ -1,7 +1,6 @@
 package br.com.cateno.sdk.domain.establishment;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents a body to create or update a Machine
@@ -18,10 +17,9 @@ public class MachineRequest {
     private String label;
     /**
      * The Id of Establishment of Machine
-     * @see UUID
      * @see Establishment
      */
-    private UUID establishmentId;
+    private String establishmentId;
     /**
      * The Validity of Machine
      * @see Validity
@@ -44,11 +42,11 @@ public class MachineRequest {
         this.label = label;
     }
 
-    public UUID getEstablishmentId() {
+    public String getEstablishmentId() {
         return establishmentId;
     }
 
-    public void setEstablishmentId(UUID establishmentId) {
+    public void setEstablishmentId(String establishmentId) {
         this.establishmentId = establishmentId;
     }
 

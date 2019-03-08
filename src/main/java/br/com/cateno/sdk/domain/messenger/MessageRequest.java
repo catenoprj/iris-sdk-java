@@ -3,7 +3,6 @@ package br.com.cateno.sdk.domain.messenger;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents a body to create a Message
@@ -18,19 +17,17 @@ public class MessageRequest {
      * The list content ids of profiles of user
      * @see br.com.cateno.sdk.domain.user.Profile
      */
-    private List<UUID> profiles;
+    private List<String> profiles;
     /**
      * The list content ids of issuers of user
-     * @see UUID
      * @see br.com.cateno.sdk.domain.issuer.Issuer
      */
-    private List<UUID> issuers;
+    private List<String> issuers;
     /**
      * The list content ids of establishments of user
-     * @see UUID
      * @see br.com.cateno.sdk.domain.establishment.Establishment
      */
-    private List<UUID> establishments;
+    private List<String> establishments;
     /**
      * The schedule of Message
      * @see LocalDateTime
@@ -53,27 +50,27 @@ public class MessageRequest {
         this.userTypes = userTypes;
     }
 
-    public List<UUID> getProfiles() {
+    public List<String> getProfiles() {
         return profiles;
     }
 
-    public void setProfiles(List<UUID> profiles) {
+    public void setProfiles(List<String> profiles) {
         this.profiles = profiles;
     }
 
-    public List<UUID> getIssuers() {
+    public List<String> getIssuers() {
         return issuers;
     }
 
-    public void setIssuers(List<UUID> issuers) {
+    public void setIssuers(List<String> issuers) {
         this.issuers = issuers;
     }
 
-    public List<UUID> getEstablishments() {
+    public List<String> getEstablishments() {
         return establishments;
     }
 
-    public void setEstablishments(List<UUID> establishments) {
+    public void setEstablishments(List<String> establishments) {
         this.establishments = establishments;
     }
 

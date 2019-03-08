@@ -1,7 +1,6 @@
 package br.com.cateno.sdk.domain.establishment;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents an Establishment
@@ -9,9 +8,8 @@ import java.util.UUID;
 public class Establishment {
     /**
      * The Id of Establishment
-     * @see UUID
      */
-    private UUID id;
+    private String id;
     /**
      * The CNPJ of Establishment
      */
@@ -31,11 +29,11 @@ public class Establishment {
      */
     private Status status;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
