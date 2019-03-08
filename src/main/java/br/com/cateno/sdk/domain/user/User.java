@@ -62,8 +62,6 @@ public class User {
      * The date that created password
      * @see LocalDateTime
      */
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime passwordDate;
 
     public UUID getId() {

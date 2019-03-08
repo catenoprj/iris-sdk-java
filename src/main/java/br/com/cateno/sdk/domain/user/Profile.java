@@ -27,8 +27,6 @@ public class Profile {
      * The date of creation of profile
      * @see LocalDateTime
      */
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createdDate;
     /**
      * The type de user

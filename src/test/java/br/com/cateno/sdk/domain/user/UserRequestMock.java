@@ -1,5 +1,9 @@
 package br.com.cateno.sdk.domain.user;
 
+import br.com.cateno.sdk.domain.establishment.Establishment;
+import br.com.cateno.sdk.domain.establishment.MachineApiClient;
+import br.com.cateno.sdk.domain.establishment.MachineRequestMock;
+import br.com.cateno.sdk.domain.establishment.MachineService;
 import br.com.cateno.sdk.domain.issuer.Issuer;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerRequestMock;
@@ -22,6 +26,9 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
         IssuerApiClient issuerApiClient = this.getAuthenticatedRetrofit().create(IssuerApiClient.class);
         IssuerService issuerService = new IssuerService(issuerApiClient);
 
+        MachineApiClient machineApiClient = this.getAuthenticatedRetrofit().create(MachineApiClient.class);
+        MachineService machineService = new MachineService(machineApiClient);
+
         FakeValuesService fakeValuesService = new FakeValuesService(
                 new Locale("pt-BR"), new RandomService());
 
@@ -33,6 +40,9 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
         String backupPhone = "11" + fakeValuesService.regexify("[1-9]{8}");
         String userName = fakeValuesService.bothify("user??????");
         List<UUID> issuerIds = new ArrayList<>();
+        List<br.com.cateno.sdk.domain.user.Machine> listMachines = new ArrayList<>();
+
+        br.com.cateno.sdk.domain.user.Machine userMachine =  new br.com.cateno.sdk.domain.user.Machine();
 
         extraInfo.setMainPhone(mainPhone);
         extraInfo.setBackupPhone(backupPhone);
@@ -56,6 +66,47 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
             issuerIds.add(issuerCreateResponse.getId());
 
             userRequest.setIssuerIds(issuerIds);
+
+        } else if (userType.equals(UserType.CATENO)) {
+
+            IssuerRequestMock issuerMock = new IssuerRequestMock();
+            Issuer issuerCreateResponse = issuerService.create(issuerMock.issuerRequestMock());
+
+            issuerIds.add(issuerCreateResponse.getId());
+
+            userRequest.setIssuerIds(issuerIds);
+
+            MachineRequestMock machineMock = new MachineRequestMock();
+            br.com.cateno.sdk.domain.establishment.Machine machineCreateResponse = machineService.create(machineMock.machineRequestMock());
+
+            userMachine.setId(machineCreateResponse.getId().toString());
+            userMachine.setLabel(machineCreateResponse.getLabel());
+            userMachine.setNumber(machineCreateResponse.getNumber());
+
+            Establishment establishment = machineCreateResponse.getEstablishment();
+
+            userMachine.setEstablishmentId(establishment.getId().toString());
+
+            listMachines.add(userMachine);
+
+            userRequest.setMachines(listMachines);
+
+        } else if (userType.equals(UserType.ESTABELECIMENTO)) {
+
+            MachineRequestMock machineMock = new MachineRequestMock();
+            br.com.cateno.sdk.domain.establishment.Machine machineCreateResponse = machineService.create(machineMock.machineRequestMock());
+
+            userMachine.setId(machineCreateResponse.getId().toString());
+            userMachine.setLabel(machineCreateResponse.getLabel());
+            userMachine.setNumber(machineCreateResponse.getNumber());
+
+            Establishment establishment = machineCreateResponse.getEstablishment();
+
+            userMachine.setEstablishmentId(establishment.getId().toString());
+
+            listMachines.add(userMachine);
+
+            userRequest.setMachines(listMachines);
         }
 
         return userRequest;

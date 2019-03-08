@@ -1,14 +1,17 @@
 package br.com.cateno.sdk.domain.establishment;
 
+import br.com.cateno.sdk.util.AuthenticatedStageEnvTest;
 import br.com.cateno.sdk.util.CNPJCreator;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 
+import java.io.IOException;
 import java.util.Locale;
+import java.util.UUID;
 
- public class EstablishmentRequestMock {
+public class EstablishmentRequestMock implements AuthenticatedStageEnvTest {
 
-     public EstablishmentRequest establismentRequestMock(){
+   public EstablishmentRequest establismentRequestMock(){
 
         FakeValuesService fakeValuesService = new FakeValuesService(
                 new Locale("pt-BR"), new RandomService());
@@ -31,4 +34,35 @@ import java.util.Locale;
 
         return establishmentRequest;
     }
+
+    UUID returnEstablishmentIdWithAMachine() throws IOException {
+
+      EstablishmentApiClient establishmentApiClient = this.getAuthenticatedRetrofit().create(EstablishmentApiClient.class);
+      EstablishmentService establishmentService = new EstablishmentService(establishmentApiClient);
+
+      Establishment establishmentCreateResponse = establishmentService.create(establismentRequestMock());
+
+      MachineApiClient machineApiClient = this.getAuthenticatedRetrofit().create(MachineApiClient.class);
+      MachineService machineService = new MachineService(machineApiClient);
+
+       FakeValuesService fakeValuesService = new FakeValuesService(
+               new Locale("pt-BR"), new RandomService());
+
+
+       String number = fakeValuesService.regexify("[1-9]{6}");
+       String label = "11" + fakeValuesService.bothify("Machine????##");
+
+       MachineRequest machineRequest = new MachineRequest();
+
+       UUID establishmentId;
+       establishmentId = establishmentCreateResponse.getId();
+
+       machineRequest.setEstablishmentId(establishmentId);
+       machineRequest.setLabel(label);
+       machineRequest.setNumber(number);
+
+       machineService.create(machineRequest);
+
+      return establishmentId;
+   }
 }

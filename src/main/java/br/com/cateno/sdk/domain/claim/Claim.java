@@ -1,7 +1,7 @@
 package br.com.cateno.sdk.domain.claim;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -52,9 +52,9 @@ public class Claim {
     private String companyName;
     /**
      * The date of authorization of Claim
-     * @see LocalDate
+     * @see ZonedDateTime
      */
-    private LocalDate authorizationDate;
+    private ZonedDateTime authorizationDate;
     /**
      * The value of authorization of Claim
      */
@@ -123,14 +123,14 @@ public class Claim {
     private UUID userId;
     /**
      * The date of capture of Claim
-     * @see LocalDate
+     * @see ZonedDateTime
      */
-    private LocalDate captureDate;
+    private ZonedDateTime captureDate;
     /**
      * The date of close of Claim
-     * @see LocalDate
+     * @see ZonedDateTime
      */
-    private LocalDate closeDate;
+    private ZonedDateTime closeDate;
 
     public String getId() {
         return id;
@@ -204,11 +204,11 @@ public class Claim {
         this.companyName = companyName;
     }
 
-    public LocalDate getAuthorizationDate() {
-        return authorizationDate;
+    public ZonedDateTime getAuthorizationDate() {
+        return this.authorizationDate;
     }
 
-    public void setAuthorizationDate(LocalDate authorizationDate) {
+    public void setAuthorizationDate(final ZonedDateTime authorizationDate) {
         this.authorizationDate = authorizationDate;
     }
 
@@ -324,19 +324,19 @@ public class Claim {
         this.userId = userId;
     }
 
-    public LocalDate getCaptureDate() {
-        return captureDate;
+    public ZonedDateTime getCaptureDate() {
+        return this.captureDate;
     }
 
-    public void setCaptureDate(LocalDate captureDate) {
+    public void setCaptureDate(final ZonedDateTime captureDate) {
         this.captureDate = captureDate;
     }
 
-    public LocalDate getCloseDate() {
-        return closeDate;
+    public ZonedDateTime getCloseDate() {
+        return this.closeDate;
     }
 
-    public void setCloseDate(LocalDate closeDate) {
+    public void setCloseDate(final ZonedDateTime closeDate) {
         this.closeDate = closeDate;
     }
 

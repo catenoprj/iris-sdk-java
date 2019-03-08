@@ -1,9 +1,5 @@
-package br.com.cateno.sdk.domain.machine;
+package br.com.cateno.sdk.domain.establishment;
 
-import br.com.cateno.sdk.domain.establishment.Machine;
-import br.com.cateno.sdk.domain.establishment.MachineApiClient;
-import br.com.cateno.sdk.domain.establishment.MachineRequest;
-import br.com.cateno.sdk.domain.establishment.MachineService;
 import br.com.cateno.sdk.util.AuthenticatedStageEnvTest;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;

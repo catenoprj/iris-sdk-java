@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -114,6 +115,23 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
       List<Establishment> establishments = service.list();
 
       assertThat(establishments).doesNotContain(establishment);
+    }
+  }
+
+  @Nested
+  @DisplayName("When create and request Machines from the Establishment")
+  class whenCreateAndRequestMachinesFromTheEstablishment {
+
+    @Test
+    @DisplayName("Then return a list of machines from the Establishment")
+    void thenReturnAListOfMachinesFromTheEstablishment() throws IOException {
+
+      EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
+      UUID establishmentId = establishmentMock.returnEstablishmentIdWithAMachine();
+
+      List<SampleMachine> machinesFromEstablishment = service.listMachines(establishmentId);
+
+      assertThat(machinesFromEstablishment).isNotNull();
     }
   }
 }

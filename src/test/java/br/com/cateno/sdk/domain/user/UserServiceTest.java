@@ -23,7 +23,6 @@ import static org.assertj.core.api.Assertions.assertThat;
         this.service = new UserService(userApiClient);
     }
 
-
     @Nested
     @DisplayName("When create a new User of Type ADMINISTRADOR")
     class WhenCreateNewUserOfTypeAdministrador {
@@ -54,6 +53,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 
         }
     }
+
+    @Nested
+    @DisplayName("When create a new User of type Establishment")
+    class WhenCreateNewUserOfTypeEstablishment {
+
+        @Test
+        @DisplayName("Then return the resource User of type Establishment generated with Id")
+        void thenReturnTheResourceUserOfTypeEstablishmentGeneratedWithId() throws IOException {
+
+            UserRequestMock userMock = new UserRequestMock();
+
+            User userCreateResponse = service.create(userMock.userRequestMock(UserType.ESTABELECIMENTO));
+            assertThat(userCreateResponse.getId()).isNotNull();
+
+         }
+     }
+
+     @Nested
+     @DisplayName("When create a new User of type Cateno")
+     class WhenCreateNewUserOfTypeCateno {
+
+         @Test
+         @DisplayName("Then return the resource User of type Cateno generated with Id")
+         void thenReturnTheResourceUserOfTypeCatenoGeneratedWithId() throws IOException {
+
+             UserRequestMock userMock = new UserRequestMock();
+
+             User userCreateResponse = service.create(userMock.userRequestMock(UserType.CATENO));
+             assertThat(userCreateResponse.getId()).isNotNull();
+
+         }
+     }
 
     @Nested
     @DisplayName("When search a new User by your ID")
@@ -171,4 +202,18 @@ import static org.assertj.core.api.Assertions.assertThat;
             service.partialUpdate(userId,userRequest);
         }
     }
+
+     @Nested
+     @DisplayName("When request a list of users types")
+     class whenRequestAListOfUsersTypes {
+
+         @Test
+         @DisplayName("Then return the list types")
+         void thenReturnTheListTypes() throws IOException {
+
+             List<String> userType = service.types();
+             assertThat(userType.size()).isEqualTo(4);
+
+         }
+     }
 }
