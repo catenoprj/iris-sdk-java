@@ -99,10 +99,10 @@ public class UploaderRequestMock implements AuthenticatedStageEnvTest {
             ClaimApiClient claimApiClient = this.getAuthenticatedRetrofit().create(ClaimApiClient.class);
             ClaimService claimService = new ClaimService(claimApiClient);
 
-            Pagination pagination = Pagination.with(1, 0);
-            ClaimFilters clamFiltes = ClaimFilters.builder().issuer(issuerCode).build();
+            Pagination pagination = Pagination.with(10, 0);
+            ClaimFilters clamFilters = ClaimFilters.builder().issuer(issuerCode).build();
 
-            List<Claim> claim = claimService.list(clamFiltes, pagination);
+            List<Claim> claim = claimService.list(clamFilters, pagination);
 
             System.out.println(claim.get(0));
 

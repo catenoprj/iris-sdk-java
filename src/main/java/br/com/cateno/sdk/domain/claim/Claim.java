@@ -2,6 +2,7 @@ package br.com.cateno.sdk.domain.claim;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 

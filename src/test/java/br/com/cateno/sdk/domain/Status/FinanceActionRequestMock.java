@@ -22,10 +22,27 @@ public class FinanceActionRequestMock implements AuthenticatedStageEnvTest {
         String financeActionName = fakeValuesService.bothify("FinanceAction????##");
 
         ActionRequest actionRequestFinance = new ActionRequest();
-
         actionRequestFinance.setDescription(financeActionName);
 
         return actionRequestFinance;
+    }
 
+    public Action financeCreate() throws IOException {
+
+        FinanceActionApiClient financeApiClient = this.getAuthenticatedRetrofit().create(FinanceActionApiClient.class);
+        FinanceActionService financeService = new FinanceActionService(financeApiClient);
+
+        FakeValuesService fakeValuesService = new FakeValuesService(
+                new Locale("pt-BR"), new RandomService());
+
+        String financeActionName = fakeValuesService.bothify("FinanceAction????##");
+
+        ActionRequest actionRequestFinance = new ActionRequest();
+
+        actionRequestFinance.setDescription(financeActionName);
+
+        Action financeAction = financeService.create(actionRequestFinance);
+
+        return financeAction;
     }
 }

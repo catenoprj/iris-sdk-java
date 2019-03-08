@@ -27,4 +27,23 @@ public class DeliveryActionRequestMock implements AuthenticatedStageEnvTest {
 
         return actionRequestDelivery;
     }
+
+    public Action deliveryCreate() throws IOException {
+
+        DeliveryActionApiClient deliveryApiClient = this.getAuthenticatedRetrofit().create(DeliveryActionApiClient.class);
+        DeliveryActionService deliveryService = new DeliveryActionService(deliveryApiClient);
+
+        FakeValuesService fakeValuesService = new FakeValuesService(
+                new Locale("pt-BR"), new RandomService());
+
+        String deliveryActionName = fakeValuesService.bothify("DeliveryAction????##");
+
+        ActionRequest actionRequestDelivery = new ActionRequest();
+
+        actionRequestDelivery.setDescription(deliveryActionName);
+        Action deliveryAction = deliveryService.create(actionRequestDelivery);
+
+        return deliveryAction;
+    }
+
 }

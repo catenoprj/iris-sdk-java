@@ -1,5 +1,10 @@
 package br.com.cateno.sdk.domain.claim;
 
+import br.com.cateno.sdk.domain.Status.DeliveryActionRequestMock;
+import br.com.cateno.sdk.domain.Status.FinanceActionRequestMock;
+import br.com.cateno.sdk.domain.status.Action;
+import br.com.cateno.sdk.domain.status.DeliveryActionApiClient;
+import br.com.cateno.sdk.domain.status.DeliveryActionService;
 import br.com.cateno.sdk.util.AuthenticatedStageEnvTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -47,7 +52,7 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
 
-            Claim claimFetchResponse = service.fetch(UUID.fromString(claimCreateResponse.getId().toString()));
+            Claim claimFetchResponse = service.fetch(claimCreateResponse.getId());
             assertThat(claimFetchResponse.getId()).isNotNull();
         }
     }
@@ -66,7 +71,7 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
             long claimCountRequest = service.count();
 
-            assertThat(claimCountRequest).isEqualTo(2);
+            assertThat(claimCountRequest).isGreaterThanOrEqualTo(2);
         }
     }
 
@@ -82,7 +87,7 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
 
             Pagination pagination = Pagination.with(1, 0);
-            ClaimFilters clamFiltes = ClaimFilters.builder().issuer(claimCreateResponse.getIssuerId()).build();
+            ClaimFilters clamFiltes = ClaimFilters.builder().issuer(claimCreateResponse.getIssuerId().toString()).build();
 
             List<Claim> claim = service.list(clamFiltes, pagination);
 
@@ -100,13 +105,18 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+            String expectedId = claimCreateResponse.getId();
 
             Pagination pagination = Pagination.with(1, 0);
-            ClaimFilters clamFiltes = ClaimFilters.builder().establishment(claimCreateResponse.getCompanyCode()).build();
+            ClaimFilters claimFilters = ClaimFilters.builder().establishment(claimCreateResponse.getCompanyCode()).build();
 
-            List<Claim> claim = service.list(clamFiltes, pagination);
+            String foundId = service.list(claimFilters, pagination)
+                    .stream()
+                    .findAny()
+                    .map(Claim::getId)
+                    .get();
 
-            assertThat(claim).contains(claimCreateResponse);
+            assertThat(foundId).isEqualTo(expectedId);
         }
     }
 
@@ -116,19 +126,25 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
         @Test
         @DisplayName("Then return a total of Claims with parameter Search Term")
-        void thenReturnATotalOfClaimsWithParameterSearchTerm() throws IOException {
+        void thenReturnATotalOfClaimsWithParameterSearchTerm() throws IOException, InterruptedException {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+            String expectedId = claimCreateResponse.getId();
 
-            String searchTerm = claimCreateResponse.getIssuerName();
+            String searchTerm = claimCreateResponse.getCompanyName();
 
             Pagination pagination = Pagination.with(1, 0);
-            ClaimFilters clamFiltes = ClaimFilters.builder().term(searchTerm).build();
+            ClaimFilters claimFilters = ClaimFilters.builder().term(searchTerm).build();
 
-            List<Claim> claim = service.list(clamFiltes, pagination);
+            Thread.sleep(3000);
+            String foundId = service.list(claimFilters, pagination)
+                    .stream()
+                    .findAny()
+                    .map(Claim::getId)
+                    .get();
 
-            assertThat(claim).contains(claimCreateResponse);
+            assertThat(foundId).isEqualTo(expectedId);
         }
     }
 
@@ -145,11 +161,15 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
             service.create(claimMock.claimRequestMock());
 
             Pagination pagination = Pagination.with(10, 0);
-            ClaimFilters clamFiltes = ClaimFilters.builder().status("a").build();
+            ClaimFilters claimFilters = ClaimFilters.builder().status("a").build();
 
-            List<Claim> claim = service.list(clamFiltes, pagination);
+            String claims = service.list(claimFilters, pagination)
+                    .stream()
+                    .findAny()
+                    .map(Claim::getId)
+                    .get();
 
-            assertThat(claim).isNotEmpty();
+            assertThat(claims).isNotEmpty();
         }
     }
 
@@ -163,16 +183,20 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+            String expectedId = claimCreateResponse.getId();
 
             Pagination pagination = Pagination.with(10, 0);
             ValueRange authorizationValue = ValueRange.between(claimCreateResponse.getAuthorizationValue(), claimCreateResponse.getAuthorizationValue());
 
+            ClaimFilters claimFilters = ClaimFilters.builder().value(authorizationValue).build();
 
-            ClaimFilters clamFiltes = ClaimFilters.builder().value(authorizationValue).build();
+            String foundId = service.list(claimFilters, pagination)
+                    .stream()
+                    .findAny()
+                    .map(Claim::getId)
+                    .get();
 
-            List<Claim> claim = service.list(clamFiltes, pagination);
-
-            assertThat(claim).contains(claimCreateResponse);
+            assertThat(foundId).contains(expectedId);
         }
     }
 
@@ -186,15 +210,18 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+            String expectedId = claimCreateResponse.getId();
 
-            Pagination pagination = Pagination.with(10, 0);
-            PurchaseDateRange purchaseDateRangeDateRange = PurchaseDateRange.between(claimCreateResponse.getAuthorizationDate(), claimCreateResponse.getAuthorizationDate());
+            Claim claimFetchResponse = service.fetch(claimCreateResponse.getId());
 
-            ClaimFilters clamFiltes = ClaimFilters.builder().purchaseDate(purchaseDateRangeDateRange).build();
+            Pagination pagination = Pagination.with(100, 0);
+            PurchaseDateRange purchaseDateRangeDateRange = PurchaseDateRange.between(claimFetchResponse.getAuthorizationDate(), claimFetchResponse.getAuthorizationDate());
 
-            List<Claim> claim = service.list(clamFiltes, pagination);
+            ClaimFilters claimFilters = ClaimFilters.builder().purchaseDate(purchaseDateRangeDateRange).build();
 
-            assertThat(claim).contains(claimCreateResponse);
+            List<Claim> claimList = service.list(claimFilters, pagination);
+
+            assertThat(claimList).contains(claimFetchResponse);
         }
     }
 
@@ -208,16 +235,36 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
             ClaimRequestMock claimMock = new ClaimRequestMock();
 
             Claim claimCreateResponse = service.create(claimMock.claimRequestMock());
+            String expectedId = claimCreateResponse.getId();
 
-            //tratar claims aqui
+            DeliveryActionRequestMock deliveryMock = new DeliveryActionRequestMock();
+            Action deliveryAction = deliveryMock.deliveryCreate();
+
+            FinanceActionRequestMock financeMock = new FinanceActionRequestMock();
+            Action financeAction = financeMock.financeCreate();
+
+            ClaimUpdateRequest claimUpdateRequest =  new ClaimUpdateRequest();
+            claimUpdateRequest.setClaimStatusDescription("Concluido");
+            claimUpdateRequest.setClaimStatus("C");
+            claimUpdateRequest.setDeliveryStatusId(deliveryAction.getId());
+            claimUpdateRequest.setFinanceStatusId(financeAction.getId());
+
+            service.update(claimCreateResponse.getId(), claimUpdateRequest);
+
+            Claim claimFetchResponse = service.fetch(claimCreateResponse.getId());
+
             Pagination pagination = Pagination.with(10, 0);
-            CloseDateRange closeDateRange = CloseDateRange.between(claimCreateResponse.getCloseDate(), claimCreateResponse.getCloseDate());
+            CloseDateRange closeDateRange = CloseDateRange.between(claimFetchResponse.getCloseDate(), claimFetchResponse.getCloseDate());
 
-            ClaimFilters clamFiltes = ClaimFilters.builder().closeDate(closeDateRange).build();
+            ClaimFilters claimFilters = ClaimFilters.builder().closeDate(closeDateRange).build();
 
-            List<Claim> claim = service.list(clamFiltes, pagination);
+            String foundId = service.list(claimFilters, pagination)
+                    .stream()
+                    .findAny()
+                    .map(Claim::getId)
+                    .get();
 
-            assertThat(claim).contains(claimCreateResponse);
+            assertThat(foundId).contains(expectedId);
         }
     }
 
@@ -235,21 +282,14 @@ class ClaimServiceTest implements AuthenticatedStageEnvTest {
 
             ClaimUpdateRequest claimUpdateRequest = new ClaimUpdateRequest();
 
-            claimUpdateRequest.setClaimStatus("Em análise");
+            claimUpdateRequest.setClaimStatusDescription("Em análise");
+            claimUpdateRequest.setClaimStatus("E");
 
-            service.update(UUID.fromString(claimCreateResponse.getId()), claimUpdateRequest);
+            service.update(claimCreateResponse.getId(), claimUpdateRequest);
 
-            Claim claim = service.fetch(UUID.fromString(claimCreateResponse.getId()));
+            Claim claim = service.fetch(claimCreateResponse.getId());
 
-            //claimUpdateRequest.setClaimStatusDescription();
-            //claimUpdateRequest.setDeliveryStatusId();
-            //claimUpdateRequest.setFinanceStatusId();
-
-            /*service.update(UUID.fromString(claimCreateResponse.getId()), claimUpdateRequest);
-
-            Claim claim = service.fetch(UUID.fromString(claimCreateResponse.getId()))*/;
-
-            assertThat(claim.getDeliveryStatusDescription()).isNotEmpty();
+            assertThat(claim.getClaimStatusDescription()).isEqualTo("Em análise");
         }
     }
 

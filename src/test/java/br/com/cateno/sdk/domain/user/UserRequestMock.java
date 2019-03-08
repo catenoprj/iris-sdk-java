@@ -1,5 +1,6 @@
 package br.com.cateno.sdk.domain.user;
 
+import br.com.cateno.sdk.domain.establishment.*;
 import br.com.cateno.sdk.domain.issuer.Issuer;
 import br.com.cateno.sdk.domain.issuer.IssuerApiClient;
 import br.com.cateno.sdk.domain.issuer.IssuerRequestMock;
@@ -70,20 +71,20 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
             IssuerRequestMock issuerMock = new IssuerRequestMock();
             Issuer issuerCreateResponse = issuerService.create(issuerMock.issuerRequestMock());
 
-            issuerIds.add(issuerCreateResponse.getId().toString());
+            issuerIds.add(issuerCreateResponse.getId());
 
             userRequest.setIssuerIds(issuerIds);
 
             MachineRequestMock machineMock = new MachineRequestMock();
-            Machine machineCreateResponse = machineService.create(machineMock.machineRequestMock());
+            br.com.cateno.sdk.domain.establishment.Machine machineCreateResponse = machineService.create(machineMock.machineRequestMock());
 
-            userMachine.setId(machineCreateResponse.getId().toString());
+            userMachine.setId(machineCreateResponse.getId());
             userMachine.setLabel(machineCreateResponse.getLabel());
             userMachine.setNumber(machineCreateResponse.getNumber());
 
             Establishment establishment = machineCreateResponse.getEstablishment();
 
-            userMachine.setEstablishmentId(establishment.getId().toString());
+            userMachine.setEstablishmentId(establishment.getId());
 
             listMachines.add(userMachine);
 
@@ -92,15 +93,15 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
         } else if (userType.equals(UserType.ESTABELECIMENTO)) {
 
             MachineRequestMock machineMock = new MachineRequestMock();
-            Machine machineCreateResponse = machineService.create(machineMock.machineRequestMock());
+            br.com.cateno.sdk.domain.establishment.Machine machineCreateResponse = machineService.create(machineMock.machineRequestMock());
 
-            userMachine.setId(machineCreateResponse.getId().toString());
+            userMachine.setId(machineCreateResponse.getId());
             userMachine.setLabel(machineCreateResponse.getLabel());
             userMachine.setNumber(machineCreateResponse.getNumber());
 
             Establishment establishment = machineCreateResponse.getEstablishment();
 
-            userMachine.setEstablishmentId(establishment.getId().toString());
+            userMachine.setEstablishmentId(establishment.getId());
 
             listMachines.add(userMachine);
 
