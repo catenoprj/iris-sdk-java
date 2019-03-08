@@ -1,7 +1,6 @@
 package br.com.cateno.sdk.domain.claim;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -25,7 +24,7 @@ public class ClaimCreateRequest {
     private String cardNumber;
     /**
      * The date of authorization of Claim
-     * @see LocalDate
+     * @see ZonedDateTime
      */
     private ZonedDateTime authorizationDate;
     /**
