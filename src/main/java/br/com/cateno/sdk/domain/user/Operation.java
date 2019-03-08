@@ -1,0 +1,33 @@
+package br.com.cateno.sdk.domain.user;
+
+/**
+ * Represents types of operation
+ */
+public enum Operation {
+    PROFILE_READ,
+    PROFILE_CREATE,
+    PROFILE_UPDATE,
+    CLAIM_READ,
+    CLAIM_CREATE,
+    CLAIM_UPDATE,
+    CLAIM_UPLOAD,
+    CLAIM_DISABLE,
+    ESTABLISHMENT_READ,
+    ESTABLISHMENT_CREATE,
+    ESTABLISHMENT_UPDATE,
+    ESTABLISHMENT_DISABLE,
+    ISSUER_READ,
+    ISSUER_CREATE,
+    ISSUER_UPDATE,
+    ISSUER_DISABLE,
+    USER_READ,
+    USER_CREATE,
+    USER_UPDATE,
+    USER_DISABLE,
+    REPORT_EXPORT,
+    ACTION_READ,
+    ACTION_CREATE,
+    ACTION_UPDATE,
+    ACTION_DISABLE,
+    MESSAGE_CREATE;
+}
