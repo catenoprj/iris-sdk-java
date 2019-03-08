@@ -1,14 +1,8 @@
 package br.com.cateno.sdk.domain.user;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents a profile of user
@@ -16,9 +10,8 @@ import java.util.UUID;
 public class Profile {
     /**
      * The id of profile
-     * @see UUID
      */
-    private UUID id;
+    private String id;
     /**
      * The name of profile
      */
@@ -39,11 +32,11 @@ public class Profile {
      */
     private List<Operation> operations;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

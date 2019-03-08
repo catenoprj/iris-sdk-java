@@ -8,7 +8,6 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
@@ -34,10 +33,10 @@ public class ProfileService {
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
-    public Profile fetch(final UUID id) throws IOException {
+    public Profile fetch(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<Profile> call = this.apiClient.findById(id.toString());
+        final Call<Profile> call = this.apiClient.findById(id);
         final Response<Profile> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -48,11 +47,11 @@ public class ProfileService {
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
 
-    public Profile update(final UUID id, final ProfileRequest profile) throws IOException {
+    public Profile update(final String id, final ProfileRequest profile) throws IOException {
         checkNotNull(id);
         checkNotNull(profile);
 
-        final Call<Profile> call = this.apiClient.update(id.toString(), profile);
+        final Call<Profile> call = this.apiClient.update(id, profile);
         final Response<Profile> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }

@@ -1,7 +1,6 @@
 package br.com.cateno.sdk.domain.issuer;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents an Issuer
@@ -10,7 +9,7 @@ public class Issuer {
     /**
      * The Id of Issuer
      */
-    private UUID id;
+    private String id;
     /**
      * The code of Issuer
      */
@@ -42,7 +41,7 @@ public class Issuer {
         return this.extraInfo;
     }
 
-    public UUID getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -66,7 +65,7 @@ public class Issuer {
         this.extraInfo = extraInfo;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

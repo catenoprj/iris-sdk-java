@@ -7,7 +7,6 @@ import com.github.javafaker.service.RandomService;
 
 import java.io.IOException;
 import java.util.Locale;
-import java.util.UUID;
 
 public class EstablishmentRequestMock implements AuthenticatedStageEnvTest {
 
@@ -35,7 +34,7 @@ public class EstablishmentRequestMock implements AuthenticatedStageEnvTest {
         return establishmentRequest;
     }
 
-    UUID returnEstablishmentIdWithAMachine() throws IOException {
+    String returnEstablishmentIdWithAMachine() throws IOException {
 
       EstablishmentApiClient establishmentApiClient = this.getAuthenticatedRetrofit().create(EstablishmentApiClient.class);
       EstablishmentService establishmentService = new EstablishmentService(establishmentApiClient);
@@ -54,7 +53,7 @@ public class EstablishmentRequestMock implements AuthenticatedStageEnvTest {
 
        MachineRequest machineRequest = new MachineRequest();
 
-       UUID establishmentId;
+       String establishmentId;
        establishmentId = establishmentCreateResponse.getId();
 
        machineRequest.setEstablishmentId(establishmentId);

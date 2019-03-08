@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -181,7 +180,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         @DisplayName("Then partial update a new User")
         void thenPartialUpdateANewUser() throws IOException {
 
-            UUID userId = UUID.fromString("c947262e-2d8d-45e1-9c89-e44dd454325c");
+            String userId ="c947262e-2d8d-45e1-9c89-e44dd454325c";
 
             User userRequestResponse = service.fetch(userId);
 

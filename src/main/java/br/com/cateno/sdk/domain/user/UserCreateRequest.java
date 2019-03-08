@@ -2,7 +2,6 @@ package br.com.cateno.sdk.domain.user;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents a body to create an User
@@ -23,9 +22,8 @@ public class UserCreateRequest {
     private UserType userType;
     /**
      * The list content ids of issuers of user
-     * @see UUID
      */
-    private List<UUID> issuerIds;
+    private List<String> issuerIds;
     /**
      * The extra information of user
      * @see ExtraInfo
@@ -38,9 +36,8 @@ public class UserCreateRequest {
     private List<Machine> machines;
     /**
      * The id of profile of user
-     * @see UUID
      */
-    private UUID profileId;
+    private String profileId;
 
     public String getCpf() {
         return cpf;
@@ -66,11 +63,11 @@ public class UserCreateRequest {
         this.userType = userType;
     }
 
-    public List<UUID> getIssuerIds() {
+    public List<String> getIssuerIds() {
         return issuerIds;
     }
 
-    public void setIssuerIds(List<UUID> issuerIds) {
+    public void setIssuerIds(List<String> issuerIds) {
         this.issuerIds = issuerIds;
     }
 
@@ -90,11 +87,11 @@ public class UserCreateRequest {
         this.machines = machines;
     }
 
-    public UUID getProfileId() {
+    public String getProfileId() {
         return profileId;
     }
 
-    public void setProfileId(UUID profileId) {
+    public void setProfileId(String profileId) {
         this.profileId = profileId;
     }
 

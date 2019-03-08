@@ -1,9 +1,7 @@
 package br.com.cateno.sdk.domain.claim;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Represents a Status of Claim
@@ -11,14 +9,12 @@ import java.util.UUID;
 public class Status {
     /**
      * The Id of Status of Claim
-     * @see UUID
      */
-    private UUID id;
+    private String id;
     /**
      * The Id of Claim
-     * @see UUID
      */
-    private UUID idClaim;
+    private String idClaim;
     /**
      * The code of Status
      */
@@ -37,28 +33,27 @@ public class Status {
     private String username;
     /**
      * The Id of User of Claim
-     * @see UUID
      */
-    private UUID userId;
+    private String userId;
     /**
      * The date of Status
      * @see LocalDateTime
      */
     private LocalDateTime date;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getIdClaim() {
+    public String getIdClaim() {
         return idClaim;
     }
 
-    public void setIdClaim(UUID idClaim) {
+    public void setIdClaim(String idClaim) {
         this.idClaim = idClaim;
     }
 
@@ -94,11 +89,11 @@ public class Status {
         this.username = username;
     }
 
-    public UUID getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

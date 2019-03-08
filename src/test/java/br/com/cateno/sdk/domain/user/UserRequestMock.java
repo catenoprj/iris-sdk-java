@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 public class UserRequestMock implements AuthenticatedStageEnvTest {
 
@@ -39,7 +38,7 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
         String cpf = fakeValuesService.regexify("[1-9]{11}");
         String backupPhone = "11" + fakeValuesService.regexify("[1-9]{8}");
         String userName = fakeValuesService.bothify("user??????");
-        List<UUID> issuerIds = new ArrayList<>();
+        List<String> issuerIds = new ArrayList<>();
         List<br.com.cateno.sdk.domain.user.Machine> listMachines = new ArrayList<>();
 
         br.com.cateno.sdk.domain.user.Machine userMachine =  new br.com.cateno.sdk.domain.user.Machine();
@@ -55,7 +54,7 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
         userRequest.setName(userName);
         userRequest.setUserType(userType);
 
-        userRequest.setProfileId(UUID.fromString("593f21e7-8485-434b-84ba-d486a63a770e"));
+        userRequest.setProfileId("593f21e7-8485-434b-84ba-d486a63a770e");
 
 
         if (userType.equals(UserType.EMISSOR)) {
@@ -79,13 +78,13 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
             MachineRequestMock machineMock = new MachineRequestMock();
             br.com.cateno.sdk.domain.establishment.Machine machineCreateResponse = machineService.create(machineMock.machineRequestMock());
 
-            userMachine.setId(machineCreateResponse.getId().toString());
+            userMachine.setId(machineCreateResponse.getId());
             userMachine.setLabel(machineCreateResponse.getLabel());
             userMachine.setNumber(machineCreateResponse.getNumber());
 
             Establishment establishment = machineCreateResponse.getEstablishment();
 
-            userMachine.setEstablishmentId(establishment.getId().toString());
+            userMachine.setEstablishmentId(establishment.getId());
 
             listMachines.add(userMachine);
 
@@ -96,13 +95,13 @@ public class UserRequestMock implements AuthenticatedStageEnvTest {
             MachineRequestMock machineMock = new MachineRequestMock();
             br.com.cateno.sdk.domain.establishment.Machine machineCreateResponse = machineService.create(machineMock.machineRequestMock());
 
-            userMachine.setId(machineCreateResponse.getId().toString());
+            userMachine.setId(machineCreateResponse.getId());
             userMachine.setLabel(machineCreateResponse.getLabel());
             userMachine.setNumber(machineCreateResponse.getNumber());
 
             Establishment establishment = machineCreateResponse.getEstablishment();
 
-            userMachine.setEstablishmentId(establishment.getId().toString());
+            userMachine.setEstablishmentId(establishment.getId());
 
             listMachines.add(userMachine);
 

@@ -8,7 +8,6 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
@@ -48,13 +47,12 @@ public class EstablishmentService {
      * @param id Establishment already created
      * @return Establishment that was found
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      * @see Establishment
      */
-    public Establishment fetch(final UUID id) throws IOException {
+    public Establishment fetch(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<Establishment> call = this.apiClient.findById(id.toString());
+        final Call<Establishment> call = this.apiClient.findById(id);
         final Response<Establishment> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -79,15 +77,14 @@ public class EstablishmentService {
      * @param establishment object necessary to update an Establishment
      * @return Establishment that was updated
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      * @see EstablishmentRequest
      * @see Establishment
      */
-    public Establishment update(final UUID id, final EstablishmentRequest establishment) throws IOException {
+    public Establishment update(final String id, final EstablishmentRequest establishment) throws IOException {
         checkNotNull(id);
         checkNotNull(establishment);
 
-        final Call<Establishment> call = this.apiClient.update(id.toString(), establishment);
+        final Call<Establishment> call = this.apiClient.update(id, establishment);
         final Response<Establishment> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -97,12 +94,11 @@ public class EstablishmentService {
      *
      * @param id Establishment already created
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      */
-    public void delete(final UUID id) throws IOException {
+    public void delete(final String id) throws IOException {
         checkNotNull(id);
 
-        final Call<Void> call = this.apiClient.delete(id.toString());
+        final Call<Void> call = this.apiClient.delete(id);
         final Response<Void> response = call.execute();
         new ApiResponseBody<>(response).successfulBodyOrThrow();
     }
@@ -113,13 +109,12 @@ public class EstablishmentService {
      * @param id Establishment already created
      * @return list of Sample Machines
      * @throws IOException does occur if response by server for unsuccessful
-     * @see UUID
      * @see SampleMachine
      */
-    public List<SampleMachine> listMachines(final UUID id) throws  IOException {
+    public List<SampleMachine> listMachines(final String id) throws  IOException {
         checkNotNull(id);
 
-        final Call<List<SampleMachine>>  call = this.apiClient.findMachinesByEstablishmentId(id.toString());
+        final Call<List<SampleMachine>>  call = this.apiClient.findMachinesByEstablishmentId(id);
         final Response<List<SampleMachine>> response = call.execute();
         return new ApiResponseBody<>(response).successfulBodyOrThrow();
     }

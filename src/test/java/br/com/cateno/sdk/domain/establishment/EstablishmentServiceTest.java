@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -127,7 +126,7 @@ class EstablishmentServiceTest implements AuthenticatedStageEnvTest {
     void thenReturnAListOfMachinesFromTheEstablishment() throws IOException {
 
       EstablishmentRequestMock establishmentMock = new EstablishmentRequestMock();
-      UUID establishmentId = establishmentMock.returnEstablishmentIdWithAMachine();
+      String establishmentId = establishmentMock.returnEstablishmentIdWithAMachine();
 
       List<SampleMachine> machinesFromEstablishment = service.listMachines(establishmentId);
 
