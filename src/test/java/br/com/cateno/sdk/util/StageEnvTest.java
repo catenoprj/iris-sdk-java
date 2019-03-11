@@ -28,7 +28,7 @@ public interface StageEnvTest {
   }
 
   default UserCredentials getUserCredentials() {
-    return new UserCredentials("00000000000", "Guilherme#123");
+    return new UserCredentials("88274771999", "Guilherme#123");
   }
 
   default Converter.Factory getConverterFactory() {
