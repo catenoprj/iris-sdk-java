@@ -6,7 +6,7 @@
 
 O **Cateno Íris SDK para Java** permite que os desenvolvedores de Java trabalhem facilmente com 
 [Cateno Íris](https://www.catenoiris.com.br) e construa soluções ágeis para bloqueio de autorizações e muito mais.
-Você pode começar em minutos usando ***Maven*** ou baixando um [único arquivo zip]().
+Você pode começar em minutos usando ***Maven*** ou baixando um [único arquivo zip](https://github.com/catenoprj/iris-sdk-java/releases/download/v1.0.0/iris-sdk-java-1.0.0.jar).
 
 ## Instalar
 
